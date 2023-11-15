@@ -1,5 +1,6 @@
 package com.study.stockmanagementstudycase.model.entities;
 
+import com.study.stockmanagementstudycase.model.enums.UnitType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -31,6 +32,10 @@ public class Stock {
 
     @Column(name = "AMOUNT", scale = 24, precision = 4)
     private BigDecimal amount;
+
+    @Column(name = "UNIT_TYPE")
+    @Enumerated(EnumType.STRING)
+    private UnitType unitType;
 
     @OneToMany(
             fetch = FetchType.LAZY,
