@@ -33,13 +33,13 @@ public class WareHouseEntity extends BaseEntity {
 
     @OneToMany(
             fetch = FetchType.LAZY,
-            mappedBy = "wareHouse"
+            mappedBy = "wareHouseEntity"
     )
     private List<WareHouseStockEntity> wareHouseStockEntities;
 
     @OneToMany(
             fetch = FetchType.LAZY,
-            mappedBy = "wareHouse"
+            mappedBy = "wareHouseEntity"
     )
     private List<StockTransactionEntity> stockTransactionEntities;
 

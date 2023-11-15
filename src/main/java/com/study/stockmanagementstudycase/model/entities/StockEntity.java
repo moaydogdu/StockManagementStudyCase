@@ -42,13 +42,13 @@ public class StockEntity extends BaseEntity {
 
     @OneToMany(
             fetch = FetchType.LAZY,
-            mappedBy = "stock"
+            mappedBy = "stockEntity"
     )
     private List<StockTransactionEntity> stockTransactionEntities;
 
     @OneToMany(
             fetch = FetchType.LAZY,
-            mappedBy = "stock"
+            mappedBy = "stockEntity"
     )
     private List<WareHouseStockEntity> wareHouseStockEntities;
 
