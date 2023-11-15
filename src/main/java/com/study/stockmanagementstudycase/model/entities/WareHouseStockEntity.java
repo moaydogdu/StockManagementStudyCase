@@ -8,7 +8,7 @@ import lombok.experimental.SuperBuilder;
 import java.math.BigDecimal;
 
 /**
- * This Entity Indicates How Much {@link Stock} is in {@link WareHouse}.
+ * This Entity Indicates How Much {@link StockEntity} is in {@link WareHouseEntity}.
  */
 @Entity
 @SuperBuilder
@@ -18,7 +18,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "WAREHOUSE_STOCK")
-public class WareHouseStock extends BaseEntity {
+public class WareHouseStockEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -30,10 +30,10 @@ public class WareHouseStock extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "STOCK_ID")
-    private Stock stock;
+    private StockEntity stockEntity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "WAREHOUSE_ID")
-    private WareHouse wareHouse;
+    private WareHouseEntity wareHouseEntity;
 
 }

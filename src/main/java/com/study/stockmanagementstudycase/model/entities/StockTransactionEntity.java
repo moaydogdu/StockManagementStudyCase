@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
- * Represents Transactions of {@link Stock} Entities.
+ * Represents Transactions of {@link StockEntity} Entities.
  */
 @Entity
 @SuperBuilder
@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "STOCK_TRANSACTION")
-public class StockTransaction extends BaseEntity {
+public class StockTransactionEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -45,10 +45,10 @@ public class StockTransaction extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "STOCK_ID")
-    private Stock stock;
+    private StockEntity stockEntity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "WAREHOUSE_ID")
-    private WareHouse wareHouse;
+    private WareHouseEntity wareHouseEntity;
 
 }

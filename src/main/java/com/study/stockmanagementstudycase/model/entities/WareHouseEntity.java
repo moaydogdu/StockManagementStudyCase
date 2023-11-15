@@ -18,7 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "WAREHOUSE")
-public class WareHouse extends BaseEntity {
+public class WareHouseEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -35,12 +35,12 @@ public class WareHouse extends BaseEntity {
             fetch = FetchType.LAZY,
             mappedBy = "wareHouse"
     )
-    private List<WareHouseStock> wareHouseStocks;
+    private List<WareHouseStockEntity> wareHouseStockEntities;
 
     @OneToMany(
             fetch = FetchType.LAZY,
             mappedBy = "wareHouse"
     )
-    private List<StockTransaction> stockTransactions;
+    private List<StockTransactionEntity> stockTransactionEntities;
 
 }

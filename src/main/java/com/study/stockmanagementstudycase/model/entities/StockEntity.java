@@ -20,7 +20,7 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "STOCK")
-public class Stock extends BaseEntity {
+public class StockEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -44,12 +44,12 @@ public class Stock extends BaseEntity {
             fetch = FetchType.LAZY,
             mappedBy = "stock"
     )
-    private List<StockTransaction> stockTransactions;
+    private List<StockTransactionEntity> stockTransactionEntities;
 
     @OneToMany(
             fetch = FetchType.LAZY,
             mappedBy = "stock"
     )
-    private List<WareHouseStock> wareHouseStocks;
+    private List<WareHouseStockEntity> wareHouseStockEntities;
 
 }

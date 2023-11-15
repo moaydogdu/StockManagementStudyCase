@@ -1,6 +1,7 @@
 package com.study.stockmanagementstudycase.common.model.entity;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import lombok.*;
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @SuperBuilder
+@MappedSuperclass
 public abstract class BaseEntity {
 
     @Column(name = "CREATED_AT")
