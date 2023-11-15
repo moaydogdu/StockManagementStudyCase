@@ -4,93 +4,123 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.10.xsd">
 
+    <changeSet id="1-stock-management-ddl" author="moaydogdu">
+        <!-- ======================= -->
+        <!-- DDL of STOCK -->
+        <!-- ======================= -->
+        <createTable tableName="STOCK">
+            <column name="ID" type="VARCHAR(36)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PRICE" type="DECIMAL(24,4)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="AMOUNT" type="DECIMAL(24,4)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UNIT_TYPE" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
 
-<changeSet id="1-stock-management-ddl" author="seymusyuzen">
-    <!-- ======================= -->
-    <!-- DDL of STOCK -->
-    <!-- ======================= -->
-    <createTable tableName="STOCK">
-        <column name="ID" type="VARCHAR(36)">
-            <constraints primaryKey="true" nullable="false"/>
-        </column>
-        <column name="NAME" type="VARCHAR(255)"/>
-        <column name="PRICE" type="DECIMAL(24,4)"/>
-        <column name="AMOUNT" type="DECIMAL(24,4)"/>
-        <!--<column name="UNIT_TYPE" type="VARCHAR(255)"/>-->
-    </createTable>
-
-<!--    <sql> &#45;&#45; TODO : Add check constraint to unit_type column with liquibase syntax
-    ALTER TABLE `STOCK`
-        ADD CONSTRAINT `C__STOCK__UNIT_TYPE` CHECK (`UNIT_TYPE` IN ('GRAM', 'KILOGRAM', 'LITER', 'PIECE'));
-    </sql>-->
-
-<!-- ======================= -->
-<!-- DDL of STOCK -->
-<!-- ======================= -->
-
-
-<!-- ======================= -->
-<!-- DDL of STOCK_TRANSACTION -->
-<!-- ======================= -->
-    <createTable tableName="STOCK_TRANSACTION">
-        <column name="ID" type="VARCHAR(36)">
-            <constraints primaryKey="true" nullable="false"/>
-        </column>
-        <column name="AMOUNT" type="DECIMAL(24,4)"/>
-        <column name="BEFORE_AMOUNT" type="DECIMAL(24,4)"/>
-        <column name="AFTER_AMOUNT" type="DECIMAL(24,4)"/>
-        <!--<column name="TRANSACTION_TYPE" type="VARCHAR(255)"/>-->
-        <column name="DATE" type="TIMESTAMP"/>
-        <column name="STOCK_ID" type="VARCHAR(255)">
-            <constraints nullable="false"/>
-        </column>
-        <column name="WAREHOUSE_ID" type="VARCHAR(255)">
-            <constraints nullable="false"/>
-        </column>
-    </createTable>
-
-<!--    <sql> &#45;&#45; TODO : Add check constraint to stock_transaction_type column with liquibase syntax
-    ALTER TABLE `STOCK_TRANSACTION_TYPE`
-        ADD CONSTRAINT `C__STOCK_TRANSACTION__STOCK_TRANSACTION_TYPE` CHECK (`STOCK_TRANSACTION_TYPE` IN ('STOCK_CREATE', 'STOCK_ENTRY', 'STOCK_SELL'));
-    </sql>-->
-
-<!-- ======================= -->
-<!-- DDL of STOCK_TRANSACTION -->
-<!-- ======================= -->
+        <sql>-- TODO : Add check constraint to status column with liquibase syntax
+        ALTER TABLE `STOCK`
+            ADD CONSTRAINT `C__STOCK__UNIT_TYPE` CHECK (`UNIT_TYPE` IN ('GRAM', 'KILOGRAM', 'LITER','PIECE'));
+        </sql>
+        <!-- ======================= -->
+        <!-- DDL of STOCK -->
+        <!-- ======================= -->
 
 
-<!-- ======================= -->
-<!-- DDL of WAREHOUSE -->
-<!-- ======================= -->
-    <createTable tableName="WAREHOUSE">
-        <column name="ID" type="VARCHAR(255)">
-            <constraints primaryKey="true" nullable="false"/>
-        </column>
-        <column name="NAME" type="VARCHAR(255)"/>
-        <column name="ADDRESS" type="VARCHAR(255)"/>
-    </createTable>
-<!-- ======================= -->
-<!-- DDL of WAREHOUSE -->
-<!-- ======================= -->
+        <!-- ===================== -->
+        <!-- DDL of WAREHOUSE -->
+        <!-- ===================== -->
+        <createTable tableName="WAREHOUSE">
+            <column name="ID" type="VARCHAR(36)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR(255)">
+            </column>
+            <column name="ADDRESS" type="VARCHAR(255)">
+            </column>
+        </createTable>
+        <!-- ===================== -->
+        <!-- DDL of WAREHOUSE -->
+        <!-- ===================== -->
 
 
-<!-- ======================= -->
-<!-- DDL of WAREHOUSE_STOCK -->
-<!-- ======================= -->
-    <createTable tableName="WAREHOUSE_STOCK">
-        <column name="ID" type="VARCHAR(255)">
-            <constraints primaryKey="true" nullable="false"/>
-        </column>
-        <column name="AMOUNT" type="DECIMAL(24,4)"/>
-        <column name="STOCK_ID" type="VARCHAR(255)">
-            <constraints nullable="false"/>
-        </column>
-        <column name="WAREHOUSE_ID" type="VARCHAR(255)">
-            <constraints nullable="false"/>
-        </column>
-    </createTable>
-<!-- ======================= -->
-<!-- DDL of WAREHOUSE_STOCK -->
-<!-- ======================= -->
-</changeSet>
+        <!-- =========================================== -->
+        <!-- DDL of WAREHOUSE_STOCK -->
+        <!-- =========================================== -->
+        <createTable tableName="WAREHOUSE_STOCK">
+            <column name="ID" type="VARCHAR(36)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="STOCK_ID" type="VARCHAR(36)">
+                <constraints foreignKeyName="FK__WAREHOUSE_STOCK__STOCK"
+                             referencedTableName="STOCK"
+                             referencedColumnNames="ID"
+                />
+            </column>
+            <column name="WAREHOUSE_ID" type="VARCHAR(36)">
+                <constraints foreignKeyName="FK__WAREHOUSE_STOCK__WAREHOUSE"
+                             referencedTableName="WAREHOUSE"
+                             referencedColumnNames="ID"
+                />
+            </column>
+            <column name="AMOUNT" type="DECIMAL(24,4)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <!-- =========================================== -->
+        <!-- DDL of WAREHOUSE_STOCK -->
+        <!-- =========================================== -->
+
+
+        <!-- =============== -->
+        <!-- DDL of STOCK_TRANSACTION -->
+        <!-- =============== -->
+        <createTable tableName="STOCK_TRANSACTION">
+            <column name="ID" type="VARCHAR(36)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="STOCK_TRANSACTION_TYPE" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="AMOUNT" type="DECIMAL(24,4)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="BEFORE_AMOUNT" type="DECIMAL(24,4)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="AFTER_AMOUNT" type="DECIMAL(24,4)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DATE" type="TIMESTAMP"/>
+            <column name="STOCK_ID" type="VARCHAR(36)">
+                <constraints foreignKeyName="FK__STOCK_TRANSACTION__STOCK"
+                             referencedTableName="STOCK"
+                             referencedColumnNames="ID"
+                />
+            </column>
+            <column name="WAREHOUSE_ID" type="VARCHAR(36)">
+                <constraints foreignKeyName="FK__STOCK_TRANSACTION__WAREHOUSE"
+                             referencedTableName="WAREHOUSE"
+                             referencedColumnNames="ID"
+                />
+            </column>
+        </createTable>
+        <sql>-- TODO : Add check constraint to status column with liquibase syntax
+        ALTER TABLE `STOCK_TRANSACTION`
+            ADD CONSTRAINT `C__STOCK_TRANSACTION__STOCK_TRANSACTION_TYPE` CHECK (`STOCK_TRANSACTION_TYPE` IN ('STOCK_CREATE', 'STOCK_ENTRY', 'STOCK_SELL'));
+        </sql>
+        <!-- =============== -->
+        <!-- DDL of STOCK_TRANSACTION -->
+        <!-- =============== -->
+
+    </changeSet>
+
 </databaseChangeLog>

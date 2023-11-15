@@ -1,5 +1,6 @@
 package com.study.stockmanagementstudycase.model.entities;
 
+import com.study.stockmanagementstudycase.model.enums.StockTransactionType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -34,6 +35,10 @@ public class StockTransaction {
 
     @Column(name = "DATE")
     private LocalDateTime date;
+
+    @Column(name = "STOCK_TRANSACTION_TYPE")
+    @Enumerated(EnumType.STRING)
+    private StockTransactionType stockTransactionType;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "STOCK_ID")
