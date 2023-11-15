@@ -24,6 +24,8 @@
             <column name="UNIT_TYPE" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
+            <column name="CREATED_AT" type="TIMESTAMP"/>
+            <column name="UPDATED_AT" type="TIMESTAMP"/>
         </createTable>
 
         <sql>-- TODO : Add check constraint to status column with liquibase syntax
@@ -46,6 +48,8 @@
             </column>
             <column name="ADDRESS" type="VARCHAR(255)">
             </column>
+            <column name="CREATED_AT" type="TIMESTAMP"/>
+            <column name="UPDATED_AT" type="TIMESTAMP"/>
         </createTable>
         <!-- ===================== -->
         <!-- DDL of WAREHOUSE -->
@@ -74,6 +78,8 @@
             <column name="AMOUNT" type="DECIMAL(24,4)">
                 <constraints nullable="false"/>
             </column>
+            <column name="CREATED_AT" type="TIMESTAMP"/>
+            <column name="UPDATED_AT" type="TIMESTAMP"/>
         </createTable>
         <!-- =========================================== -->
         <!-- DDL of WAREHOUSE_STOCK -->
@@ -112,6 +118,8 @@
                              referencedColumnNames="ID"
                 />
             </column>
+            <column name="CREATED_AT" type="TIMESTAMP"/>
+            <column name="UPDATED_AT" type="TIMESTAMP"/>
         </createTable>
         <sql>-- TODO : Add check constraint to status column with liquibase syntax
         ALTER TABLE `STOCK_TRANSACTION`

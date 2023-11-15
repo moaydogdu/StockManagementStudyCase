@@ -1,7 +1,9 @@
 package com.study.stockmanagementstudycase.model.entities;
 
+import com.study.stockmanagementstudycase.common.model.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
@@ -9,13 +11,14 @@ import java.util.List;
  * Represents WareHouse Entities.
  */
 @Entity
-@Builder
+@SuperBuilder
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 @Table(name = "WAREHOUSE")
-public class WareHouse {
+public class WareHouseEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -32,12 +35,12 @@ public class WareHouse {
             fetch = FetchType.LAZY,
             mappedBy = "wareHouse"
     )
-    private List<WareHouseStock> wareHouseStocks;
+    private List<WareHouseStockEntity> wareHouseStockEntities;
 
     @OneToMany(
             fetch = FetchType.LAZY,
             mappedBy = "wareHouse"
     )
-    private List<StockTransaction> stockTransactions;
+    private List<StockTransactionEntity> stockTransactionEntities;
 
 }

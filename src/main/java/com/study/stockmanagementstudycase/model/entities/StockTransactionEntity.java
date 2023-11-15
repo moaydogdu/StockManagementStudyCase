@@ -1,23 +1,26 @@
 package com.study.stockmanagementstudycase.model.entities;
 
+import com.study.stockmanagementstudycase.common.model.entity.BaseEntity;
 import com.study.stockmanagementstudycase.model.enums.StockTransactionType;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
- * Represents Transactions of {@link Stock} Entities.
+ * Represents Transactions of {@link StockEntity} Entities.
  */
 @Entity
-@Builder
+@SuperBuilder
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 @Table(name = "STOCK_TRANSACTION")
-public class StockTransaction {
+public class StockTransactionEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -42,10 +45,10 @@ public class StockTransaction {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "STOCK_ID")
-    private Stock stock;
+    private StockEntity stockEntity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "WAREHOUSE_ID")
-    private WareHouse wareHouse;
+    private WareHouseEntity wareHouseEntity;
 
 }
