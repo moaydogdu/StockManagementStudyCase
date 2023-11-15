@@ -1,8 +1,10 @@
 package com.study.stockmanagementstudycase.model.entities;
 
+import com.study.stockmanagementstudycase.common.model.entity.BaseEntity;
 import com.study.stockmanagementstudycase.model.enums.StockTransactionType;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -11,13 +13,14 @@ import java.time.LocalDateTime;
  * Represents Transactions of {@link Stock} Entities.
  */
 @Entity
-@Builder
+@SuperBuilder
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 @Table(name = "STOCK_TRANSACTION")
-public class StockTransaction {
+public class StockTransaction extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
