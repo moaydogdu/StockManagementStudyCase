@@ -1,12 +1,14 @@
 package com.study.stockmanagementstudycase.model.entities;
 
-import com.study.stockmanagementstudycase.model.enums.TransactionType;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+/**
+ * Represents Transactions of {@link Stock} Entities.
+ */
 @Entity
 @Builder
 @Getter
@@ -30,19 +32,15 @@ public class StockTransaction {
     @Column(name = "AFTER_AMOUNT", scale = 24, precision = 4)
     private BigDecimal afterAmount;
 
-    @Column(name = "TRANSACTION_TYPE")
-    @Enumerated(EnumType.STRING)
-    private TransactionType transactionType;
-
     @Column(name = "DATE")
     private LocalDateTime date;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "STOCK")
+    @JoinColumn(name = "STOCK_ID")
     private Stock stock;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "WAREHOUSE")
+    @JoinColumn(name = "WAREHOUSE_ID")
     private WareHouse wareHouse;
 
 }

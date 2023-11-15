@@ -5,6 +5,9 @@ import lombok.*;
 
 import java.util.List;
 
+/**
+ * Represents WareHouse Entities.
+ */
 @Entity
 @Builder
 @Getter
@@ -29,14 +32,12 @@ public class WareHouse {
             fetch = FetchType.LAZY,
             mappedBy = "wareHouse"
     )
-    @JoinColumn(name = "WAREHOUSE_STOCK")
     private List<WareHouseStock> wareHouseStocks;
 
     @OneToMany(
             fetch = FetchType.LAZY,
             mappedBy = "wareHouse"
     )
-    @JoinColumn(name = "STOCK_TRANSACTION")
     private List<StockTransaction> stockTransactions;
 
 }

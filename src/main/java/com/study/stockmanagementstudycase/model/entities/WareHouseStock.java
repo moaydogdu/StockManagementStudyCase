@@ -5,7 +5,9 @@ import lombok.*;
 
 import java.math.BigDecimal;
 
-
+/**
+ * This Entity Indicates How Much {@link Stock} is in {@link WareHouse}.
+ */
 @Entity
 @Builder
 @Getter
@@ -24,11 +26,11 @@ public class WareHouseStock {
     private BigDecimal amount;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "STOCK")
+    @JoinColumn(name = "STOCK_ID")
     private Stock stock;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "WAREHOUSE")
+    @JoinColumn(name = "WAREHOUSE_ID")
     private WareHouse wareHouse;
 
 }

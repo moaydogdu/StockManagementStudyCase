@@ -1,12 +1,14 @@
 package com.study.stockmanagementstudycase.model.entities;
 
-import com.study.stockmanagementstudycase.model.enums.UnitType;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.List;
 
+/**
+ * Represents Stock Entities.
+ */
 @Entity
 @Builder
 @Getter
@@ -30,22 +32,16 @@ public class Stock {
     @Column(name = "AMOUNT", scale = 24, precision = 4)
     private BigDecimal amount;
 
-    @Column(name = "UNITTYPE")
-    @Enumerated(EnumType.STRING)
-    private UnitType unitType;
-
     @OneToMany(
             fetch = FetchType.LAZY,
             mappedBy = "stock"
     )
-    @JoinColumn(name = "STOCK_TRANSACTION")
     private List<StockTransaction> stockTransactions;
 
     @OneToMany(
             fetch = FetchType.LAZY,
             mappedBy = "stock"
     )
-    @JoinColumn(name = "WAREHOUSE_STOCK")
     private List<WareHouseStock> wareHouseStocks;
 
 }
