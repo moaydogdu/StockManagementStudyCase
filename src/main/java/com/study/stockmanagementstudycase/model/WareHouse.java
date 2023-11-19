@@ -1,13 +1,13 @@
-package com.study.stockmanagementstudycase.model.dto.response;
+package com.study.stockmanagementstudycase.model;
 
 import lombok.*;
 
 @Builder
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class WareHouseResponse {
+@NoArgsConstructor
+public class WareHouse {
 
     private String id;
 

@@ -1,10 +1,11 @@
 package com.study.stockmanagementstudycase.controller;
 
+import com.study.stockmanagementstudycase.model.WareHouse;
 import com.study.stockmanagementstudycase.model.dto.request.WareHouseCreateRequest;
 import com.study.stockmanagementstudycase.model.dto.response.WareHouseResponse;
-import com.study.stockmanagementstudycase.model.entities.WareHouseEntity;
+import com.study.stockmanagementstudycase.model.mappers.WareHouseDtoMapper;
 import com.study.stockmanagementstudycase.service.WareHouseCreateService;
-import com.study.stockmanagementstudycase.service.WareHouseGetAllService;
+import com.study.stockmanagementstudycase.service.WareHouseService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,19 +19,21 @@ import java.util.List;
 public class WareHouseController {
 
     private final WareHouseCreateService wareHouseCreateService;
-    private final WareHouseGetAllService wareHouseGetAllService;
+    private final WareHouseService wareHouseService;
 
     @GetMapping()
-    public ResponseEntity<List<WareHouseResponse>> getAllWareHouses() {
-        return ResponseEntity.ok(wareHouseGetAllService.getAllWareHouses());
+    public ResponseEntity<List<WareHouseResponse>> getWareHouses() {
+        final List<WareHouse> wareHouses = wareHouseService.getWareHouses();
+        final List<WareHouseResponse> wareHouseResponseList = WareHouseDtoMapper
+                .toGetResponse(wareHouses);
+        return ResponseEntity.ok(wareHouseResponseList);
     }
 
     @PostMapping
-    public ResponseEntity createWareHouse(
-            @RequestBody @Valid WareHouseCreateRequest request
+    public ResponseEntity<Void> createWareHouse(
+            @RequestBody @Valid final WareHouseCreateRequest request
     ) {
-        WareHouseEntity createdWareHouseEntity = wareHouseCreateService
-                .createWareHouse(request);
+        wareHouseCreateService.createWareHouse(request);
 
         return ResponseEntity.ok().build();
     }
