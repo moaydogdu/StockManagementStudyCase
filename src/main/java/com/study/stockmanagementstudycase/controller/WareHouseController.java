@@ -37,4 +37,10 @@ public class WareHouseController {
 
         return ResponseEntity.ok().build();
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<WareHouseResponse> getUserById(@PathVariable String id){
+
+        return ResponseEntity.ok(WareHouseDtoMapper.toGetResponse( wareHouseService.getWareHouseById(id)));
+    }
+
 }

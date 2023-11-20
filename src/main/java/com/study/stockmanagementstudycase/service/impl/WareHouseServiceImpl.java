@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -24,6 +26,19 @@ public class WareHouseServiceImpl implements WareHouseService {
         return wareHouseEntityList.stream()
                 .map(WareHouseMapper::toWareHouse)
                 .toList();
+    }
+    @Override
+    public WareHouse getWareHouseById(String id) {
+        Optional<WareHouseEntity> wareHouseEntity = wareHouseRepository.findById(id);
+        if(wareHouseEntity.isPresent())//Objects.isNull()
+        {
+
+            WareHouseEntity wareHouseEntity1 = wareHouseEntity.get();
+            return WareHouseMapper.toWareHouse(wareHouseEntity1);
+        }
+        else{
+            throw new RuntimeException("WareHouse cant find given id");
+        }
     }
 
 }
