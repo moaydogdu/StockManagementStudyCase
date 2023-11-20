@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class WareHouseDtoMapper {
-    // TODO: her service uyesi icin ayri ayri methodlar yazilacak
 
     public static WareHouseResponse toGetResponse(
             WareHouse wareHouse

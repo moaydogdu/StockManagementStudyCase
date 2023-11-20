@@ -2,25 +2,36 @@ package com.study.stockmanagementstudycase.model.mappers;
 
 import com.study.stockmanagementstudycase.model.WareHouse;
 import com.study.stockmanagementstudycase.model.dto.request.WareHouseCreateRequest;
+import com.study.stockmanagementstudycase.model.dto.request.WareHouseUpdateRequest;
 import com.study.stockmanagementstudycase.model.entities.WareHouseEntity;
 
 import java.util.Objects;
 
-// Dto ve Entity arasindaki donusumu yapan mapperdir
 public class WareHouseMapper {
 
 
     public static WareHouseEntity mapForSaving(
-            WareHouseCreateRequest request
+            final WareHouseCreateRequest createRequest
     ) {
         return WareHouseEntity.builder()
-                .name(request.getName())
-                .address(request.getAddress())
+                .name(createRequest.getName())
+                .address(createRequest.getAddress())
+                .build();
+    }
+
+    public static WareHouseEntity mapForUpdating(
+            final WareHouseUpdateRequest updateRequest,
+            String id
+    ) {
+        return WareHouseEntity.builder()
+                .id(id)
+                .name(updateRequest.getName())
+                .address(updateRequest.getAddress())
                 .build();
     }
 
     public static WareHouse toWareHouse(
-            WareHouseEntity wareHouseEntity
+            final WareHouseEntity wareHouseEntity
     ) {
         if (Objects.isNull(wareHouseEntity)) {
             return null;
