@@ -37,4 +37,12 @@ public class WareHouseController {
 
         return ResponseEntity.ok().build();
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteWareHouse(
+            @PathVariable final String id
+    ) {
+        wareHouseService.deleteWareHouse(id);
+        return ResponseEntity.ok().build();
+    }
 }
