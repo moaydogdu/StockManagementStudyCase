@@ -19,10 +19,10 @@ public class WareHouseUpdateServiceImpl implements WareHouseUpdateService {
     @Override
     public void updateWareHouse(
             final WareHouseUpdateRequest updateRequest,
-            String id
+            final String warehouseId
     ) {
-        WareHouseEntity wareHouseEntity = wareHouseRepository.
-                findById(id)
+        final WareHouseEntity wareHouseEntityFromDb = wareHouseRepository.
+                findById(warehouseId)
                 .orElseThrow(() -> new RuntimeException("WareHouseEntity not found"));
 
         this.checkWareHouseNameAndAddressUniqueness(
@@ -30,10 +30,10 @@ public class WareHouseUpdateServiceImpl implements WareHouseUpdateService {
                 updateRequest.getAddress()
         );
 
-        final WareHouseEntity wareHouseEntityToBeUpdate = WareHouseMapper
-                .mapForUpdating(updateRequest, id);
+        WareHouseMapper.mapForUpdating(updateRequest, wareHouseEntityFromDb);
 
-        wareHouseRepository.save(wareHouseEntityToBeUpdate);
+        wareHouseRepository.save(wareHouseEntityFromDb);
+
     }
 
     private void checkWareHouseNameAndAddressUniqueness(

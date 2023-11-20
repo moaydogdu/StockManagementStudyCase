@@ -57,15 +57,15 @@ public class WareHouseController {
      * Update a warehouse by its ID.
      *
      * @param updateRequest The updated warehouse data.
-     * @param id The ID of the warehouse to update.
+     * @param warehouseId The ID of the warehouse to update.
      * @return A ResponseEntity with no content.
      */
-    @PutMapping("/{id}")
+    @PutMapping("/{warehouseId}")
     public ResponseEntity<Void> updateWareHouse(
             @RequestBody @Valid final WareHouseUpdateRequest updateRequest,
-            @PathVariable final String id
+            @PathVariable("warehouseId") final String warehouseId
     ) {
-        wareHouseUpdateService.updateWareHouse(updateRequest, id);
+        wareHouseUpdateService.updateWareHouse(updateRequest, warehouseId);
 
        return ResponseEntity.ok().build();
     }

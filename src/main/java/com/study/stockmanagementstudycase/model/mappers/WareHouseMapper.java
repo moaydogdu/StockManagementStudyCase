@@ -19,15 +19,12 @@ public class WareHouseMapper {
                 .build();
     }
 
-    public static WareHouseEntity mapForUpdating(
+    public static void mapForUpdating(
             final WareHouseUpdateRequest updateRequest,
-            String id
+            final WareHouseEntity wareHouseEntityFromDb
     ) {
-        return WareHouseEntity.builder()
-                .id(id)
-                .name(updateRequest.getName())
-                .address(updateRequest.getAddress())
-                .build();
+        wareHouseEntityFromDb.setName(updateRequest.getName());
+        wareHouseEntityFromDb.setAddress(updateRequest.getAddress());
     }
 
     public static WareHouse toWareHouse(
