@@ -8,6 +8,4 @@ public interface WareHouseService {
 
     List<WareHouse> getWareHouses();
 
-    void deleteWareHouse(String id);
-
 }

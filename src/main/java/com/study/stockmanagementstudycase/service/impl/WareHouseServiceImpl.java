@@ -26,15 +26,4 @@ public class WareHouseServiceImpl implements WareHouseService {
                 .toList();
     }
 
-    @Override
-    public void deleteWareHouse(
-            final String id
-    ) {
-        wareHouseRepository
-                .findById(id)
-                .orElseThrow(() -> new RuntimeException("WareHouse not found"));
-
-        wareHouseRepository.deleteById(id);
-    }
-
 }

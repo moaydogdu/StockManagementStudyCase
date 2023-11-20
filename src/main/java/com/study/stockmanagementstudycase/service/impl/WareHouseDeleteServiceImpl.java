@@ -1,0 +1,25 @@
+package com.study.stockmanagementstudycase.service.impl;
+
+import com.study.stockmanagementstudycase.repository.WareHouseRepository;
+import com.study.stockmanagementstudycase.service.WareHouseDeleteService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class WareHouseDeleteServiceImpl implements WareHouseDeleteService {
+
+    private final WareHouseRepository wareHouseRepository;
+
+    @Override
+    public void deleteWareHouse(
+            final String wareHouseId
+    ) {
+        wareHouseRepository
+                .findById(wareHouseId)
+                .orElseThrow(() -> new RuntimeException("WareHouse not found"));
+
+        wareHouseRepository.deleteById(wareHouseId);
+    }
+
+}

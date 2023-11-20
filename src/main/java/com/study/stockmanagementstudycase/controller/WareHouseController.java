@@ -5,6 +5,7 @@ import com.study.stockmanagementstudycase.model.dto.request.WareHouseCreateReque
 import com.study.stockmanagementstudycase.model.dto.response.WareHouseResponse;
 import com.study.stockmanagementstudycase.model.mappers.WareHouseDtoMapper;
 import com.study.stockmanagementstudycase.service.WareHouseCreateService;
+import com.study.stockmanagementstudycase.service.WareHouseDeleteService;
 import com.study.stockmanagementstudycase.service.WareHouseService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ public class WareHouseController {
 
     private final WareHouseCreateService wareHouseCreateService;
     private final WareHouseService wareHouseService;
+    private final WareHouseDeleteService wareHouseDeleteService;
 
     @GetMapping()
     public ResponseEntity<List<WareHouseResponse>> getWareHouses() {
@@ -38,11 +40,12 @@ public class WareHouseController {
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{wareHouseId}")
     public ResponseEntity<Void> deleteWareHouse(
-            @PathVariable final String id
+            @PathVariable("wareHouseId") final String wareHouseId
     ) {
-        wareHouseService.deleteWareHouse(id);
+        wareHouseDeleteService.deleteWareHouse(wareHouseId);
+
         return ResponseEntity.ok().build();
     }
 }
