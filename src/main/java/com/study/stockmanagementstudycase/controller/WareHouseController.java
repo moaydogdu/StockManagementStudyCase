@@ -9,7 +9,12 @@ import com.study.stockmanagementstudycase.service.WareHouseService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -22,10 +27,13 @@ public class WareHouseController {
     private final WareHouseService wareHouseService;
 
     @GetMapping()
-    public ResponseEntity<List<WareHouseResponse>> getWareHouses() {
-        final List<WareHouse> wareHouses = wareHouseService.getWareHouses();
+    public ResponseEntity<List<WareHouseResponse>> getWareHouses(
+    ) {
+        final List<WareHouse> wareHouses = wareHouseService
+                .getWareHouses();
         final List<WareHouseResponse> wareHouseResponseList = WareHouseDtoMapper
-                .toGetResponse(wareHouses);
+                .toWareHouseResponse(wareHouses);
+
         return ResponseEntity.ok(wareHouseResponseList);
     }
 
@@ -37,15 +45,17 @@ public class WareHouseController {
 
         return ResponseEntity.ok().build();
     }
+
     @GetMapping("/{wareHouseId}")
     public ResponseEntity<WareHouseResponse> getWareHouseById(
             @PathVariable("wareHouseId") final String wareHouseId
     ){
+        final WareHouse wareHouse = wareHouseService
+                .getWareHouseById(wareHouseId);
+        final WareHouseResponse wareHouseResponse = WareHouseDtoMapper
+                .toWareHouseResponse(wareHouse);
 
-        final WareHouse wareHouse =wareHouseService.getWareHouseById(wareHouseId);
-        final WareHouseResponse wareHouseResponse = WareHouseDtoMapper.toGetResponse(wareHouse);
-        return ResponseEntity.ok(wareHouseResponse);//.build(); review de build kullanılmam istenmiş ama bildiğim kadarıyla build gövde içeriği içermeye alanda kullanılır
-
+        return ResponseEntity.ok(wareHouseResponse);
     }
 
 }
