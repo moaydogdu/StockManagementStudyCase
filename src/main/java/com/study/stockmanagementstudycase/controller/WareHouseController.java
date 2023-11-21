@@ -38,7 +38,9 @@ public class WareHouseController {
         return ResponseEntity.ok().build();
     }
     @GetMapping("/{wareHouseId}")
-    public ResponseEntity<WareHouseResponse> getUserById(@PathVariable("wareHouseId") final String wareHouseId){
+    public ResponseEntity<WareHouseResponse> getWareHouseById(
+            @PathVariable("wareHouseId") final String wareHouseId
+    ){
 
         final WareHouse wareHouse =wareHouseService.getWareHouseById(wareHouseId);
         final WareHouseResponse wareHouseResponse = WareHouseDtoMapper.toGetResponse(wareHouse);
