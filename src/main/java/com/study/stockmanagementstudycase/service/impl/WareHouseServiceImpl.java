@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 @Service
 @RequiredArgsConstructor
 public class WareHouseServiceImpl implements WareHouseService {
@@ -18,12 +19,24 @@ public class WareHouseServiceImpl implements WareHouseService {
 
     @Override
     public List<WareHouse> getWareHouses() {
-
-        List<WareHouseEntity> wareHouseEntityList = wareHouseRepository.findAll();
+        final List<WareHouseEntity> wareHouseEntityList = wareHouseRepository
+                .findAll();
 
         return wareHouseEntityList.stream()
-                .map(WareHouseMapper::toWareHouse)
+                .map(WareHouseMapper::toDomainModel)
                 .toList();
+    }
+
+    @Override
+    public WareHouse getWareHouseById(
+            final String wareHouseId
+    ) {
+        final WareHouseEntity wareHouseEntityFromDb = wareHouseRepository
+                .findById(wareHouseId)
+                .orElseThrow(() -> new RuntimeException("WareHouse cant fin given id"));
+
+        return WareHouseMapper
+                .toDomainModel(wareHouseEntityFromDb);
     }
 
 }

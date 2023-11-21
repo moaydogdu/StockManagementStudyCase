@@ -8,4 +8,6 @@ public interface WareHouseService {
 
     List<WareHouse> getWareHouses();
 
+    WareHouse getWareHouseById(final String wareHouseId);
+
 }

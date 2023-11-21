@@ -4,7 +4,7 @@ import com.study.stockmanagementstudycase.model.WareHouse;
 import com.study.stockmanagementstudycase.model.dto.request.WareHouseCreateRequest;
 import com.study.stockmanagementstudycase.model.dto.request.WareHouseUpdateRequest;
 import com.study.stockmanagementstudycase.model.dto.response.WareHouseResponse;
-import com.study.stockmanagementstudycase.model.mappers.WareHouseDtoMapper;
+import com.study.stockmanagementstudycase.model.mappers.WareHouseDTOMapper;
 import com.study.stockmanagementstudycase.service.WareHouseCreateService;
 import com.study.stockmanagementstudycase.service.WareHouseDeleteService;
 import com.study.stockmanagementstudycase.service.WareHouseService;
@@ -12,7 +12,14 @@ import com.study.stockmanagementstudycase.service.WareHouseUpdateService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -32,10 +39,13 @@ public class WareHouseController {
      * @return ResponseEntity containing a list of WareHouseResponse objects
      */
     @GetMapping()
-    public ResponseEntity<List<WareHouseResponse>> getWareHouses() {
-        final List<WareHouse> wareHouses = wareHouseService.getWareHouses();
-        final List<WareHouseResponse> wareHouseResponseList = WareHouseDtoMapper
-                .toGetResponse(wareHouses);
+    public ResponseEntity<List<WareHouseResponse>> getWareHouses(
+    ) {
+        final List<WareHouse> wareHouses = wareHouseService
+                .getWareHouses();
+        final List<WareHouseResponse> wareHouseResponseList = WareHouseDTOMapper
+                .toWareHouseResponse(wareHouses);
+
         return ResponseEntity.ok(wareHouseResponseList);
     }
 
@@ -54,6 +64,17 @@ public class WareHouseController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/{wareHouseId}")
+    public ResponseEntity<WareHouseResponse> getWareHouseById(
+            @PathVariable("wareHouseId") final String wareHouseId
+    ){
+        final WareHouse wareHouse = wareHouseService
+                .getWareHouseById(wareHouseId);
+        final WareHouseResponse wareHouseResponse = WareHouseDTOMapper
+                .toWareHouseResponse(wareHouse);
+
+        return ResponseEntity.ok(wareHouseResponse);
+    }
 
     @DeleteMapping("/{wareHouseId}")
     public ResponseEntity<Void> deleteWareHouse(
@@ -68,7 +89,7 @@ public class WareHouseController {
      * Update a warehouse by its ID.
      *
      * @param updateRequest The updated warehouse data.
-     * @param warehouseId The ID of the warehouse to update.
+     * @param wareHouseId The ID of the warehouse to update.
      * @return A ResponseEntity with no content.
      */
     @PutMapping("/{wareHouseId}")

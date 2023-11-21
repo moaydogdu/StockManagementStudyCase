@@ -9,7 +9,6 @@ import java.util.Objects;
 
 public class WareHouseMapper {
 
-
     public static WareHouseEntity mapForSaving(
             final WareHouseCreateRequest createRequest
     ) {
@@ -27,12 +26,13 @@ public class WareHouseMapper {
         wareHouseEntityFromDb.setAddress(updateRequest.getAddress());
     }
 
-    public static WareHouse toWareHouse(
+    public static WareHouse toDomainModel(
             final WareHouseEntity wareHouseEntity
     ) {
         if (Objects.isNull(wareHouseEntity)) {
             return null;
         }
+
         return WareHouse.builder()
                 .id(wareHouseEntity.getId())
                 .name(wareHouseEntity.getName())
