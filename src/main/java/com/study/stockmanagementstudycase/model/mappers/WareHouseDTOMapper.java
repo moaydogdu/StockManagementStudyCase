@@ -6,16 +6,15 @@ import com.study.stockmanagementstudycase.model.dto.response.WareHouseResponse;
 import java.util.List;
 import java.util.Objects;
 
-public class WareHouseDtoMapper {
-    // TODO: her service uyesi icin ayri ayri methodlar yazilacak
+public class WareHouseDTOMapper {
 
-    public static WareHouseResponse toGetResponse(
-            WareHouse wareHouse
+    public static WareHouseResponse toWareHouseResponse(
+            final WareHouse wareHouse
     ) {
-
         if (Objects.isNull(wareHouse)) {
             return null;
         }
+
         return WareHouseResponse.builder()
                 .id(wareHouse.getId())
                 .name(wareHouse.getName())
@@ -23,15 +22,15 @@ public class WareHouseDtoMapper {
                 .build();
     }
 
-    public static List<WareHouseResponse> toGetResponse(
-            List<WareHouse> wareHouseList
+    public static List<WareHouseResponse> toWareHouseResponse(
+            final List<WareHouse> wareHouseList
     ) {
-
         if (Objects.isNull(wareHouseList)) {
             return null;
         }
+
         return wareHouseList.stream()
-                .map(WareHouseDtoMapper::toGetResponse)
+                .map(WareHouseDTOMapper::toWareHouseResponse)
                 .toList();
     }
 }
