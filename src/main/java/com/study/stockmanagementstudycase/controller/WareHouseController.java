@@ -37,10 +37,13 @@ public class WareHouseController {
 
         return ResponseEntity.ok().build();
     }
-    @GetMapping("/{id}")
-    public ResponseEntity<WareHouseResponse> getUserById(@PathVariable String id){
+    @GetMapping("/{wareHouseId}")
+    public ResponseEntity<WareHouseResponse> getUserById(@PathVariable("wareHouseId") final String wareHouseId){
 
-        return ResponseEntity.ok(WareHouseDtoMapper.toGetResponse( wareHouseService.getWareHouseById(id)));
+        final WareHouse wareHouse =wareHouseService.getWareHouseById(wareHouseId);
+        final WareHouseResponse wareHouseResponse = WareHouseDtoMapper.toGetResponse(wareHouse);
+        return ResponseEntity.ok(wareHouseResponse);//.build(); review de build kullanılmam istenmiş ama bildiğim kadarıyla build gövde içeriği içermeye alanda kullanılır
+
     }
 
 }

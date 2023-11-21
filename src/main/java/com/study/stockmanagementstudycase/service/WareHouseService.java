@@ -7,6 +7,6 @@ import java.util.List;
 public interface WareHouseService {
 
     List<WareHouse> getWareHouses();
-    WareHouse getWareHouseById( String id);
+    WareHouse getWareHouseById( final String wareHouseId);
 
 }
