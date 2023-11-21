@@ -19,25 +19,24 @@ public class WareHouseServiceImpl implements WareHouseService {
 
     @Override
     public List<WareHouse> getWareHouses() {
-
-        List<WareHouseEntity> wareHouseEntityList = wareHouseRepository.findAll();
-
+        final List<WareHouseEntity> wareHouseEntityList = wareHouseRepository
+                .findAll();
 
         return wareHouseEntityList.stream()
-
-                .map(WareHouseMapper::toWareHouse)
-
+                .map(WareHouseMapper::toDomainModel)
                 .toList();
-
     }
+
     @Override
     public WareHouse getWareHouseById(
             final String wareHouseId
     ) {
-           final WareHouseEntity wareHouseEntityFromDb = wareHouseRepository.findById(wareHouseId).orElseThrow(()->new RuntimeException("WareHouse cant fin given id"));
+        final WareHouseEntity wareHouseEntityFromDb = wareHouseRepository
+                .findById(wareHouseId)
+                .orElseThrow(() -> new RuntimeException("WareHouse cant fin given id"));
 
-            return WareHouseMapper.toWareHouse(wareHouseEntityFromDb);
-
+        return WareHouseMapper
+                .toDomainModel(wareHouseEntityFromDb);
     }
 
 }
