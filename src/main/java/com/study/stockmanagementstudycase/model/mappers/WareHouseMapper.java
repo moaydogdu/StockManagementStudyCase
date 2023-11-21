@@ -6,25 +6,24 @@ import com.study.stockmanagementstudycase.model.entities.WareHouseEntity;
 
 import java.util.Objects;
 
-// Dto ve Entity arasindaki donusumu yapan mapperdir
 public class WareHouseMapper {
 
-
     public static WareHouseEntity mapForSaving(
-            WareHouseCreateRequest request
+            final WareHouseCreateRequest createRequest
     ) {
         return WareHouseEntity.builder()
-                .name(request.getName())
-                .address(request.getAddress())
+                .name(createRequest.getName())
+                .address(createRequest.getAddress())
                 .build();
     }
 
-    public static WareHouse toWareHouse(
-            WareHouseEntity wareHouseEntity
+    public static WareHouse toDomainModel(
+            final WareHouseEntity wareHouseEntity
     ) {
         if (Objects.isNull(wareHouseEntity)) {
             return null;
         }
+
         return WareHouse.builder()
                 .id(wareHouseEntity.getId())
                 .name(wareHouseEntity.getName())
