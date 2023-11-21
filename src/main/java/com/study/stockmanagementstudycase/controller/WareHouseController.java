@@ -2,16 +2,21 @@ package com.study.stockmanagementstudycase.controller;
 
 import com.study.stockmanagementstudycase.model.WareHouse;
 import com.study.stockmanagementstudycase.model.dto.request.WareHouseCreateRequest;
+import com.study.stockmanagementstudycase.model.dto.request.WareHouseUpdateRequest;
 import com.study.stockmanagementstudycase.model.dto.response.WareHouseResponse;
 import com.study.stockmanagementstudycase.model.mappers.WareHouseDTOMapper;
 import com.study.stockmanagementstudycase.service.WareHouseCreateService;
+import com.study.stockmanagementstudycase.service.WareHouseDeleteService;
 import com.study.stockmanagementstudycase.service.WareHouseService;
+import com.study.stockmanagementstudycase.service.WareHouseUpdateService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,7 +30,14 @@ public class WareHouseController {
 
     private final WareHouseCreateService wareHouseCreateService;
     private final WareHouseService wareHouseService;
+    private final WareHouseDeleteService wareHouseDeleteService;
+    private final WareHouseUpdateService wareHouseUpdateService;
 
+    /**
+     * Retrieves a list of warehouses.
+     *
+     * @return ResponseEntity containing a list of WareHouseResponse objects
+     */
     @GetMapping()
     public ResponseEntity<List<WareHouseResponse>> getWareHouses(
     ) {
@@ -37,6 +49,12 @@ public class WareHouseController {
         return ResponseEntity.ok(wareHouseResponseList);
     }
 
+    /**
+     * Create a new warehouse.
+     *
+     * @param request The warehouse data.
+     * @return A ResponseEntity with no content.
+     */
     @PostMapping
     public ResponseEntity<Void> createWareHouse(
             @RequestBody @Valid final WareHouseCreateRequest request
@@ -58,4 +76,29 @@ public class WareHouseController {
         return ResponseEntity.ok(wareHouseResponse);
     }
 
+    @DeleteMapping("/{wareHouseId}")
+    public ResponseEntity<Void> deleteWareHouse(
+            @PathVariable("wareHouseId") final String wareHouseId
+    ) {
+        wareHouseDeleteService.deleteWareHouse(wareHouseId);
+
+        return ResponseEntity.ok().build();
+    }
+
+    /**
+     * Update a warehouse by its ID.
+     *
+     * @param updateRequest The updated warehouse data.
+     * @param wareHouseId The ID of the warehouse to update.
+     * @return A ResponseEntity with no content.
+     */
+    @PutMapping("/{wareHouseId}")
+    public ResponseEntity<Void> updateWareHouse(
+            @RequestBody @Valid final WareHouseUpdateRequest updateRequest,
+            @PathVariable("wareHouseId") final String wareHouseId
+    ) {
+        wareHouseUpdateService.updateWareHouse(updateRequest, wareHouseId);
+
+       return ResponseEntity.ok().build();
+    }
 }
