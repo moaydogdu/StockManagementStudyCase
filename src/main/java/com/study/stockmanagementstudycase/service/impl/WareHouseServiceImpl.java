@@ -30,8 +30,8 @@ public class WareHouseServiceImpl implements WareHouseService {
     public WareHouse getWareHouseById(
             final String wareHouseId
     ) {
-           final WareHouseEntity wareHouseEntity = wareHouseRepository.findById(wareHouseId).orElseThrow(()->new RuntimeException("WareHouse cant fin given id"));
-            return WareHouseMapper.toWareHouse(wareHouseEntity);
+           final WareHouseEntity wareHouseEntityFromDb = wareHouseRepository.findById(wareHouseId).orElseThrow(()->new RuntimeException("WareHouse cant fin given id"));
+            return WareHouseMapper.toWareHouse(wareHouseEntityFromDb);
 
     }
 }
