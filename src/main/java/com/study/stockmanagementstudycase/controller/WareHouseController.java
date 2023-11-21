@@ -3,7 +3,7 @@ package com.study.stockmanagementstudycase.controller;
 import com.study.stockmanagementstudycase.model.WareHouse;
 import com.study.stockmanagementstudycase.model.dto.request.WareHouseCreateRequest;
 import com.study.stockmanagementstudycase.model.dto.response.WareHouseResponse;
-import com.study.stockmanagementstudycase.model.mappers.WareHouseDtoMapper;
+import com.study.stockmanagementstudycase.model.mappers.WareHouseDTOMapper;
 import com.study.stockmanagementstudycase.service.WareHouseCreateService;
 import com.study.stockmanagementstudycase.service.WareHouseService;
 import jakarta.validation.Valid;
@@ -31,7 +31,7 @@ public class WareHouseController {
     ) {
         final List<WareHouse> wareHouses = wareHouseService
                 .getWareHouses();
-        final List<WareHouseResponse> wareHouseResponseList = WareHouseDtoMapper
+        final List<WareHouseResponse> wareHouseResponseList = WareHouseDTOMapper
                 .toWareHouseResponse(wareHouses);
 
         return ResponseEntity.ok(wareHouseResponseList);
@@ -52,7 +52,7 @@ public class WareHouseController {
     ){
         final WareHouse wareHouse = wareHouseService
                 .getWareHouseById(wareHouseId);
-        final WareHouseResponse wareHouseResponse = WareHouseDtoMapper
+        final WareHouseResponse wareHouseResponse = WareHouseDTOMapper
                 .toWareHouseResponse(wareHouse);
 
         return ResponseEntity.ok(wareHouseResponse);
