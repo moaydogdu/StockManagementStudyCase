@@ -1,0 +1,55 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+    <!-- ================================== -->
+    <!-- DML of example warehouse data      -->
+    <!-- ================================== -->
+    <changeSet id="insertWareHouseExampleData1" author="seymusyuzen">
+        <insert tableName="WAREHOUSE">
+            <column name="ID" value="ba0f7571-1ecd-41d2-8e9b-d23ca2b99e3d"/>
+            <column name="NAME" value="Kadikoy Deposu"/>
+            <column name="ADDRESS" value="Istanbul/Kadikoy"/>
+            <column name="CREATED_AT" value="2023-11-22 10:00:00"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insertWareHouseExampleData2" author="seymusyuzen">
+        <insert tableName="WAREHOUSE">
+            <column name="ID" value="b4a785b5-3903-4701-83c7-a14e240875ef"/>
+            <column name="NAME" value="Bagcilar Deposu"/>
+            <column name="ADDRESS" value="Istanbul/Bagcilar"/>
+            <column name="CREATED_AT" value="2023-11-22 09:00:00"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insertWareHouseExampleData3" author="seymusyuzen">
+        <insert tableName="WAREHOUSE">
+            <column name="ID" value="e7365438-e5c0-4419-93ea-539fa8392e9d"/>
+            <column name="NAME" value="Kizilay Deposu"/>
+            <column name="ADDRESS" value="Ankara/Kizilay"/>
+            <column name="CREATED_AT" value="2023-11-22 12:15:00"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insertWareHouseExampleData4" author="seymusyuzen">
+        <insert tableName="WAREHOUSE">
+            <column name="ID" value="df3c0867-7692-457d-946e-953be18d6541"/>
+            <column name="NAME" value="Alsancak Deposu"/>
+            <column name="ADDRESS" value="Izmir/Alsancak"/>
+            <column name="CREATED_AT" value="2023-11-22 11:00:00"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insertWareHouseExampleData5" author="seymusyuzen">
+        <insert tableName="WAREHOUSE">
+            <column name="ID" value="3e269ce8-482f-4576-8a21-e8b76562c06d"/>
+            <column name="NAME" value="Doktorlar Deposu"/>
+            <column name="ADDRESS" value="Eskisehir/Doktorlar"/>
+            <column name="CREATED_AT" value="2023-11-22 10:00:00"/>
+        </insert>
+    </changeSet>
+    <!-- ================================== -->
+    <!-- DML of example warehouse data      -->
+    <!-- ================================== -->
+</databaseChangeLog>
