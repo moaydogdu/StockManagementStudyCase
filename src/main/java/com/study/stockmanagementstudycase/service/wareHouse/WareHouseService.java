@@ -1,4 +1,4 @@
-package com.study.stockmanagementstudycase.service;
+package com.study.stockmanagementstudycase.service.wareHouse;
 
 import com.study.stockmanagementstudycase.model.WareHouse;
 
