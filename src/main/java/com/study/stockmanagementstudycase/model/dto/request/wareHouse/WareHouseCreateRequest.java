@@ -1,4 +1,4 @@
-package com.study.stockmanagementstudycase.model.dto.request;
+package com.study.stockmanagementstudycase.model.dto.request.wareHouse;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
