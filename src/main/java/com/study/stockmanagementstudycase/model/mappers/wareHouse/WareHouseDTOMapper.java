@@ -1,4 +1,4 @@
-package com.study.stockmanagementstudycase.model.mappers;
+package com.study.stockmanagementstudycase.model.mappers.wareHouse;
 
 import com.study.stockmanagementstudycase.model.WareHouse;
 import com.study.stockmanagementstudycase.model.dto.response.WareHouseResponse;
