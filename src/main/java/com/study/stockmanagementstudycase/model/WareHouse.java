@@ -8,12 +8,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-@Builder
+@SuperBuilder
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class WareHouse {
+@EqualsAndHashCode(callSuper = true)
+public class WareHouse extends BaseDomainModel {
 
     private String id;
 
