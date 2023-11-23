@@ -1,7 +1,7 @@
-package com.study.stockmanagementstudycase.service.impl;
+package com.study.stockmanagementstudycase.service.wareHouse.impl;
 
 import com.study.stockmanagementstudycase.repository.WareHouseRepository;
-import com.study.stockmanagementstudycase.service.WareHouseDeleteService;
+import com.study.stockmanagementstudycase.service.wareHouse.WareHouseDeleteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
