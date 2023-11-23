@@ -1,10 +1,10 @@
-package com.study.stockmanagementstudycase.service.impl;
+package com.study.stockmanagementstudycase.service.wareHouse.impl;
 
-import com.study.stockmanagementstudycase.model.dto.request.WareHouseCreateRequest;
+import com.study.stockmanagementstudycase.model.dto.request.wareHouse.WareHouseCreateRequest;
 import com.study.stockmanagementstudycase.model.entities.WareHouseEntity;
-import com.study.stockmanagementstudycase.model.mappers.WareHouseMapper;
+import com.study.stockmanagementstudycase.model.mappers.wareHouse.WareHouseMapper;
 import com.study.stockmanagementstudycase.repository.WareHouseRepository;
-import com.study.stockmanagementstudycase.service.WareHouseCreateService;
+import com.study.stockmanagementstudycase.service.wareHouse.WareHouseCreateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
