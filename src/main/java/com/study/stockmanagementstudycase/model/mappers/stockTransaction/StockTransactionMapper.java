@@ -24,7 +24,6 @@ public class StockTransactionMapper {
                 .build();
     }
 
-
     public static StockTransaction toDomainModel(
             final StockTransactionEntity stockTransactionEntity
     ) {
@@ -38,7 +37,6 @@ public class StockTransactionMapper {
                 .createdAt(stockTransactionEntity.getCreatedAt())
                 .updatedAt(stockTransactionEntity.getUpdatedAt())
                 .build();
-
     }
 
     public static StockTransactionEntity mapForStockEntry(
