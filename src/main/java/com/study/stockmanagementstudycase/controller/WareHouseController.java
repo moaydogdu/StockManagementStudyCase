@@ -1,14 +1,14 @@
 package com.study.stockmanagementstudycase.controller;
 
 import com.study.stockmanagementstudycase.model.WareHouse;
-import com.study.stockmanagementstudycase.model.dto.request.WareHouseCreateRequest;
-import com.study.stockmanagementstudycase.model.dto.request.WareHouseUpdateRequest;
+import com.study.stockmanagementstudycase.model.dto.request.wareHouse.WareHouseCreateRequest;
+import com.study.stockmanagementstudycase.model.dto.request.wareHouse.WareHouseUpdateRequest;
 import com.study.stockmanagementstudycase.model.dto.response.WareHouseResponse;
-import com.study.stockmanagementstudycase.model.mappers.WareHouseDTOMapper;
-import com.study.stockmanagementstudycase.service.WareHouseCreateService;
-import com.study.stockmanagementstudycase.service.WareHouseDeleteService;
-import com.study.stockmanagementstudycase.service.WareHouseService;
-import com.study.stockmanagementstudycase.service.WareHouseUpdateService;
+import com.study.stockmanagementstudycase.model.mappers.wareHouse.WareHouseDTOMapper;
+import com.study.stockmanagementstudycase.service.wareHouse.WareHouseCreateService;
+import com.study.stockmanagementstudycase.service.wareHouse.WareHouseDeleteService;
+import com.study.stockmanagementstudycase.service.wareHouse.WareHouseService;
+import com.study.stockmanagementstudycase.service.wareHouse.WareHouseUpdateService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -67,7 +67,7 @@ public class WareHouseController {
     @GetMapping("/{wareHouseId}")
     public ResponseEntity<WareHouseResponse> getWareHouseById(
             @PathVariable("wareHouseId") final String wareHouseId
-    ){
+    ) {
         final WareHouse wareHouse = wareHouseService
                 .getWareHouseById(wareHouseId);
         final WareHouseResponse wareHouseResponse = WareHouseDTOMapper
@@ -99,6 +99,6 @@ public class WareHouseController {
     ) {
         wareHouseUpdateService.updateWareHouse(updateRequest, wareHouseId);
 
-       return ResponseEntity.ok().build();
+        return ResponseEntity.ok().build();
     }
 }

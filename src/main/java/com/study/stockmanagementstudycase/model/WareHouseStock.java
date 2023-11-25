@@ -1,5 +1,6 @@
 package com.study.stockmanagementstudycase.model;
 
+
 import com.study.stockmanagementstudycase.common.model.BaseDomainModel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -8,18 +9,19 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+import java.math.BigDecimal;
+
 @SuperBuilder
+@EqualsAndHashCode(callSuper = true)
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
-public class WareHouse extends BaseDomainModel {
+@AllArgsConstructor
+public class WareHouseStock extends BaseDomainModel {
 
     private String id;
-
-    private String name;
-
-    private String address;
+    private BigDecimal amount;
+    private String stockEntityId;
+    private String wareHouseEntityId;
 
 }

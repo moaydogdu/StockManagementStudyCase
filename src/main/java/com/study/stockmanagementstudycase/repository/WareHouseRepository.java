@@ -10,6 +10,7 @@ public interface WareHouseRepository extends JpaRepository<WareHouseEntity, Stri
     /**
      * Checks WareHouseEntity in database by name or address field.
      * If entity exists returns true
+     *
      * @param name
      * @param address
      * @return
