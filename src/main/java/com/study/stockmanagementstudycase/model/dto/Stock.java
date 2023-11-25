@@ -17,7 +17,7 @@ import java.math.BigDecimal;
  */
 
 @SuperBuilder
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode
 @Getter
 @Setter
 @NoArgsConstructor
