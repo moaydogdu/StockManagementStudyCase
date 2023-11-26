@@ -29,11 +29,11 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(WareHouseNotFoundException.class)
-    protected ResponseEntity<?> wareHouseNotFoundException(
-            final WareHouseNotFoundException wareHouseNotFoundException
+    @ExceptionHandler(RuntimeException.class)
+    protected ResponseEntity<?> handleRuntimeException(
+            final RuntimeException runtimeException
     ) {
-        return new ResponseEntity<>(wareHouseNotFoundException, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(runtimeException, HttpStatus.NOT_FOUND);
     }
 
 }
