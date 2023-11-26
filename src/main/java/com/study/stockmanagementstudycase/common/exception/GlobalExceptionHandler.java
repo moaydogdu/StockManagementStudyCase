@@ -1,4 +1,4 @@
-package com.study.stockmanagementstudycase.common.model.exception;
+package com.study.stockmanagementstudycase.common.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,4 +28,12 @@ public class GlobalExceptionHandler {
         );
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(WareHouseNotFoundException.class)
+    protected ResponseEntity<?> wareHouseNotFoundException(
+            final WareHouseNotFoundException wareHouseNotFoundException
+    ) {
+        return new ResponseEntity<>(wareHouseNotFoundException, HttpStatus.NOT_FOUND);
+    }
+
 }
