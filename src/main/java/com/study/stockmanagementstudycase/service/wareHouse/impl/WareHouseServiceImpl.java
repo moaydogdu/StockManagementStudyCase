@@ -34,7 +34,7 @@ public class WareHouseServiceImpl implements WareHouseService {
     ) {
         final WareHouseEntity wareHouseEntityFromDb = wareHouseRepository
                 .findById(wareHouseId)
-                .orElseThrow(() -> new WareHouseNotFoundException("WareHouse can not find given id"));
+                .orElseThrow(() -> new WareHouseNotFoundException());
 
         return WareHouseMapper
                 .toDomainModel(wareHouseEntityFromDb);
