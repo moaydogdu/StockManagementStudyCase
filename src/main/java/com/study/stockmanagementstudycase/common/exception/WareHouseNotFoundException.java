@@ -5,7 +5,7 @@ import java.io.Serial;
 public class WareHouseNotFoundException extends RuntimeException {
 
     @Serial
-    private static final long serialVersionUID = -7067959181502070426L;
+    private static final long serialVersionUID = 2810295268219378487L;
 
     private static final String DEFAULT_MESSAGE =
             "The specified WareHouse is not found!";
