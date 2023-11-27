@@ -1,12 +1,11 @@
 package com.study.stockmanagementstudycase.common.exception;
 
 import java.io.Serial;
-import java.io.Serializable;
 
 public class WareHouseNameAndAddressAlreadyExistException extends RuntimeException{
 
     @Serial
-    private static final long serialVersionUID = -7067959181502070425L;
+    private static final long serialVersionUID = -1448032964961359695L;
 
     private static final String DEFAULT_MESSAGE =
             "The WareHouse Name and Address already exist!";
