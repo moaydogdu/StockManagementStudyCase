@@ -1,5 +1,6 @@
 package com.study.stockmanagementstudycase.service.wareHouse.impl;
 
+import com.study.stockmanagementstudycase.common.exception.WareHouseEntityNotFoundException;
 import com.study.stockmanagementstudycase.model.dto.request.wareHouse.WareHouseUpdateRequest;
 import com.study.stockmanagementstudycase.model.entities.WareHouseEntity;
 import com.study.stockmanagementstudycase.model.mappers.wareHouse.WareHouseMapper;
@@ -21,7 +22,7 @@ public class WareHouseUpdateServiceImpl implements WareHouseUpdateService {
     ) {
         final WareHouseEntity wareHouseEntityFromDb = wareHouseRepository.
                 findById(warehouseId)
-                .orElseThrow(() -> new RuntimeException("WareHouseEntity not found"));
+                .orElseThrow(() -> new WareHouseEntityNotFoundException());
 
         this.checkWareHouseNameAndAddressUniqueness(
                 updateRequest.getName(),
