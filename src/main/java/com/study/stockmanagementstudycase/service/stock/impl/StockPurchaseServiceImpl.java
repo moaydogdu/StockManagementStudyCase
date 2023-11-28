@@ -36,7 +36,7 @@ public class StockPurchaseServiceImpl implements StockPurchaseService {
     ) {
         final StockEntity stockEntityFromDbForStockPurchase = stockRepository
                 .findById(stockId)
-                .orElseThrow(() -> new StockNotFoundException());
+                .orElseThrow(StockNotFoundException::new);
 
         final WareHouse wareHouseDomainModelForStockPurchase = wareHouseService
                 .getWareHouseById(wareHouseId);
