@@ -1,5 +1,6 @@
 package com.study.stockmanagementstudycase.service.wareHouse.impl;
 
+import com.study.stockmanagementstudycase.common.exception.WareHouseNotFoundException;
 import com.study.stockmanagementstudycase.model.WareHouse;
 import com.study.stockmanagementstudycase.model.entities.WareHouseEntity;
 import com.study.stockmanagementstudycase.model.mappers.wareHouse.WareHouseMapper;
@@ -33,7 +34,7 @@ public class WareHouseServiceImpl implements WareHouseService {
     ) {
         final WareHouseEntity wareHouseEntityFromDb = wareHouseRepository
                 .findById(wareHouseId)
-                .orElseThrow(() -> new RuntimeException("WareHouse cant fin given id"));
+                .orElseThrow(WareHouseNotFoundException::new);
 
         return WareHouseMapper
                 .toDomainModel(wareHouseEntityFromDb);

@@ -1,4 +1,4 @@
-package com.study.stockmanagementstudycase.common.model.exception;
+package com.study.stockmanagementstudycase.common.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,4 +28,12 @@ public class GlobalExceptionHandler {
         );
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(RuntimeException.class)
+    protected ResponseEntity<?> handleRuntimeException(
+            final RuntimeException runtimeException
+    ) {
+        return new ResponseEntity<>(runtimeException, HttpStatus.NOT_FOUND);
+    }
+
 }

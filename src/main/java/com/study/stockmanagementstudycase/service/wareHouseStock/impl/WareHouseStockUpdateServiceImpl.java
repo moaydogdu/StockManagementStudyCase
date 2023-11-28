@@ -1,5 +1,6 @@
 package com.study.stockmanagementstudycase.service.wareHouseStock.impl;
 
+import com.study.stockmanagementstudycase.common.exception.WareHouseStockNotFoundException;
 import com.study.stockmanagementstudycase.model.WareHouse;
 import com.study.stockmanagementstudycase.model.WareHouseStock;
 import com.study.stockmanagementstudycase.model.dto.Stock;
@@ -48,7 +49,7 @@ public class WareHouseStockUpdateServiceImpl implements WareHouseStockUpdateServ
                         StockMapper.toEntity(stock),
                         WareHouseMapper.toEntity(wareHouse)
                 )
-                .orElseThrow(() -> new RuntimeException("WareHouseStock bulunamadı."));
+                .orElseThrow(WareHouseStockNotFoundException::new);
 
         this.updateWareHouseStockEntityAmountForStockEntry(
                 entryAmount,

@@ -1,5 +1,7 @@
 package com.study.stockmanagementstudycase.service.wareHouse.impl;
 
+import com.study.stockmanagementstudycase.common.exception.WareHouseAlreadyExistException;
+import com.study.stockmanagementstudycase.common.exception.WareHouseStockNotFoundException;
 import com.study.stockmanagementstudycase.model.dto.request.wareHouse.WareHouseUpdateRequest;
 import com.study.stockmanagementstudycase.model.entities.WareHouseEntity;
 import com.study.stockmanagementstudycase.model.mappers.wareHouse.WareHouseMapper;
@@ -21,7 +23,7 @@ public class WareHouseUpdateServiceImpl implements WareHouseUpdateService {
     ) {
         final WareHouseEntity wareHouseEntityFromDb = wareHouseRepository.
                 findById(warehouseId)
-                .orElseThrow(() -> new RuntimeException("WareHouseEntity not found"));
+                .orElseThrow(() -> new WareHouseEntityNotFoundException());
 
         this.checkWareHouseNameAndAddressUniqueness(
                 updateRequest.getName(),
@@ -38,8 +40,9 @@ public class WareHouseUpdateServiceImpl implements WareHouseUpdateService {
             final String name,
             final String address
     ) {
-        if (wareHouseRepository.existsWareHouseEntitiesByNameAndAddress(name, address)) {
-            throw new RuntimeException("WareHouse with given name or address is already exist");
+        if (Boolean.TRUE.equals(wareHouseRepository
+                .existsWareHouseEntitiesByNameAndAddress(name, address))) {
+            throw new WareHouseAlreadyExistException("The WareHouse Name and Address already exist!");
         }
     }
 }
