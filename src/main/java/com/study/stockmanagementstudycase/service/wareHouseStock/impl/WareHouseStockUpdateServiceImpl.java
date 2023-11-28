@@ -49,7 +49,7 @@ public class WareHouseStockUpdateServiceImpl implements WareHouseStockUpdateServ
                         StockMapper.toEntity(stock),
                         WareHouseMapper.toEntity(wareHouse)
                 )
-                .orElseThrow(() -> new WareHouseStockNotFoundException());
+                .orElseThrow(WareHouseStockNotFoundException::new);
 
         this.updateWareHouseStockEntityAmountForStockEntry(
                 entryAmount,
