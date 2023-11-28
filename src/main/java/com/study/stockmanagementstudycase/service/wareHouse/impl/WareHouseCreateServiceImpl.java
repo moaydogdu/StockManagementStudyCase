@@ -37,7 +37,7 @@ public class WareHouseCreateServiceImpl implements WareHouseCreateService {
             final String name,
             final String address
     ) {
-        if (wareHouseRepository.existsWareHouseEntitiesByNameAndAddress(name, address)) {
+        if (Boolean.TRUE.equals(wareHouseRepository.existsWareHouseEntitiesByNameAndAddress(name, address))) {
             throw new WareHouseNameAndAddressAlreadyExistException();
         }
     }
