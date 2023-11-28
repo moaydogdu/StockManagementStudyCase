@@ -18,7 +18,7 @@ public class WareHouseDeleteServiceImpl implements WareHouseDeleteService {
     ) {
         wareHouseRepository
                 .findById(wareHouseId)
-                .orElseThrow(() -> new WareHouseNotFoundException());
+                .orElseThrow(WareHouseNotFoundException::new);
 
         wareHouseRepository.deleteById(wareHouseId);
     }
