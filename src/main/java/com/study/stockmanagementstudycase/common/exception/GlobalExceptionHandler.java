@@ -1,5 +1,8 @@
 package com.study.stockmanagementstudycase.common.exception;
 
+import com.study.stockmanagementstudycase.common.model.CustomSubError;
+import jakarta.validation.ConstraintViolationException;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -7,7 +10,9 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestControllerAdvice
@@ -27,6 +32,28 @@ public class GlobalExceptionHandler {
                 }
         );
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    protected ResponseEntity<Object> handlePathVariableErrors(
+            final ConstraintViolationException constraintViolationException
+    ) {
+        final List<CustomSubError> subErrors = new ArrayList<>();
+        constraintViolationException.getConstraintViolations()
+                .forEach(constraintViolation ->
+                        subErrors.add(
+                                CustomSubError.builder()
+                                        .message(constraintViolation.getMessage())
+                                        .field(StringUtils.substringAfterLast(constraintViolation.getPropertyPath().toString(), "."))
+                                        .value(constraintViolation.getInvalidValue() != null ? constraintViolation.getInvalidValue().toString() : null)
+                                        .type(constraintViolation.getInvalidValue().getClass().getSimpleName())
+                                        .build()
+                        )
+                );
+
+        return new ResponseEntity<>(
+                subErrors,
+                HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(RuntimeException.class)
