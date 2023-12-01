@@ -11,7 +11,9 @@ import com.study.stockmanagementstudycase.service.wareHouse.WareHouseService;
 import com.study.stockmanagementstudycase.service.wareHouse.WareHouseUpdateService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.validator.constraints.UUID;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +28,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1/warehouses")
 @RequiredArgsConstructor
+@Validated
 public class WareHouseController {
 
     private final WareHouseCreateService wareHouseCreateService;
@@ -33,12 +36,28 @@ public class WareHouseController {
     private final WareHouseDeleteService wareHouseDeleteService;
     private final WareHouseUpdateService wareHouseUpdateService;
 
+
+    /**
+     * Create a new warehouse.
+     *
+     * @param request The warehouse data.
+     * @return A ResponseEntity with no content.
+     */
+    @PostMapping
+    public ResponseEntity<Void> createWareHouse(
+            @RequestBody final WareHouseCreateRequest request
+    ) {
+        wareHouseCreateService.createWareHouse(request);
+
+        return ResponseEntity.ok().build();
+    }
+
     /**
      * Retrieves a list of warehouses.
      *
      * @return ResponseEntity containing a list of WareHouseResponse objects
      */
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<List<WareHouseResponse>> getWareHouses(
     ) {
         final List<WareHouse> wareHouses = wareHouseService
@@ -49,24 +68,9 @@ public class WareHouseController {
         return ResponseEntity.ok(wareHouseResponseList);
     }
 
-    /**
-     * Create a new warehouse.
-     *
-     * @param request The warehouse data.
-     * @return A ResponseEntity with no content.
-     */
-    @PostMapping
-    public ResponseEntity<Void> createWareHouse(
-            @RequestBody @Valid final WareHouseCreateRequest request
-    ) {
-        wareHouseCreateService.createWareHouse(request);
-
-        return ResponseEntity.ok().build();
-    }
-
     @GetMapping("/{wareHouseId}")
     public ResponseEntity<WareHouseResponse> getWareHouseById(
-            @PathVariable("wareHouseId") final String wareHouseId
+            @PathVariable("wareHouseId") @UUID String wareHouseId
     ) {
         final WareHouse wareHouse = wareHouseService
                 .getWareHouseById(wareHouseId);
@@ -74,15 +78,6 @@ public class WareHouseController {
                 .toWareHouseResponse(wareHouse);
 
         return ResponseEntity.ok(wareHouseResponse);
-    }
-
-    @DeleteMapping("/{wareHouseId}")
-    public ResponseEntity<Void> deleteWareHouse(
-            @PathVariable("wareHouseId") final String wareHouseId
-    ) {
-        wareHouseDeleteService.deleteWareHouse(wareHouseId);
-
-        return ResponseEntity.ok().build();
     }
 
     /**
@@ -95,10 +90,23 @@ public class WareHouseController {
     @PutMapping("/{wareHouseId}")
     public ResponseEntity<Void> updateWareHouse(
             @RequestBody @Valid final WareHouseUpdateRequest updateRequest,
-            @PathVariable("wareHouseId") final String wareHouseId
+            @PathVariable("wareHouseId") @UUID final String wareHouseId
     ) {
-        wareHouseUpdateService.updateWareHouse(updateRequest, wareHouseId);
+        wareHouseUpdateService.updateWareHouse(
+                updateRequest,
+                wareHouseId
+        );
 
         return ResponseEntity.ok().build();
     }
+
+    @DeleteMapping("/{wareHouseId}")
+    public ResponseEntity<Void> deleteWareHouse(
+            @PathVariable("wareHouseId") @UUID final String wareHouseId
+    ) {
+        wareHouseDeleteService.deleteWareHouse(wareHouseId);
+
+        return ResponseEntity.ok().build();
+    }
+
 }
