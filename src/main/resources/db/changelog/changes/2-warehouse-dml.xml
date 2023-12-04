@@ -3,7 +3,7 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
 
     <!-- ================================== -->
-    <!-- DML of example warehouse data      -->
+    <!-- DML of example WAREHOUSE data      -->
     <!-- ================================== -->
     <changeSet id="insertWareHouseExampleData1" author="seymusyuzen">
         <insert tableName="WAREHOUSE">
@@ -50,6 +50,6 @@
         </insert>
     </changeSet>
     <!-- ================================== -->
-    <!-- DML of example warehouse data      -->
+    <!-- DML of example WAREHOUSE data      -->
     <!-- ================================== -->
 </databaseChangeLog>
