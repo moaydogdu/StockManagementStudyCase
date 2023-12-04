@@ -1,0 +1,158 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+    <!-- ================================== -->
+    <!-- DML of example STOCK_TRANSACTION data      -->
+    <!-- ================================== -->
+    <changeSet id="insertStockTransactionExampleData1" author="moaydogdu">
+        <insert tableName="STOCK_TRANSACTION">
+            <column name="ID" value="836af595-883b-44f6-a29a-6d2a6e50a1d7"/>
+            <column name="STOCK_TRANSACTION_TYPE" value="STOCK_CREATE"/>
+            <column name="AMOUNT" value="0.0000"/>
+            <column name="BEFORE_AMOUNT" value="0.0000"/>
+            <column name="AFTER_AMOUNT" value="0.0000"/>
+            <column name="DATE" value="2023-12-04 21:00:00"/>
+            <column name="CREATED_AT" value="2023-12-04 21:00:00"/>
+            <column name="STOCK_ID" value="3b308439-c142-451d-8843-b1e774ff0a00"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insertStockTransactionExampleData2" author="moaydogdu">
+        <insert tableName="STOCK_TRANSACTION">
+            <column name="ID" value="79574edf-7ea3-4de0-90b5-d3470569f495"/>
+            <column name="STOCK_TRANSACTION_TYPE" value="STOCK_ENTRY"/>
+            <column name="AMOUNT" value="5.0000"/>
+            <column name="BEFORE_AMOUNT" value="0.0000"/>
+            <column name="AFTER_AMOUNT" value="5.0000"/>
+            <column name="DATE" value="2023-12-04 21:00:00"/>
+            <column name="CREATED_AT" value="2023-12-04 21:00:00"/>
+            <column name="STOCK_ID" value="3b308439-c142-451d-8843-b1e774ff0a00"/>
+            <column name="WAREHOUSE_ID" value="e7365438-e5c0-4419-93ea-539fa8392e9d"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insertStockTransactionExampleData3" author="moaydogdu">
+        <insert tableName="STOCK_TRANSACTION">
+            <column name="ID" value="9c80f573-e592-4719-937e-2fed98b72a20"/>
+            <column name="STOCK_TRANSACTION_TYPE" value="STOCK_CREATE"/>
+            <column name="AMOUNT" value="0.0000"/>
+            <column name="BEFORE_AMOUNT" value="0.0000"/>
+            <column name="AFTER_AMOUNT" value="0.0000"/>
+            <column name="DATE" value="2023-12-04 21:00:00"/>
+            <column name="CREATED_AT" value="2023-12-04 21:00:00"/>
+            <column name="STOCK_ID" value="6abf4fb9-fc15-4194-8e4b-72d900ee3998"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insertStockTransactionExampleData4" author="moaydogdu">
+        <insert tableName="STOCK_TRANSACTION">
+            <column name="ID" value="94019386-3696-45f2-b52f-5e6e228560b4"/>
+            <column name="STOCK_TRANSACTION_TYPE" value="STOCK_ENTRY"/>
+            <column name="AMOUNT" value="5.0000"/>
+            <column name="BEFORE_AMOUNT" value="0.0000"/>
+            <column name="AFTER_AMOUNT" value="5.0000"/>
+            <column name="DATE" value="2023-12-04 21:00:00"/>
+            <column name="CREATED_AT" value="2023-12-04 21:00:00"/>
+            <column name="STOCK_ID" value="6abf4fb9-fc15-4194-8e4b-72d900ee3998"/>
+            <column name="WAREHOUSE_ID" value="ba0f7571-1ecd-41d2-8e9b-d23ca2b99e3d"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insertStockTransactionExampleData5" author="moaydogdu">
+        <insert tableName="STOCK_TRANSACTION">
+            <column name="ID" value="1a15343e-03e0-441f-8868-487f224c2708"/>
+            <column name="STOCK_TRANSACTION_TYPE" value="STOCK_CREATE"/>
+            <column name="AMOUNT" value="0.0000"/>
+            <column name="BEFORE_AMOUNT" value="0.0000"/>
+            <column name="AFTER_AMOUNT" value="0.0000"/>
+            <column name="DATE" value="2023-12-04 21:00:00"/>
+            <column name="CREATED_AT" value="2023-12-04 21:00:00"/>
+            <column name="STOCK_ID" value="6c49af6f-6da0-43f5-80a3-9fd5d0bfdd4f"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insertStockTransactionExampleData6" author="moaydogdu">
+        <insert tableName="STOCK_TRANSACTION">
+            <column name="ID" value="c36cd50f-1a28-4b46-ae58-cb4b335ff631"/>
+            <column name="STOCK_TRANSACTION_TYPE" value="STOCK_ENTRY"/>
+            <column name="AMOUNT" value="5.0000"/>
+            <column name="BEFORE_AMOUNT" value="0.0000"/>
+            <column name="AFTER_AMOUNT" value="5.0000"/>
+            <column name="DATE" value="2023-12-04 21:00:00"/>
+            <column name="CREATED_AT" value="2023-12-04 21:00:00"/>
+            <column name="STOCK_ID" value="6c49af6f-6da0-43f5-80a3-9fd5d0bfdd4f"/>
+            <column name="WAREHOUSE_ID" value="b4a785b5-3903-4701-83c7-a14e240875ef"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insertStockTransactionExampleData7" author="moaydogdu">
+        <insert tableName="STOCK_TRANSACTION">
+            <column name="ID" value="958ffb3d-8a0c-4cda-a442-3e597f7363b5"/>
+            <column name="STOCK_TRANSACTION_TYPE" value="STOCK_CREATE"/>
+            <column name="AMOUNT" value="0.0000"/>
+            <column name="BEFORE_AMOUNT" value="0.0000"/>
+            <column name="AFTER_AMOUNT" value="0.0000"/>
+            <column name="DATE" value="2023-12-04 21:00:00"/>
+            <column name="CREATED_AT" value="2023-12-04 21:00:00"/>
+            <column name="STOCK_ID" value="af747123-f01c-4620-8c85-415a5b9a1fbd"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insertStockTransactionExampleData8" author="moaydogdu">
+        <insert tableName="STOCK_TRANSACTION">
+            <column name="ID" value="0e5f2ab1-34ba-4eb6-a037-cea67b778285"/>
+            <column name="STOCK_TRANSACTION_TYPE" value="STOCK_ENTRY"/>
+            <column name="AMOUNT" value="5.0000"/>
+            <column name="BEFORE_AMOUNT" value="0.0000"/>
+            <column name="AFTER_AMOUNT" value="5.0000"/>
+            <column name="DATE" value="2023-12-04 21:00:00"/>
+            <column name="CREATED_AT" value="2023-12-04 21:00:00"/>
+            <column name="STOCK_ID" value="af747123-f01c-4620-8c85-415a5b9a1fbd"/>
+            <column name="WAREHOUSE_ID" value="3e269ce8-482f-4576-8a21-e8b76562c06d"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insertStockTransactionExampleData9" author="moaydogdu">
+        <insert tableName="STOCK_TRANSACTION">
+            <column name="ID" value="73a6e33d-3678-4e0f-bdcc-d4f8e14d482d"/>
+            <column name="STOCK_TRANSACTION_TYPE" value="STOCK_CREATE"/>
+            <column name="AMOUNT" value="0.0000"/>
+            <column name="BEFORE_AMOUNT" value="0.0000"/>
+            <column name="AFTER_AMOUNT" value="0.0000"/>
+            <column name="DATE" value="2023-12-04 21:00:00"/>
+            <column name="CREATED_AT" value="2023-12-04 21:00:00"/>
+            <column name="STOCK_ID" value="c42fbe7d-af9c-434d-902e-f4489ceda748"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insertStockTransactionExampleData10" author="moaydogdu">
+        <insert tableName="STOCK_TRANSACTION">
+            <column name="ID" value="70223fda-1b3e-4b0d-a095-eea9822166ff"/>
+            <column name="STOCK_TRANSACTION_TYPE" value="STOCK_ENTRY"/>
+            <column name="AMOUNT" value="5.0000"/>
+            <column name="BEFORE_AMOUNT" value="0.0000"/>
+            <column name="AFTER_AMOUNT" value="5.0000"/>
+            <column name="DATE" value="2023-12-04 21:00:00"/>
+            <column name="CREATED_AT" value="2023-12-04 21:00:00"/>
+            <column name="STOCK_ID" value="c42fbe7d-af9c-434d-902e-f4489ceda748"/>
+            <column name="WAREHOUSE_ID" value="df3c0867-7692-457d-946e-953be18d6541"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insertStockTransactionExampleData11" author="moaydogdu">
+        <insert tableName="STOCK_TRANSACTION">
+            <column name="ID" value="eaf3d66f-4db4-40c8-a11f-3d58f4ef25d6"/>
+            <column name="STOCK_TRANSACTION_TYPE" value="STOCK_CREATE"/>
+            <column name="AMOUNT" value="0.0000"/>
+            <column name="BEFORE_AMOUNT" value="0.0000"/>
+            <column name="AFTER_AMOUNT" value="0.0000"/>
+            <column name="DATE" value="2023-12-04 21:00:00"/>
+            <column name="CREATED_AT" value="2023-12-04 21:00:00"/>
+            <column name="STOCK_ID" value="f12fae0e-01f6-4177-9f0e-6d0e7525ce48"/>
+        </insert>
+    </changeSet>
+    <!-- ================================== -->
+    <!-- DML of example STOCK_TRANSACTION data      -->
+    <!-- ================================== -->
+</databaseChangeLog>
