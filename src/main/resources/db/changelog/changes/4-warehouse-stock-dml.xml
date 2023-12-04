@@ -1,0 +1,60 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+    <!-- ================================== -->
+    <!-- DML of example WAREHOUSE_STOCK data      -->
+    <!-- ================================== -->
+    <changeSet id="insertWareHouseStockExampleData1" author="moaydogdu">
+        <insert tableName="WAREHOUSE_STOCK">
+            <column name="ID" value="79db620f-8ed4-415d-8645-4557b58bc9f4"/>
+            <column name="STOCK_ID" value="3b308439-c142-451d-8843-b1e774ff0a00"/>
+            <column name="WAREHOUSE_ID" value="e7365438-e5c0-4419-93ea-539fa8392e9d"/>
+            <column name="AMOUNT" value="5.0000"/>
+            <column name="CREATED_AT" value="2023-12-04 21:00:00"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insertWareHouseStockExampleData2" author="moaydogdu">
+        <insert tableName="WAREHOUSE_STOCK">
+            <column name="ID" value="3d502ce5-9dc3-4613-841e-ba0d6724ecfd"/>
+            <column name="STOCK_ID" value="6abf4fb9-fc15-4194-8e4b-72d900ee3998"/>
+            <column name="WAREHOUSE_ID" value="ba0f7571-1ecd-41d2-8e9b-d23ca2b99e3d"/>
+            <column name="AMOUNT" value="5.0000"/>
+            <column name="CREATED_AT" value="2023-12-04 21:00:00"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insertWareHouseStockExampleData3" author="moaydogdu">
+        <insert tableName="WAREHOUSE_STOCK">
+            <column name="ID" value="c219e4e8-2ad7-4ed6-a008-aa084298f4aa"/>
+            <column name="STOCK_ID" value="6c49af6f-6da0-43f5-80a3-9fd5d0bfdd4f"/>
+            <column name="WAREHOUSE_ID" value="b4a785b5-3903-4701-83c7-a14e240875ef"/>
+            <column name="AMOUNT" value="5.0000"/>
+            <column name="CREATED_AT" value="2023-12-04 21:00:00"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insertWareHouseStockExampleData4" author="moaydogdu">
+        <insert tableName="WAREHOUSE_STOCK">
+            <column name="ID" value="edd00586-cef7-4c64-8bc4-81fce0017caf"/>
+            <column name="STOCK_ID" value="af747123-f01c-4620-8c85-415a5b9a1fbd"/>
+            <column name="WAREHOUSE_ID" value="3e269ce8-482f-4576-8a21-e8b76562c06d"/>
+            <column name="AMOUNT" value="5.0000"/>
+            <column name="CREATED_AT" value="2023-12-04 21:00:00"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insertWareHouseStockExampleData5" author="moaydogdu">
+        <insert tableName="WAREHOUSE_STOCK">
+            <column name="ID" value="e73f3027-a45a-4db5-b669-5f16a15bcd2d"/>
+            <column name="STOCK_ID" value="c42fbe7d-af9c-434d-902e-f4489ceda748"/>
+            <column name="WAREHOUSE_ID" value="df3c0867-7692-457d-946e-953be18d6541"/>
+            <column name="AMOUNT" value="5.0000"/>
+            <column name="CREATED_AT" value="2023-12-04 21:00:00"/>
+        </insert>
+    </changeSet>
+    <!-- ================================== -->
+    <!-- DML of example WAREHOUSE_STOCK data      -->
+    <!-- ================================== -->
+</databaseChangeLog>

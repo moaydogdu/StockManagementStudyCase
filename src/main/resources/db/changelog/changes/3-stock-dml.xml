@@ -1,0 +1,81 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+    <!-- ================================== -->
+    <!-- DML of example STOCK data      -->
+    <!-- ================================== -->
+    <changeSet id="insertStockExampleData1" author="moaydogdu">
+        <insert tableName="STOCK">
+            <column name="ID" value="3b308439-c142-451d-8843-b1e774ff0a00"/>
+            <column name="NAME" value="iPhone 12 Pro Max 1TB"/>
+            <column name="PRICE" value="65.0000"/>
+            <column name="AMOUNT" value="5.0000"/>
+            <column name="UNIT_TYPE" value="PIECE"/>
+            <column name="CREATED_AT" value="2023-12-04 21:00:00"/>
+            <column name="UPDATED_AT" value="2023-12-04 21:00:00"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insertStockExampleData2" author="moaydogdu">
+        <insert tableName="STOCK">
+            <column name="ID" value="6abf4fb9-fc15-4194-8e4b-72d900ee3998"/>
+            <column name="NAME" value="iPhone 15 Pro Max 1TB"/>
+            <column name="PRICE" value="105.0000"/>
+            <column name="AMOUNT" value="5.0000"/>
+            <column name="UNIT_TYPE" value="PIECE"/>
+            <column name="CREATED_AT" value="2023-12-04 21:00:00"/>
+            <column name="UPDATED_AT" value="2023-12-04 21:00:00"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insertStockExampleData3" author="moaydogdu">
+        <insert tableName="STOCK">
+            <column name="ID" value="6c49af6f-6da0-43f5-80a3-9fd5d0bfdd4f"/>
+            <column name="NAME" value="iPhone 15 Pro Max 256GB"/>
+            <column name="PRICE" value="85.0000"/>
+            <column name="AMOUNT" value="5.0000"/>
+            <column name="UNIT_TYPE" value="PIECE"/>
+            <column name="CREATED_AT" value="2023-12-04 21:00:00"/>
+            <column name="UPDATED_AT" value="2023-12-04 21:00:00"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insertStockExampleData4" author="moaydogdu">
+        <insert tableName="STOCK">
+            <column name="ID" value="af747123-f01c-4620-8c85-415a5b9a1fbd"/>
+            <column name="NAME" value="iPhone 14 Pro Max 256GB"/>
+            <column name="PRICE" value="65.0000"/>
+            <column name="AMOUNT" value="5.0000"/>
+            <column name="UNIT_TYPE" value="PIECE"/>
+            <column name="CREATED_AT" value="2023-12-04 21:00:00"/>
+            <column name="UPDATED_AT" value="2023-12-04 21:00:00"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insertStockExampleData5" author="moaydogdu">
+        <insert tableName="STOCK">
+            <column name="ID" value="c42fbe7d-af9c-434d-902e-f4489ceda748"/>
+            <column name="NAME" value="iPhone 13 Pro Max 1TB"/>
+            <column name="PRICE" value="75.0000"/>
+            <column name="AMOUNT" value="5.0000"/>
+            <column name="UNIT_TYPE" value="PIECE"/>
+            <column name="CREATED_AT" value="2023-12-04 21:00:00"/>
+            <column name="UPDATED_AT" value="2023-12-04 21:00:00"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insertStockExampleData6" author="moaydogdu">
+        <insert tableName="STOCK">
+            <column name="ID" value="f12fae0e-01f6-4177-9f0e-6d0e7525ce48"/>
+            <column name="NAME" value="iPhone 11 Pro 256GB"/>
+            <column name="PRICE" value="45.0000"/>
+            <column name="AMOUNT" value="5.0000"/>
+            <column name="UNIT_TYPE" value="PIECE"/>
+            <column name="CREATED_AT" value="2023-12-04 21:00:00"/>
+        </insert>
+    </changeSet>
+    <!-- ================================== -->
+    <!-- DML of example STOCK data      -->
+    <!-- ================================== -->
+</databaseChangeLog>
