@@ -23,6 +23,7 @@ public class WareHouseStockCreateServiceImpl implements WareHouseStockCreateServ
             final Stock stock,
             final WareHouse wareHouse
     ) {
+        // TODO : Burada amount değeri ayrıca parametre olarak alınmalı. Hatalı logic.
         final WareHouseStockEntity wareHouseStockEntityForStockEntry = WareHouseStockMapper
                 .mapForStockEntry(stock);
 
