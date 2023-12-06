@@ -1,16 +1,29 @@
 package com.study.stockmanagementstudycase.model.mappers.wareHouseStock;
 
+import com.study.stockmanagementstudycase.model.WareHouse;
 import com.study.stockmanagementstudycase.model.WareHouseStock;
 import com.study.stockmanagementstudycase.model.dto.Stock;
 import com.study.stockmanagementstudycase.model.entities.WareHouseStockEntity;
+import com.study.stockmanagementstudycase.model.mappers.stock.StockMapper;
+import com.study.stockmanagementstudycase.model.mappers.wareHouse.WareHouseMapper;
+
+import java.math.BigDecimal;
 
 public class WareHouseStockMapper {
 
-    public static WareHouseStockEntity mapForStockEntry(
-            final Stock stock
+    public static WareHouseStockEntity mapForSaving(
+            final Stock stock,
+            final WareHouse wareHouse,
+            final BigDecimal entryAmount
     ) {
         return WareHouseStockEntity.builder()
-                .amount(stock.getAmount())
+                .stockEntity(
+                        StockMapper.toEntity(stock)
+                )
+                .wareHouseEntity(
+                        WareHouseMapper.toEntity(wareHouse)
+                )
+                .amount(entryAmount)
                 .build();
     }
 
