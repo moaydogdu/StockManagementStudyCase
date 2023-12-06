@@ -1,4 +1,4 @@
-package com.study.stockmanagementstudycase.model.dto;
+package com.study.stockmanagementstudycase.model;
 
 import com.study.stockmanagementstudycase.common.model.BaseDomainModel;
 import com.study.stockmanagementstudycase.model.entities.StockEntity;
@@ -17,7 +17,7 @@ import java.math.BigDecimal;
  */
 
 @SuperBuilder
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = true)
 @Getter
 @Setter
 @NoArgsConstructor

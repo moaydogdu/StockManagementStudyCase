@@ -1,6 +1,6 @@
 package com.study.stockmanagementstudycase.service.stock;
 
-import com.study.stockmanagementstudycase.model.dto.Stock;
+import com.study.stockmanagementstudycase.model.Stock;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
