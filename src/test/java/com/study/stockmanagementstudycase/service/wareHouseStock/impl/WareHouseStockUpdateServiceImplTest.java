@@ -138,7 +138,8 @@ public class WareHouseStockUpdateServiceImplTest extends BaseServiceTest {
         Mockito.when(wareHouseStockCreateService
                         .createWareHouseStockForStockEntry(
                                 mockValidStockDomainModel,
-                                mockValidWareHouseDomainModel
+                                mockValidWareHouseDomainModel,
+                                entryAmount
                         ))
                 .thenReturn(WareHouseStock.builder()
                         .id(UUID.randomUUID().toString())

@@ -40,7 +40,8 @@ public class WareHouseStockUpdateServiceImpl implements WareHouseStockUpdateServ
             return wareHouseStockCreateService
                     .createWareHouseStockForStockEntry(
                             stock,
-                            wareHouse
+                            wareHouse,
+                            entryAmount
                     );
         }
 
