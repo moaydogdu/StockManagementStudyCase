@@ -66,7 +66,7 @@ public class StockServiceImpl implements StockService {
     public void deleteStock(String stockId) {
       StockEntity stockEntity=  this.stockRepository.findById(stockId).orElseThrow(StockNotFoundException::new);
         wareHouseStockRepository.findWareHouseStockEntitiesByStockEntity(stockEntity);
-
+        this.checkWareHouseExist(stockEntity);
 
     }
 
