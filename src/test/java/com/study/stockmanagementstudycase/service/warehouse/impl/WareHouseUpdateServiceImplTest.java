@@ -16,6 +16,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.util.Optional;
+import java.util.UUID;
 
 public class WareHouseUpdateServiceImplTest extends BaseServiceTest {
 
@@ -79,6 +80,7 @@ public class WareHouseUpdateServiceImplTest extends BaseServiceTest {
         final WareHouseUpdateRequest notValidWareHouseUpdateRequest = new WareHouseUpdateRequestBuilder()
                 .withValidFields()
                 .build();
+        final String mockWareHouseId = UUID.randomUUID().toString();
 
         // When
         Mockito.when(wareHouseRepository.existsWareHouseEntitiesByNameAndAddress(
@@ -91,7 +93,8 @@ public class WareHouseUpdateServiceImplTest extends BaseServiceTest {
                 WareHouseAlreadyExistException.class,
                 () -> wareHouseUpdateService.updateWareHouse(
                         notValidWareHouseUpdateRequest,
-                        Mockito.anyString())
+                        mockWareHouseId
+                )
         );
 
         // Verify
@@ -117,6 +120,7 @@ public class WareHouseUpdateServiceImplTest extends BaseServiceTest {
         final WareHouseUpdateRequest validWareHouseUpdateRequest = new WareHouseUpdateRequestBuilder()
                 .withValidFields()
                 .build();
+        final String mockWareHouseId = UUID.randomUUID().toString();
 
         // When
         Mockito.when(wareHouseRepository.existsWareHouseEntitiesByNameAndAddress(
@@ -132,7 +136,7 @@ public class WareHouseUpdateServiceImplTest extends BaseServiceTest {
                 WareHouseNotFoundException.class,
                 () -> wareHouseUpdateService.updateWareHouse(
                         validWareHouseUpdateRequest,
-                        Mockito.anyString()
+                        mockWareHouseId
                 )
         );
 

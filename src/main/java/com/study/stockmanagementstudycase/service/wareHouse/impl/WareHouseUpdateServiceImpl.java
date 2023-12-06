@@ -21,15 +21,15 @@ public class WareHouseUpdateServiceImpl implements WareHouseUpdateService {
             final WareHouseUpdateRequest updateRequest,
             final String warehouseId
     ) {
-        // TODO Önce kontrol yap, sonra veritabanından nesneyi çağır. Optimizasyon.
-        final WareHouseEntity wareHouseEntityFromDb = wareHouseRepository.
-                findById(warehouseId)
-                .orElseThrow(WareHouseNotFoundException::new);
 
         this.checkWareHouseNameAndAddressUniqueness(
                 updateRequest.getName(),
                 updateRequest.getAddress()
         );
+
+        final WareHouseEntity wareHouseEntityFromDb = wareHouseRepository.
+                findById(warehouseId)
+                .orElseThrow(WareHouseNotFoundException::new);
 
         WareHouseMapper.mapForUpdating(updateRequest, wareHouseEntityFromDb);
 
