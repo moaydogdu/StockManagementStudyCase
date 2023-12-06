@@ -1,16 +1,17 @@
 package com.study.stockmanagementstudycase.service.wareHouseStock.impl;
 
+import com.study.stockmanagementstudycase.common.exception.wareHouseStock.UnableToCreateWareHouseStockException;
 import com.study.stockmanagementstudycase.model.WareHouse;
 import com.study.stockmanagementstudycase.model.WareHouseStock;
 import com.study.stockmanagementstudycase.model.dto.Stock;
 import com.study.stockmanagementstudycase.model.entities.WareHouseStockEntity;
-import com.study.stockmanagementstudycase.model.mappers.stock.StockMapper;
-import com.study.stockmanagementstudycase.model.mappers.wareHouse.WareHouseMapper;
 import com.study.stockmanagementstudycase.model.mappers.wareHouseStock.WareHouseStockMapper;
 import com.study.stockmanagementstudycase.repository.WareHouseStockRepository;
 import com.study.stockmanagementstudycase.service.wareHouseStock.WareHouseStockCreateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
 
 @Service
 @RequiredArgsConstructor
@@ -21,22 +22,29 @@ public class WareHouseStockCreateServiceImpl implements WareHouseStockCreateServ
     @Override
     public WareHouseStock createWareHouseStockForStockEntry(
             final Stock stock,
-            final WareHouse wareHouse
+            final WareHouse wareHouse,
+            final BigDecimal entryAmount
     ) {
         // TODO : Burada amount değeri ayrıca parametre olarak alınmalı. Hatalı logic.
+        this.checkEntryAmount(entryAmount);
+
         final WareHouseStockEntity wareHouseStockEntityForStockEntry = WareHouseStockMapper
-                .mapForStockEntry(stock);
-
-        wareHouseStockEntityForStockEntry.setStockEntity(
-                StockMapper.toEntity(stock)
-        );
-
-        wareHouseStockEntityForStockEntry.setWareHouseEntity(
-                WareHouseMapper.toEntity(wareHouse)
-        );
+                .mapForSaving(
+                        stock,
+                        wareHouse,
+                        entryAmount
+                );
 
         wareHouseStockRepository.save(wareHouseStockEntityForStockEntry);
 
         return WareHouseStockMapper.toDomainModel(wareHouseStockEntityForStockEntry);
+    }
+
+    private void checkEntryAmount(
+            final BigDecimal entryAmount
+    ) {
+        if (Boolean.FALSE.equals(entryAmount.compareTo(BigDecimal.ZERO) > 0)) {
+            throw new UnableToCreateWareHouseStockException("Stok giriş miktarı 0'dan büyük olmalıdır.");
+        }
     }
 }
