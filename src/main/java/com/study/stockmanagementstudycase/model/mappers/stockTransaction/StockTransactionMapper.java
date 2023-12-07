@@ -1,7 +1,7 @@
 package com.study.stockmanagementstudycase.model.mappers.stockTransaction;
 
 import com.study.stockmanagementstudycase.model.StockTransaction;
-import com.study.stockmanagementstudycase.model.dto.Stock;
+import com.study.stockmanagementstudycase.model.Stock;
 import com.study.stockmanagementstudycase.model.dto.request.stock.StockCreateRequest;
 import com.study.stockmanagementstudycase.model.entities.StockTransactionEntity;
 import com.study.stockmanagementstudycase.model.enums.StockTransactionType;

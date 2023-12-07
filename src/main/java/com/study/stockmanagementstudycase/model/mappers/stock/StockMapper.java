@@ -1,10 +1,11 @@
 package com.study.stockmanagementstudycase.model.mappers.stock;
 
-import com.study.stockmanagementstudycase.model.dto.Stock;
+import com.study.stockmanagementstudycase.model.Stock;
 import com.study.stockmanagementstudycase.model.dto.request.stock.StockCreateRequest;
 import com.study.stockmanagementstudycase.model.entities.StockEntity;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class StockMapper {
 
@@ -31,6 +32,11 @@ public class StockMapper {
                 .createdAt(stockEntity.getCreatedAt())
                 .updatedAt(stockEntity.getUpdatedAt())
                 .build();
+    }
+    public static List<Stock>  toDomainModel(
+            final List<StockEntity> stockEntity
+    ) {
+        return stockEntity.stream().map((StockMapper::toDomainModel)).toList();
     }
 
     public static StockEntity toEntity(

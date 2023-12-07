@@ -4,7 +4,7 @@ import com.study.stockmanagementstudycase.base.BaseServiceTest;
 import com.study.stockmanagementstudycase.builder.dto.StockCreateRequestBuilder;
 import com.study.stockmanagementstudycase.model.StockTransaction;
 import com.study.stockmanagementstudycase.model.WareHouse;
-import com.study.stockmanagementstudycase.model.dto.Stock;
+import com.study.stockmanagementstudycase.model.Stock;
 import com.study.stockmanagementstudycase.model.dto.request.stock.StockCreateRequest;
 import com.study.stockmanagementstudycase.model.entities.StockTransactionEntity;
 import com.study.stockmanagementstudycase.model.enums.StockTransactionType;
