@@ -14,14 +14,17 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class StockServiceImpl implements StockService {
+
     private final StockRepository stockRepository;
 
     @Override
     public List<Stock> getStocks() {
         final List<StockEntity> stocksFromDB = stockRepository.findAll();
+
         if (stocksFromDB.isEmpty()) {
             throw new StockNotFoundException();
         }
+
         return StockMapper.toDomainModel(stocksFromDB);
     }
 
