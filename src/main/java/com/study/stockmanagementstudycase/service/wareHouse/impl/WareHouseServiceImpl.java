@@ -23,6 +23,10 @@ public class WareHouseServiceImpl implements WareHouseService {
         final List<WareHouseEntity> wareHouseEntityList = wareHouseRepository
                 .findAll();
 
+        if (Boolean.TRUE.equals(wareHouseEntityList.isEmpty())) {
+            throw new WareHouseNotFoundException();
+        }
+
         return wareHouseEntityList.stream()
                 .map(WareHouseMapper::toDomainModel)
                 .toList();
