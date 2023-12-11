@@ -34,15 +34,17 @@ public class StockController {
     }
 
     @GetMapping
-    public ResponseEntity<List<StockResponse>> getStocks(){
-       final List<Stock> stocks = stockService.getStocks();
+    public ResponseEntity<List<StockResponse>> getStocks() {
+        final List<Stock> stocks = stockService.getStocks();
         return ResponseEntity.ok(StockDTOMapper.stockResponses(stocks));
 
     }
 
     @GetMapping("/{stockId}")
-    public ResponseEntity<StockResponse> getStockById(@UUID @PathVariable("stockId") final String stockId){
-        final Stock stock= stockService.getStockById(stockId);
+    public ResponseEntity<StockResponse> getStockById(
+            @UUID @PathVariable("stockId") final String stockId
+    ) {
+        final Stock stock = stockService.getStockById(stockId);
         return ResponseEntity.ok(StockDTOMapper.toStockResponse(stock));
     }
 }

@@ -15,7 +15,6 @@ import java.math.BigDecimal;
 /**
  * Domain model of {@link StockEntity}
  */
-
 @SuperBuilder
 @EqualsAndHashCode
 @Getter
@@ -29,3 +28,4 @@ public class Stock extends BaseDomainModel {
     private BigDecimal amount;
     private UnitType unitType;
 }
+
