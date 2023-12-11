@@ -1,5 +1,7 @@
 package com.study.stockmanagementstudycase.service.wareHouseStock.impl;
 
+import com.study.stockmanagementstudycase.common.exception.InvalidEntryAmount;
+import com.study.stockmanagementstudycase.common.exception.InvalidEntryTime;
 import com.study.stockmanagementstudycase.common.exception.WareHouseStockNotFoundException;
 import com.study.stockmanagementstudycase.model.WareHouse;
 import com.study.stockmanagementstudycase.model.WareHouseStock;
@@ -52,6 +54,10 @@ public class WareHouseStockUpdateServiceImpl implements WareHouseStockUpdateServ
                 )
                 .orElseThrow(WareHouseStockNotFoundException::new);
 
+        this.checkDateTimeForStockEntry(entryTime);
+
+        this.checkEntryAmountForStockEntry(entryAmount);
+
         this.updateWareHouseStockEntityAmountForStockEntry(
                 entryAmount,
                 wareHouseStockEntityFromDbForStockEntry
@@ -62,6 +68,7 @@ public class WareHouseStockUpdateServiceImpl implements WareHouseStockUpdateServ
         return WareHouseStockMapper.toDomainModel(wareHouseStockEntityFromDbForStockEntry);
     }
 
+
     private void updateWareHouseStockEntityAmountForStockEntry(
             final BigDecimal entryAmount,
             final WareHouseStockEntity wareHouseEntityForStockEntry
@@ -69,6 +76,22 @@ public class WareHouseStockUpdateServiceImpl implements WareHouseStockUpdateServ
         wareHouseEntityForStockEntry.setAmount(
                 wareHouseEntityForStockEntry.getAmount().add(entryAmount)
         );
+    }
+
+    private void checkEntryAmountForStockEntry(
+            final BigDecimal entryAmount
+    ) {
+        if (Boolean.FALSE.equals(entryAmount.compareTo(BigDecimal.ZERO) > 0)) {
+            throw new InvalidEntryAmount();
+        }
+    }
+
+    private void checkDateTimeForStockEntry(
+            final LocalDateTime entryTime
+    ) {
+        if (entryTime.isAfter(LocalDateTime.now())) {
+            throw new InvalidEntryTime();
+        }
     }
 
 }
