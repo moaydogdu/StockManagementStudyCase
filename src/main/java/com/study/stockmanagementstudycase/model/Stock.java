@@ -1,4 +1,4 @@
-package com.study.stockmanagementstudycase.model.dto;
+package com.study.stockmanagementstudycase.model;
 
 import com.study.stockmanagementstudycase.common.model.BaseDomainModel;
 import com.study.stockmanagementstudycase.model.entities.StockEntity;
@@ -15,7 +15,6 @@ import java.math.BigDecimal;
 /**
  * Domain model of {@link StockEntity}
  */
-
 @SuperBuilder
 @EqualsAndHashCode
 @Getter
@@ -29,3 +28,4 @@ public class Stock extends BaseDomainModel {
     private BigDecimal amount;
     private UnitType unitType;
 }
+

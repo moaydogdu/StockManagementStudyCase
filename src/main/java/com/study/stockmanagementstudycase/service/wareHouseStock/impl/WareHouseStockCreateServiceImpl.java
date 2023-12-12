@@ -3,7 +3,7 @@ package com.study.stockmanagementstudycase.service.wareHouseStock.impl;
 import com.study.stockmanagementstudycase.common.exception.wareHouseStock.UnableToCreateWareHouseStockException;
 import com.study.stockmanagementstudycase.model.WareHouse;
 import com.study.stockmanagementstudycase.model.WareHouseStock;
-import com.study.stockmanagementstudycase.model.dto.Stock;
+import com.study.stockmanagementstudycase.model.Stock;
 import com.study.stockmanagementstudycase.model.entities.WareHouseStockEntity;
 import com.study.stockmanagementstudycase.model.mappers.wareHouseStock.WareHouseStockMapper;
 import com.study.stockmanagementstudycase.repository.WareHouseStockRepository;

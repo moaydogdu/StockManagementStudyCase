@@ -4,7 +4,7 @@ import com.study.stockmanagementstudycase.base.BaseServiceTest;
 import com.study.stockmanagementstudycase.builder.entity.StockEntityBuilder;
 import com.study.stockmanagementstudycase.builder.model.WareHouseBuilder;
 import com.study.stockmanagementstudycase.model.WareHouse;
-import com.study.stockmanagementstudycase.model.dto.Stock;
+import com.study.stockmanagementstudycase.model.Stock;
 import com.study.stockmanagementstudycase.model.entities.StockEntity;
 import com.study.stockmanagementstudycase.model.mappers.stock.StockMapper;
 import com.study.stockmanagementstudycase.repository.StockRepository;

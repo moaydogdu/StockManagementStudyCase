@@ -84,7 +84,7 @@ public class WareHouseController {
      * Update a warehouse by its ID.
      *
      * @param updateRequest The updated warehouse data.
-     * @param wareHouseId The ID of the warehouse to update.
+     * @param wareHouseId   The ID of the warehouse to update.
      * @return A ResponseEntity with no content.
      */
     @PutMapping("/{wareHouseId}")
