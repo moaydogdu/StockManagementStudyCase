@@ -27,7 +27,6 @@ class WareHouseStockServiceImplTest extends BaseServiceTest {
     @Test
     void givenWareHouseStockEntities_whenGetWareHouseStocks_thenReturnWareHouseStockDomainModels() {
         // Given
-
         final StockEntity mockStockEntity = StockEntity.builder()
                 .id(UUID.randomUUID().toString())
                 .build();
@@ -62,7 +61,6 @@ class WareHouseStockServiceImplTest extends BaseServiceTest {
         // Then
         final List<WareHouseStock> response = wareHouseStockService.getWareHouseStocks();
 
-        //Assert
         Assertions.assertNotNull(response);
 
         Assertions.assertEquals(response.size(), 3);
