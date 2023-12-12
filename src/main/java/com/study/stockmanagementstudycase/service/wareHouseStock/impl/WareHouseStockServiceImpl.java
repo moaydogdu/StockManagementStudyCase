@@ -20,14 +20,14 @@ public class WareHouseStockServiceImpl implements WareHouseStockService {
     @Override
     public List<WareHouseStock> getWareHouseStocks() {
 
-        final List<WareHouseStockEntity> wareHouseStockEntityList = wareHouseStockRepository
+        final List<WareHouseStockEntity> wareHouseStockEntitiesFromDb = wareHouseStockRepository
                 .findAll();
 
-        if (Boolean.TRUE.equals(wareHouseStockEntityList.isEmpty())) {
+        if (Boolean.TRUE.equals(wareHouseStockEntitiesFromDb.isEmpty())) {
             throw new WareHouseStockNotFoundException();
         }
 
-        return wareHouseStockEntityList.stream()
+        return wareHouseStockEntitiesFromDb.stream()
                 .map(WareHouseStockMapper::toDomainModel)
                 .toList();
     }
