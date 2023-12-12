@@ -8,6 +8,8 @@ public interface WareHouseStockService {
 
     List<WareHouseStock> getWareHouseStocks();
 
-    WareHouseStock getWareHouseStockById(final String wareHouseStockId);
+    WareHouseStock getWareHouseStockById(
+            final String wareHouseStockId
+    );
 
 }
