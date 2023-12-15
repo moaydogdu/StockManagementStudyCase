@@ -1,8 +1,8 @@
 package com.study.stockmanagementstudycase.service.stockTransaction.impl;
 
+import com.study.stockmanagementstudycase.model.Stock;
 import com.study.stockmanagementstudycase.model.StockTransaction;
 import com.study.stockmanagementstudycase.model.WareHouse;
-import com.study.stockmanagementstudycase.model.Stock;
 import com.study.stockmanagementstudycase.model.dto.request.stock.StockCreateRequest;
 import com.study.stockmanagementstudycase.model.entities.StockTransactionEntity;
 import com.study.stockmanagementstudycase.model.mappers.stock.StockMapper;
@@ -49,11 +49,22 @@ public class StockTransactionCreateServiceImpl implements StockTransactionCreate
             final Stock stock,
             final WareHouse wareHouse
     ) {
+
+        if (this.checkStockEntryTimeComparingToNow(entryTime)) {
+            return createStockTransactionForStockEntryForPastDate(
+                    entryAmount,
+                    entryTime,
+                    stock,
+                    wareHouse
+            );
+        }
+
         final StockTransactionEntity stockTransactionEntityToBeSaveForStockEntry =
                 StockTransactionMapper.mapForStockEntry(
                         entryAmount,
                         entryTime,
-                        stock
+                        stock,
+                        wareHouse
                 );
 
         stockTransactionEntityToBeSaveForStockEntry.setStockEntity(
@@ -70,5 +81,43 @@ public class StockTransactionCreateServiceImpl implements StockTransactionCreate
 
         return StockTransactionMapper
                 .toDomainModel(stockTransactionEntityToBeSaveForStockEntry);
+    }
+
+
+    private Boolean checkStockEntryTimeComparingToNow(
+            final LocalDateTime entryTime
+    ) {
+        return entryTime.isBefore(LocalDateTime.now());
+    }
+
+    private StockTransaction createStockTransactionForStockEntryForPastDate(
+            final BigDecimal entryAmount,
+            final LocalDateTime entryTime,
+            final Stock stock,
+            final WareHouse wareHouse
+    ) {
+        StockTransactionEntity stockTransactionEntityBeforeEntryTime = stockTransactionRepository
+                .findStockTransactionEntityByDateBefore(entryTime)
+                .orElseThrow(() -> new RuntimeException("StockTranscation gecmisinde bozulma tespit edildi lutfen yoneticiye bildirin"));
+
+
+        StockTransactionEntity stockTransactionEntityForStockEntry = StockTransactionMapper
+                .mapForStockEntryForPastDate(
+                        entryAmount,
+                        entryTime,
+                        stockTransactionEntityBeforeEntryTime.getAfterAmount(),
+                        stock,
+                        wareHouse
+                );
+
+        stockTransactionRepository.save(stockTransactionEntityForStockEntry);
+
+        stockTransactionRepository.updateBeforeAmountAndAfterAmountAfterSpecifiedDate(
+                entryTime,
+                entryAmount
+        );
+
+        return StockTransactionMapper
+                .toDomainModel(stockTransactionEntityForStockEntry);
     }
 }
