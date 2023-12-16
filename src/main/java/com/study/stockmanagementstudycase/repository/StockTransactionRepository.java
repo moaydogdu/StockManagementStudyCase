@@ -20,8 +20,8 @@ public interface StockTransactionRepository extends JpaRepository<StockTransacti
             "afterAmount = afterAmount + :amount " +
             " WHERE date > :date")
     void updateBeforeAmountAndAfterAmountAfterSpecifiedDate(
-            @Param("date") LocalDateTime date,
-            @Param("amount") BigDecimal amount
+            @Param("date") final LocalDateTime date,
+            @Param("amount") final BigDecimal amount
     );
 
     @Query("SELECT st FROM StockTransactionEntity st " +
