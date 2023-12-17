@@ -6,7 +6,7 @@ import com.study.stockmanagementstudycase.model.entities.StockEntity;
 import com.study.stockmanagementstudycase.model.mappers.stock.StockMapper;
 import com.study.stockmanagementstudycase.repository.StockRepository;
 import com.study.stockmanagementstudycase.service.stock.StockCreateService;
-import com.study.stockmanagementstudycase.service.stock.StockPurchaseService;
+import com.study.stockmanagementstudycase.service.stock.StockEntryService;
 import com.study.stockmanagementstudycase.service.stockTransaction.StockTransactionCreateService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ import java.util.Objects;
 public class StockCreateServiceImpl implements StockCreateService {
 
     private final StockRepository stockRepository;
-    private final StockPurchaseService stockPurchaseService;
+    private final StockEntryService stockEntryService;
     private final StockTransactionCreateService stockTransactionCreateService;
 
     @Override
@@ -44,7 +44,7 @@ public class StockCreateServiceImpl implements StockCreateService {
         if (Objects.nonNull(stockCreateRequest.getAmount())
                 && Boolean.TRUE.equals(stockCreateRequest.getAmount().compareTo(BigDecimal.ZERO) > 0)
         ) {
-            return stockPurchaseService.purchaseStock(
+            return stockEntryService.entryStock(
                     stockEntityToBeCreate.getId(),
                     stockCreateRequest.getWareHouseId(),
                     stockCreateRequest.getAmount(),

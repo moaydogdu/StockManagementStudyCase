@@ -3,8 +3,8 @@ package com.study.stockmanagementstudycase.service.stock.impl;
 import com.study.stockmanagementstudycase.base.BaseServiceTest;
 import com.study.stockmanagementstudycase.builder.entity.StockEntityBuilder;
 import com.study.stockmanagementstudycase.builder.model.WareHouseBuilder;
-import com.study.stockmanagementstudycase.model.WareHouse;
 import com.study.stockmanagementstudycase.model.Stock;
+import com.study.stockmanagementstudycase.model.WareHouse;
 import com.study.stockmanagementstudycase.model.entities.StockEntity;
 import com.study.stockmanagementstudycase.model.mappers.stock.StockMapper;
 import com.study.stockmanagementstudycase.repository.StockRepository;
@@ -22,10 +22,10 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
-public class StockPurchaseServiceImplTest extends BaseServiceTest {
+public class StockEntryServiceImplTest extends BaseServiceTest {
 
     @InjectMocks
-    private StockPurchaseServiceImpl stockPurchaseService;
+    private StockEntryServiceImpl stockPurchaseService;
 
     @Mock
     private StockRepository stockRepository;
@@ -50,7 +50,7 @@ public class StockPurchaseServiceImplTest extends BaseServiceTest {
         // Then
         Assertions.assertThrows(
                 RuntimeException.class,
-                () -> stockPurchaseService.purchaseStock(
+                () -> stockPurchaseService.entryStock(
                         Mockito.any(String.class),
                         Mockito.any(String.class),
                         Mockito.any(BigDecimal.class),
@@ -98,7 +98,7 @@ public class StockPurchaseServiceImplTest extends BaseServiceTest {
         // Then
         Assertions.assertThrows(
                 RuntimeException.class,
-                () -> stockPurchaseService.purchaseStock(
+                () -> stockPurchaseService.entryStock(
                         Mockito.any(String.class),
                         Mockito.any(String.class),
                         Mockito.any(BigDecimal.class),
@@ -165,7 +165,7 @@ public class StockPurchaseServiceImplTest extends BaseServiceTest {
                 .thenReturn(mockWareHouse);
 
         // Then
-        Stock response = stockPurchaseService.purchaseStock(
+        Stock response = stockPurchaseService.entryStock(
                 mockStockId,
                 mockWareHouseId,
                 mockEntryAmount,

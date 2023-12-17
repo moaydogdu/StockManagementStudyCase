@@ -7,7 +7,7 @@ import com.study.stockmanagementstudycase.model.dto.request.stock.StockCreateReq
 import com.study.stockmanagementstudycase.model.entities.StockEntity;
 import com.study.stockmanagementstudycase.model.mappers.stock.StockMapper;
 import com.study.stockmanagementstudycase.repository.StockRepository;
-import com.study.stockmanagementstudycase.service.stock.StockPurchaseService;
+import com.study.stockmanagementstudycase.service.stock.StockEntryService;
 import com.study.stockmanagementstudycase.service.stockTransaction.StockTransactionCreateService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -31,7 +31,7 @@ public class StockCreateServiceImplTests extends BaseServiceTest {
     private StockTransactionCreateService stockTransactionCreateService;
 
     @Mock
-    private StockPurchaseService stockPurchaseService;
+    private StockEntryService stockEntryService;
 
     @Test
     void givenValidStockCreateRequestWithoutAmount_whenCreateStock_thenReturnStockDomainModel() {
@@ -72,10 +72,10 @@ public class StockCreateServiceImplTests extends BaseServiceTest {
                 .save(Mockito.any(StockEntity.class));
 
         Mockito.verify(
-                        stockPurchaseService,
+                        stockEntryService,
                         Mockito.times(0)
                 )
-                .purchaseStock(Mockito.any(String.class),
+                .entryStock(Mockito.any(String.class),
                         Mockito.any(String.class),
                         Mockito.any(BigDecimal.class),
                         Mockito.any(LocalDateTime.class));
@@ -101,7 +101,7 @@ public class StockCreateServiceImplTests extends BaseServiceTest {
         Mockito.when(stockRepository.save(Mockito.any(StockEntity.class)))
                 .thenReturn(mockStockEntity);
 
-        Mockito.when(stockPurchaseService.purchaseStock(
+        Mockito.when(stockEntryService.entryStock(
                         Mockito.any(String.class),
                         Mockito.any(String.class),
                         Mockito.any(BigDecimal.class),
@@ -120,10 +120,10 @@ public class StockCreateServiceImplTests extends BaseServiceTest {
                 .save(Mockito.any(StockEntity.class));
 
         Mockito.verify(
-                        stockPurchaseService,
+                        stockEntryService,
                         Mockito.times(1)
                 )
-                .purchaseStock(Mockito.any(String.class),
+                .entryStock(Mockito.any(String.class),
                         Mockito.any(String.class),
                         Mockito.any(BigDecimal.class),
                         Mockito.any(LocalDateTime.class));
@@ -154,7 +154,7 @@ public class StockCreateServiceImplTests extends BaseServiceTest {
                 Mockito.any(Stock.class)
         )).thenThrow(new RuntimeException("Mock Error"));
 
-        Mockito.when(stockPurchaseService.purchaseStock(
+        Mockito.when(stockEntryService.entryStock(
                         Mockito.any(String.class),
                         Mockito.any(String.class),
                         Mockito.any(BigDecimal.class),
@@ -175,10 +175,10 @@ public class StockCreateServiceImplTests extends BaseServiceTest {
                 .save(Mockito.any(StockEntity.class));
 
         Mockito.verify(
-                        stockPurchaseService,
+                        stockEntryService,
                         Mockito.times(0)
                 )
-                .purchaseStock(Mockito.any(String.class),
+                .entryStock(Mockito.any(String.class),
                         Mockito.any(String.class),
                         Mockito.any(BigDecimal.class),
                         Mockito.any(LocalDateTime.class));

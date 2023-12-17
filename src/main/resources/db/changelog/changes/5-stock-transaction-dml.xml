@@ -25,14 +25,28 @@
             <column name="AMOUNT" value="5.0000"/>
             <column name="BEFORE_AMOUNT" value="0.0000"/>
             <column name="AFTER_AMOUNT" value="5.0000"/>
-            <column name="DATE" value="2023-12-04 21:00:00"/>
-            <column name="CREATED_AT" value="2023-12-04 21:00:00"/>
+            <column name="DATE" value="2023-12-04 23:00:00"/>
+            <column name="CREATED_AT" value="2023-12-04 23:00:00"/>
             <column name="STOCK_ID" value="3b308439-c142-451d-8843-b1e774ff0a00"/>
             <column name="WAREHOUSE_ID" value="e7365438-e5c0-4419-93ea-539fa8392e9d"/>
         </insert>
     </changeSet>
 
     <changeSet id="insertStockTransactionExampleData3" author="moaydogdu">
+        <insert tableName="STOCK_TRANSACTION">
+            <column name="ID" value="79574edf-7ea3-4de0-90b5-d3470569f496"/>
+            <column name="STOCK_TRANSACTION_TYPE" value="STOCK_ENTRY"/>
+            <column name="AMOUNT" value="10.0000"/>
+            <column name="BEFORE_AMOUNT" value="5.0000"/>
+            <column name="AFTER_AMOUNT" value="15.0000"/>
+            <column name="DATE" value="2023-12-04 23:30:00"/>
+            <column name="CREATED_AT" value="2023-12-04 23:30:00"/>
+            <column name="STOCK_ID" value="3b308439-c142-451d-8843-b1e774ff0a00"/>
+            <column name="WAREHOUSE_ID" value="e7365438-e5c0-4419-93ea-539fa8392e9d"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insertStockTransactionExampleData4" author="moaydogdu">
         <insert tableName="STOCK_TRANSACTION">
             <column name="ID" value="9c80f573-e592-4719-937e-2fed98b72a20"/>
             <column name="STOCK_TRANSACTION_TYPE" value="STOCK_CREATE"/>
@@ -45,7 +59,7 @@
         </insert>
     </changeSet>
 
-    <changeSet id="insertStockTransactionExampleData4" author="moaydogdu">
+    <changeSet id="insertStockTransactionExampleData5" author="moaydogdu">
         <insert tableName="STOCK_TRANSACTION">
             <column name="ID" value="94019386-3696-45f2-b52f-5e6e228560b4"/>
             <column name="STOCK_TRANSACTION_TYPE" value="STOCK_ENTRY"/>
@@ -59,7 +73,7 @@
         </insert>
     </changeSet>
 
-    <changeSet id="insertStockTransactionExampleData5" author="moaydogdu">
+    <changeSet id="insertStockTransactionExampleData6" author="moaydogdu">
         <insert tableName="STOCK_TRANSACTION">
             <column name="ID" value="1a15343e-03e0-441f-8868-487f224c2708"/>
             <column name="STOCK_TRANSACTION_TYPE" value="STOCK_CREATE"/>
@@ -72,7 +86,7 @@
         </insert>
     </changeSet>
 
-    <changeSet id="insertStockTransactionExampleData6" author="moaydogdu">
+    <changeSet id="insertStockTransactionExampleData7" author="moaydogdu">
         <insert tableName="STOCK_TRANSACTION">
             <column name="ID" value="c36cd50f-1a28-4b46-ae58-cb4b335ff631"/>
             <column name="STOCK_TRANSACTION_TYPE" value="STOCK_ENTRY"/>
@@ -86,7 +100,7 @@
         </insert>
     </changeSet>
 
-    <changeSet id="insertStockTransactionExampleData7" author="moaydogdu">
+    <changeSet id="insertStockTransactionExampleData8" author="moaydogdu">
         <insert tableName="STOCK_TRANSACTION">
             <column name="ID" value="958ffb3d-8a0c-4cda-a442-3e597f7363b5"/>
             <column name="STOCK_TRANSACTION_TYPE" value="STOCK_CREATE"/>
@@ -99,7 +113,7 @@
         </insert>
     </changeSet>
 
-    <changeSet id="insertStockTransactionExampleData8" author="moaydogdu">
+    <changeSet id="insertStockTransactionExampleData9" author="moaydogdu">
         <insert tableName="STOCK_TRANSACTION">
             <column name="ID" value="0e5f2ab1-34ba-4eb6-a037-cea67b778285"/>
             <column name="STOCK_TRANSACTION_TYPE" value="STOCK_ENTRY"/>
@@ -113,7 +127,7 @@
         </insert>
     </changeSet>
 
-    <changeSet id="insertStockTransactionExampleData9" author="moaydogdu">
+    <changeSet id="insertStockTransactionExampleData10" author="moaydogdu">
         <insert tableName="STOCK_TRANSACTION">
             <column name="ID" value="73a6e33d-3678-4e0f-bdcc-d4f8e14d482d"/>
             <column name="STOCK_TRANSACTION_TYPE" value="STOCK_CREATE"/>
@@ -126,7 +140,7 @@
         </insert>
     </changeSet>
 
-    <changeSet id="insertStockTransactionExampleData10" author="moaydogdu">
+    <changeSet id="insertStockTransactionExampleData11" author="moaydogdu">
         <insert tableName="STOCK_TRANSACTION">
             <column name="ID" value="70223fda-1b3e-4b0d-a095-eea9822166ff"/>
             <column name="STOCK_TRANSACTION_TYPE" value="STOCK_ENTRY"/>
@@ -140,7 +154,7 @@
         </insert>
     </changeSet>
 
-    <changeSet id="insertStockTransactionExampleData11" author="moaydogdu">
+    <changeSet id="insertStockTransactionExampleData12" author="moaydogdu">
         <insert tableName="STOCK_TRANSACTION">
             <column name="ID" value="eaf3d66f-4db4-40c8-a11f-3d58f4ef25d6"/>
             <column name="STOCK_TRANSACTION_TYPE" value="STOCK_CREATE"/>
