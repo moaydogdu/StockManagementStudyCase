@@ -43,7 +43,7 @@ public class StockEntryServiceImpl implements StockEntryService {
         final WareHouse wareHouseDomainModelForStockPurchase = wareHouseService
                 .getWareHouseById(wareHouseId);
 
-        this.updateStockAmountForEntryStock(
+        this.updateStockAmountForStockEntry(
                 stockEntityFromDbForStockPurchase,
                 entryAmount
         );
@@ -83,7 +83,7 @@ public class StockEntryServiceImpl implements StockEntryService {
         );
     }
 
-    private void updateStockAmountForEntryStock(
+    private void updateStockAmountForStockEntry(
             final StockEntity stockEntityForUpdateAmount,
             final BigDecimal entryAmount
     ) {
