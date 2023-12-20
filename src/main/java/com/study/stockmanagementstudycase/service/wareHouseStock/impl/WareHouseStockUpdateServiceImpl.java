@@ -54,9 +54,9 @@ public class WareHouseStockUpdateServiceImpl implements WareHouseStockUpdateServ
                 )
                 .orElseThrow(WareHouseStockNotFoundException::new);
 
-        this.checkDateTimeForStockEntry(entryTime);
+        this.checkDateTimeForWareHouseStockUpdateProcess(entryTime);
 
-        this.checkEntryAmountForStockEntry(entryAmount);
+        this.checkEntryAmountForWareHouseStockUpdateProcess(entryAmount);
 
         this.updateWareHouseStockEntityAmountForStockEntry(
                 entryAmount,
@@ -68,6 +68,33 @@ public class WareHouseStockUpdateServiceImpl implements WareHouseStockUpdateServ
         return WareHouseStockMapper.toDomainModel(wareHouseStockEntityFromDbForStockEntry);
     }
 
+    @Override
+    public WareHouseStock updateWareHouseStockForStockSale(
+            final Stock stock,
+            final WareHouse wareHouse,
+            final BigDecimal saleAmount,
+            final LocalDateTime saleTime
+    ) {
+        final WareHouseStockEntity wareHouseStockEntityFromDbForStockSale = wareHouseStockRepository
+                .findWareHouseStockEntityByStockEntityAndWareHouseEntity(
+                        StockMapper.toEntity(stock),
+                        WareHouseMapper.toEntity(wareHouse)
+                )
+                .orElseThrow(WareHouseStockNotFoundException::new);
+
+        this.checkDateTimeForWareHouseStockUpdateProcess(saleTime);
+
+        this.checkEntryAmountForWareHouseStockUpdateProcess(saleAmount);
+
+        this.updateWareHouseStockEntityAmountForStockSale(
+                saleAmount,
+                wareHouseStockEntityFromDbForStockSale
+        );
+
+        wareHouseStockRepository.save(wareHouseStockEntityFromDbForStockSale);
+
+        return WareHouseStockMapper.toDomainModel(wareHouseStockEntityFromDbForStockSale);
+    }
 
     private void updateWareHouseStockEntityAmountForStockEntry(
             final BigDecimal entryAmount,
@@ -78,7 +105,16 @@ public class WareHouseStockUpdateServiceImpl implements WareHouseStockUpdateServ
         );
     }
 
-    private void checkEntryAmountForStockEntry(
+    private void updateWareHouseStockEntityAmountForStockSale(
+            final BigDecimal saleAmount,
+            final WareHouseStockEntity wareHouseStockEntityForStockSale
+    ) {
+        wareHouseStockEntityForStockSale.setAmount(
+                wareHouseStockEntityForStockSale.getAmount().subtract(saleAmount)
+        );
+    }
+
+    private void checkEntryAmountForWareHouseStockUpdateProcess(
             final BigDecimal entryAmount
     ) {
         if (Boolean.FALSE.equals(entryAmount.compareTo(BigDecimal.ZERO) > 0)) {
@@ -86,10 +122,10 @@ public class WareHouseStockUpdateServiceImpl implements WareHouseStockUpdateServ
         }
     }
 
-    private void checkDateTimeForStockEntry(
-            final LocalDateTime entryTime
+    private void checkDateTimeForWareHouseStockUpdateProcess(
+            final LocalDateTime processTime
     ) {
-        if (entryTime.isAfter(LocalDateTime.now())) {
+        if (processTime.isAfter(LocalDateTime.now())) {
             throw new InvalidEntryTime();
         }
     }
