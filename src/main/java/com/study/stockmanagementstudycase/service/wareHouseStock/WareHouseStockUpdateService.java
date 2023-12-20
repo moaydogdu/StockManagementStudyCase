@@ -14,4 +14,11 @@ public interface WareHouseStockUpdateService {
             final BigDecimal entryAmount,
             final LocalDateTime entryTime
     );
+
+    WareHouseStock updateWareHouseStockForStockSale(
+            final Stock stock,
+            final WareHouse wareHouse,
+            final BigDecimal saleAmount,
+            final LocalDateTime saleTime
+    );
 }
