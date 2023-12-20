@@ -2,7 +2,10 @@ package com.study.stockmanagementstudycase.service.wareHouseStock.impl;
 
 import com.study.stockmanagementstudycase.common.exception.WareHouseStockNotFoundException;
 import com.study.stockmanagementstudycase.model.WareHouseStock;
+import com.study.stockmanagementstudycase.model.entities.StockEntity;
+import com.study.stockmanagementstudycase.model.entities.WareHouseEntity;
 import com.study.stockmanagementstudycase.model.entities.WareHouseStockEntity;
+import com.study.stockmanagementstudycase.model.mappers.stock.StockMapper;
 import com.study.stockmanagementstudycase.model.mappers.wareHouseStock.WareHouseStockMapper;
 import com.study.stockmanagementstudycase.repository.WareHouseStockRepository;
 import com.study.stockmanagementstudycase.service.wareHouseStock.WareHouseStockService;
@@ -42,5 +45,21 @@ public class WareHouseStockServiceImpl implements WareHouseStockService {
 
         return WareHouseStockMapper
                 .toDomainModel(wareHouseStockEntityFromDb);
+    }
+
+    @Override
+    public WareHouseStock getWareHouseStockByStockIdAndWareHouseId(
+            final String stockId,
+            final String wareHouseId
+    ) {
+        final WareHouseStockEntity wareHouseStockEntityFromDbByStockAndWareHouse = wareHouseStockRepository
+                .findWareHouseStockEntityByStockEntityAndWareHouseEntity(
+                        StockEntity.builder().id(stockId).build(),
+                        WareHouseEntity.builder().id(wareHouseId).build()
+                )
+                .orElseThrow(WareHouseStockNotFoundException::new);
+
+        return WareHouseStockMapper
+                .toDomainModel(wareHouseStockEntityFromDbByStockAndWareHouse);
     }
 }
