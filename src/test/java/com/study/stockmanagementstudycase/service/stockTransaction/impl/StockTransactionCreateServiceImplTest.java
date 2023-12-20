@@ -2,9 +2,9 @@ package com.study.stockmanagementstudycase.service.stockTransaction.impl;
 
 import com.study.stockmanagementstudycase.base.BaseServiceTest;
 import com.study.stockmanagementstudycase.builder.dto.StockCreateRequestBuilder;
+import com.study.stockmanagementstudycase.model.Stock;
 import com.study.stockmanagementstudycase.model.StockTransaction;
 import com.study.stockmanagementstudycase.model.WareHouse;
-import com.study.stockmanagementstudycase.model.Stock;
 import com.study.stockmanagementstudycase.model.dto.request.stock.StockCreateRequest;
 import com.study.stockmanagementstudycase.model.entities.StockTransactionEntity;
 import com.study.stockmanagementstudycase.model.enums.StockTransactionType;
@@ -17,6 +17,7 @@ import org.mockito.Mockito;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.UUID;
 
 public class StockTransactionCreateServiceImplTest extends BaseServiceTest {
@@ -170,6 +171,58 @@ public class StockTransactionCreateServiceImplTest extends BaseServiceTest {
                 stockTransactionRepository,
                 Mockito.times(0)
         ).save(Mockito.any(StockTransactionEntity.class));
+
+    }
+
+
+    @Test
+    void givenValidParameters_whenCreateStockTransactionForStockEntryForPastDate_thenReturnStockTransaction() {
+        // Given
+        final WareHouse mockWareHouseDomainModel = WareHouse.builder()
+                .id(UUID.randomUUID().toString())
+                .build();
+
+        final Stock mockStockDomainModel = Stock.builder()
+                .id(UUID.randomUUID().toString())
+                .build();
+
+        final BigDecimal mockEntryAmount = BigDecimal.TEN;
+        final LocalDateTime mockEntryTime = LocalDateTime.now().minusHours(3);
+
+        StockTransactionEntity stockTransactionEntityBeforeEntryTime = StockTransactionEntity.builder()
+                .afterAmount(BigDecimal.valueOf(5L))
+                .build();
+
+        // When
+        Mockito.when(stockTransactionRepository.findStockTransactionEntityByDateBefore(
+                mockEntryTime
+        )).thenReturn(Optional.of(stockTransactionEntityBeforeEntryTime));
+
+        // Then
+        StockTransaction response = stockTransactionCreateService.createStockTransactionForStockEntry(
+                mockEntryAmount,
+                mockEntryTime,
+                mockStockDomainModel,
+                mockWareHouseDomainModel
+        );
+
+        Assertions.assertEquals(
+                response.getAfterAmount(),
+                mockEntryAmount.add(stockTransactionEntityBeforeEntryTime.getAfterAmount())
+        );
+
+        // Verify
+        Mockito.verify(stockTransactionRepository, Mockito.times(1))
+                .save(Mockito.any(StockTransactionEntity.class));
+
+        Mockito.verify(stockTransactionRepository, Mockito.times(1))
+                .updateBeforeAmountAndAfterAmountAfterSpecifiedDate(
+                        mockEntryTime,
+                        mockEntryAmount
+                );
+
+        Mockito.verify(stockTransactionRepository, Mockito.times(1))
+                .findStockTransactionEntityByDateBefore(mockEntryTime);
 
     }
 
