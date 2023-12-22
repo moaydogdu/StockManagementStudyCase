@@ -78,7 +78,7 @@ public class StockSaleServiceImpl implements StockSaleService {
             final StockEntity stockEntityForSale,
             final String wareHouseId
     ) {
-        if (stockEntityForSale.getAmount().compareTo(saleAmount)<0) {
+        if (stockEntityForSale.getAmount().compareTo(saleAmount) < 0) {
             throw new UnableToSellStockException("Mevcut stok miktarı yetersiz.");
         }
 
@@ -88,7 +88,7 @@ public class StockSaleServiceImpl implements StockSaleService {
                         wareHouseId
                 );
 
-        if (wareHouseStock.getAmount().compareTo(saleAmount)<0){
+        if (wareHouseStock.getAmount().compareTo(saleAmount) < 0) {
             throw new UnableToSellStockException("Mevcut stok miktarı yetersiz.");
         }
     }
