@@ -12,4 +12,9 @@ public interface WareHouseStockService {
             final String wareHouseStockId
     );
 
+    WareHouseStock getWareHouseStockByStockIdAndWareHouseId(
+            final String stockId,
+            final String wareHouseId
+    );
+
 }

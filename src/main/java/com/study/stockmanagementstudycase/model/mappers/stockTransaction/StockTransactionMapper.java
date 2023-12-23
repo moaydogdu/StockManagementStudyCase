@@ -76,4 +76,39 @@ public class StockTransactionMapper {
                 .wareHouseEntity(WareHouseMapper.toEntity(wareHouse))
                 .build();
     }
+
+    public static StockTransactionEntity mapForStockSaleForPastDate(
+            final BigDecimal saleAmount,
+            final LocalDateTime saleTime,
+            final BigDecimal beforeAmount,
+            final Stock stock,
+            final WareHouse wareHouse
+    ) {
+        return StockTransactionEntity.builder()
+                .amount(saleAmount)
+                .beforeAmount(beforeAmount)
+                .afterAmount(beforeAmount.subtract(saleAmount))
+                .date(saleTime)
+                .stockTransactionType(StockTransactionType.STOCK_SELL)
+                .stockEntity(StockMapper.toEntity(stock))
+                .wareHouseEntity(WareHouseMapper.toEntity(wareHouse))
+                .build();
+    }
+
+    public static StockTransactionEntity mapForStockSale(
+            final BigDecimal saleAmount,
+            final LocalDateTime saleTime,
+            final Stock stock,
+            final WareHouse wareHouse
+    ) {
+        return StockTransactionEntity.builder()
+                .amount(saleAmount)
+                .beforeAmount(stock.getAmount().add(saleAmount))
+                .afterAmount(stock.getAmount())
+                .date(saleTime)
+                .stockTransactionType(StockTransactionType.STOCK_SELL)
+                .stockEntity(StockMapper.toEntity(stock))
+                .wareHouseEntity(WareHouseMapper.toEntity(wareHouse))
+                .build();
+    }
 }

@@ -24,6 +24,17 @@ public interface StockTransactionRepository extends JpaRepository<StockTransacti
             @Param("amount") final BigDecimal amount
     );
 
+    @Modifying
+    @Query("UPDATE StockTransactionEntity SET " +
+            "beforeAmount =  beforeAmount - :amount, " +
+            "afterAmount = afterAmount - :amount " +
+            " WHERE date > :date")
+    void updateBeforeAmountAndAfterAmountAfterSpecifiedDateBySubtractAmount(
+            @Param("date") final LocalDateTime date,
+            @Param("amount") final BigDecimal amount
+    );
+
+
     @Query("SELECT st FROM StockTransactionEntity st " +
             "WHERE st.date < :date " +
             "ORDER BY  st.date DESC " +
@@ -32,5 +43,7 @@ public interface StockTransactionRepository extends JpaRepository<StockTransacti
     Optional<StockTransactionEntity> findStockTransactionEntityByDateBefore(
             @Param("date") final LocalDateTime date
     );
+
+
 
 }

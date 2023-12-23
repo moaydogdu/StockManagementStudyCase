@@ -10,7 +10,7 @@
             <column name="ID" value="79db620f-8ed4-415d-8645-4557b58bc9f4"/>
             <column name="STOCK_ID" value="3b308439-c142-451d-8843-b1e774ff0a00"/>
             <column name="WAREHOUSE_ID" value="e7365438-e5c0-4419-93ea-539fa8392e9d"/>
-            <column name="AMOUNT" value="5.0000"/>
+            <column name="AMOUNT" value="15.0000"/>
             <column name="CREATED_AT" value="2023-12-04 21:00:00"/>
         </insert>
     </changeSet>

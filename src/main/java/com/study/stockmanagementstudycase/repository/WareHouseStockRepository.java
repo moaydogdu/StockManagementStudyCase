@@ -20,4 +20,5 @@ public interface WareHouseStockRepository extends JpaRepository<WareHouseStockEn
             final StockEntity stockEntity,
             final WareHouseEntity wareHouseEntity
     );
+
 }

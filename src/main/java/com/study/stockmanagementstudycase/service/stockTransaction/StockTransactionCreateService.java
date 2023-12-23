@@ -20,4 +20,11 @@ public interface StockTransactionCreateService {
             final Stock stock,
             final WareHouse wareHouse
     );
+
+    StockTransaction createStockTransactionForStockSale(
+            final BigDecimal saleAmount,
+            final LocalDateTime saleTime,
+            final Stock stock,
+            final WareHouse wareHouse
+    );
 }
