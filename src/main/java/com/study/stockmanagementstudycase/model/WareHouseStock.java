@@ -18,10 +18,8 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class WareHouseStock extends BaseDomainModel {
-
     private String id;
     private BigDecimal amount;
     private String stockEntityId;
     private String wareHouseEntityId;
-
 }
