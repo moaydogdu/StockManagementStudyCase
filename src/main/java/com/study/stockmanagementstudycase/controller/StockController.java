@@ -1,15 +1,19 @@
 package com.study.stockmanagementstudycase.controller;
 
 import com.study.stockmanagementstudycase.model.Stock;
+import com.study.stockmanagementstudycase.model.aggregate.wareHouseStock.WareHouseStockAggregateWithWareHouse;
 import com.study.stockmanagementstudycase.model.dto.request.stock.StockCreateRequest;
 import com.study.stockmanagementstudycase.model.dto.request.stock.StockEntryRequest;
 import com.study.stockmanagementstudycase.model.dto.request.stock.StockSaleRequest;
-import com.study.stockmanagementstudycase.model.dto.response.StockResponse;
+import com.study.stockmanagementstudycase.model.dto.response.stock.StockResponse;
+import com.study.stockmanagementstudycase.model.dto.response.wareHouseStock.WareHouseStockResponse;
 import com.study.stockmanagementstudycase.model.mappers.stock.StockDTOMapper;
+import com.study.stockmanagementstudycase.model.mappers.wareHouseStock.WareHouseStockMapper;
 import com.study.stockmanagementstudycase.service.stock.StockCreateService;
 import com.study.stockmanagementstudycase.service.stock.StockEntryService;
 import com.study.stockmanagementstudycase.service.stock.StockSaleService;
 import com.study.stockmanagementstudycase.service.stock.StockService;
+import com.study.stockmanagementstudycase.service.wareHouseStock.WareHouseStockService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.validator.constraints.UUID;
@@ -34,6 +38,8 @@ public class StockController {
     private final StockService stockService;
     private final StockEntryService stockEntryService;
     private final StockSaleService stockSaleService;
+
+    private final WareHouseStockService wareHouseStockService;
 
     @PostMapping
     public ResponseEntity<Void> createStock(
@@ -76,7 +82,7 @@ public class StockController {
         return ResponseEntity.ok(stockResponse);
     }
 
-    @PostMapping("{stockId}/sale")
+    @PostMapping("/{stockId}/sale")
     public ResponseEntity<Void> sellStock(
             @PathVariable("stockId") @UUID final String stockId,
             @RequestBody @Valid final StockSaleRequest stockSaleRequest
@@ -87,5 +93,20 @@ public class StockController {
         );
 
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/{stockId}/wareHouseStocks")
+    public ResponseEntity<List<WareHouseStockResponse>> getWareHouseStocks(
+            @PathVariable("stockId") @UUID final String stockId
+    ) {
+        final Stock stock = stockService.getStockById(stockId);
+
+        final List<WareHouseStockAggregateWithWareHouse> wareHouseStocksByStock = wareHouseStockService
+                .getWareHouseStocksByStock(stock);
+
+        final List<WareHouseStockResponse> wareHouseStockResponses = WareHouseStockMapper
+                .toWareHouseStockResponse(wareHouseStocksByStock);
+
+        return ResponseEntity.ok(wareHouseStockResponses);
     }
 }
