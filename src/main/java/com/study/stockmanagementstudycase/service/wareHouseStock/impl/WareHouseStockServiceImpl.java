@@ -1,7 +1,9 @@
 package com.study.stockmanagementstudycase.service.wareHouseStock.impl;
 
 import com.study.stockmanagementstudycase.common.exception.WareHouseStockNotFoundException;
+import com.study.stockmanagementstudycase.model.Stock;
 import com.study.stockmanagementstudycase.model.WareHouseStock;
+import com.study.stockmanagementstudycase.model.aggregate.wareHouseStock.WareHouseStockAggregateWithWareHouse;
 import com.study.stockmanagementstudycase.model.entities.StockEntity;
 import com.study.stockmanagementstudycase.model.entities.WareHouseEntity;
 import com.study.stockmanagementstudycase.model.entities.WareHouseStockEntity;
@@ -61,5 +63,30 @@ public class WareHouseStockServiceImpl implements WareHouseStockService {
 
         return WareHouseStockMapper
                 .toDomainModel(wareHouseStockEntityFromDbByStockAndWareHouse);
+    }
+
+    /**
+     * ID değeri verilen {@link StockEntity} nesnesinin hangi depolarda kaçar adet olduğunu
+     * geriye {@link WareHouseStockAggregateWithWareHouse} domain modeller içerisinde dönen metoddur.
+     *
+     * @param stock
+     * @return
+     * @author Muhammet Oguzhan AYDOGDU
+     * @since 1.0.0
+     */
+    @Override
+    public List<WareHouseStockAggregateWithWareHouse> getWareHouseStocksByStock(
+            final Stock stock
+    ) {
+        final List<WareHouseStockEntity> wareHouseStockEntitiesByStock = wareHouseStockRepository
+                .findWareHouseStockEntitiesByStockEntity(
+                        StockMapper.toEntity(stock)
+                );
+
+        if (wareHouseStockEntitiesByStock.isEmpty()) {
+            throw new WareHouseStockNotFoundException("Belirtilen Stock ile ilgili depo stoğu bulunamadı.");
+        }
+
+        return WareHouseStockMapper.toAggregateWithWareHouse(wareHouseStockEntitiesByStock);
     }
 }
