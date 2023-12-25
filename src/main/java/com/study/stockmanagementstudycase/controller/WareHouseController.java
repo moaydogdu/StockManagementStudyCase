@@ -3,7 +3,7 @@ package com.study.stockmanagementstudycase.controller;
 import com.study.stockmanagementstudycase.model.WareHouse;
 import com.study.stockmanagementstudycase.model.dto.request.wareHouse.WareHouseCreateRequest;
 import com.study.stockmanagementstudycase.model.dto.request.wareHouse.WareHouseUpdateRequest;
-import com.study.stockmanagementstudycase.model.dto.response.WareHouseResponse;
+import com.study.stockmanagementstudycase.model.dto.response.wareHouse.WareHouseResponse;
 import com.study.stockmanagementstudycase.model.mappers.wareHouse.WareHouseDTOMapper;
 import com.study.stockmanagementstudycase.service.wareHouse.WareHouseCreateService;
 import com.study.stockmanagementstudycase.service.wareHouse.WareHouseDeleteService;
