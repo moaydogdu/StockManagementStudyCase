@@ -1,4 +1,4 @@
-package com.study.stockmanagementstudycase.model.dto.response;
+package com.study.stockmanagementstudycase.model.dto.response.stock;
 
 import com.study.stockmanagementstudycase.model.enums.UnitType;
 import lombok.*;
