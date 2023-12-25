@@ -36,7 +36,9 @@ public class StockMapper {
     public static List<Stock>  toDomainModel(
             final List<StockEntity> stockEntity
     ) {
-        return stockEntity.stream().map((StockMapper::toDomainModel)).toList();
+        return stockEntity.stream()
+                .map(StockMapper::toDomainModel)
+                .toList();
     }
 
     public static StockEntity toEntity(

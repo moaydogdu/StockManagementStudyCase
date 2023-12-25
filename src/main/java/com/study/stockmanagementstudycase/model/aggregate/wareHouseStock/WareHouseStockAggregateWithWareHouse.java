@@ -1,7 +1,8 @@
-package com.study.stockmanagementstudycase.model;
+package com.study.stockmanagementstudycase.model.aggregate.wareHouseStock;
 
 
 import com.study.stockmanagementstudycase.common.model.BaseDomainModel;
+import com.study.stockmanagementstudycase.model.WareHouse;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -17,9 +18,8 @@ import java.math.BigDecimal;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class WareHouseStock extends BaseDomainModel {
+public class WareHouseStockAggregateWithWareHouse extends BaseDomainModel {
     private String id;
     private BigDecimal amount;
-    private String stockEntityId;
-    private String wareHouseEntityId;
+    private WareHouse wareHouse;
 }
