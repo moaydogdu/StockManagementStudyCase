@@ -6,6 +6,7 @@ import com.study.stockmanagementstudycase.model.entities.WareHouseStockEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -19,6 +20,10 @@ public interface WareHouseStockRepository extends JpaRepository<WareHouseStockEn
     boolean existsWareHouseStockEntityByStockEntityAndWareHouseEntity(
             final StockEntity stockEntity,
             final WareHouseEntity wareHouseEntity
+    );
+
+    List<WareHouseStockEntity> findWareHouseStockEntitiesByStockEntity(
+            final StockEntity stockEntity
     );
 
 }
