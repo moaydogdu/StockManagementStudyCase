@@ -1,7 +1,7 @@
 package com.study.stockmanagementstudycase.model.mappers.stock;
 
 import com.study.stockmanagementstudycase.model.Stock;
-import com.study.stockmanagementstudycase.model.dto.response.StockResponse;
+import com.study.stockmanagementstudycase.model.dto.response.stock.StockResponse;
 
 import java.util.List;
 
