@@ -1,4 +1,4 @@
-package com.study.stockmanagementstudycase.model.dto.response;
+package com.study.stockmanagementstudycase.model.dto.response.wareHouse;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
