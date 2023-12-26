@@ -5,26 +5,19 @@ import com.study.stockmanagementstudycase.model.aggregate.wareHouseStock.WareHou
 import com.study.stockmanagementstudycase.model.dto.request.stock.StockCreateRequest;
 import com.study.stockmanagementstudycase.model.dto.request.stock.StockEntryRequest;
 import com.study.stockmanagementstudycase.model.dto.request.stock.StockSaleRequest;
+import com.study.stockmanagementstudycase.model.dto.request.stock.StockUpdateRequest;
 import com.study.stockmanagementstudycase.model.dto.response.stock.StockResponse;
 import com.study.stockmanagementstudycase.model.dto.response.wareHouseStock.WareHouseStockResponse;
 import com.study.stockmanagementstudycase.model.mappers.stock.StockDTOMapper;
 import com.study.stockmanagementstudycase.model.mappers.wareHouseStock.WareHouseStockMapper;
-import com.study.stockmanagementstudycase.service.stock.StockCreateService;
-import com.study.stockmanagementstudycase.service.stock.StockEntryService;
-import com.study.stockmanagementstudycase.service.stock.StockSaleService;
-import com.study.stockmanagementstudycase.service.stock.StockService;
+import com.study.stockmanagementstudycase.service.stock.*;
 import com.study.stockmanagementstudycase.service.wareHouseStock.WareHouseStockService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.validator.constraints.UUID;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -38,6 +31,7 @@ public class StockController {
     private final StockService stockService;
     private final StockEntryService stockEntryService;
     private final StockSaleService stockSaleService;
+    private final StockUpdateService stockUpdateService;
 
     private final WareHouseStockService wareHouseStockService;
 
@@ -109,4 +103,19 @@ public class StockController {
 
         return ResponseEntity.ok(wareHouseStockResponses);
     }
+
+    @PostMapping("/{stockId}/stockUpdate")
+    public ResponseEntity<Void> updateStock(
+            @RequestBody @Valid final StockUpdateRequest updateRequest,
+            @PathVariable("stockId") @UUID final String stockId
+    ) {
+
+        stockUpdateService.updateStock(
+                updateRequest,
+                stockId
+        );
+
+        return ResponseEntity.ok().build();
+    }
+
 }
