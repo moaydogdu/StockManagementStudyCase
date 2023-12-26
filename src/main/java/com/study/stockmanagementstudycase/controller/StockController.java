@@ -104,12 +104,11 @@ public class StockController {
         return ResponseEntity.ok(wareHouseStockResponses);
     }
 
-    @PostMapping("/{stockId}/stockUpdate")
+    @PutMapping("/{stockId}")
     public ResponseEntity<Void> updateStock(
             @RequestBody @Valid final StockUpdateRequest updateRequest,
             @PathVariable("stockId") @UUID final String stockId
     ) {
-
         stockUpdateService.updateStock(
                 updateRequest,
                 stockId
