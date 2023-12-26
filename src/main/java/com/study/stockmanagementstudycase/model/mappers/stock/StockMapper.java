@@ -56,11 +56,11 @@ public class StockMapper {
                 .build();
     }
 
-    public static void mapForUpdating
-            (final StockUpdateRequest updateRequest,
-             final StockEntity stockEntityFromDb) {
+    public static void mapForUpdating(
+            final StockUpdateRequest updateRequest,
+            final StockEntity stockEntityFromDb
+    ) {
         stockEntityFromDb.setName(updateRequest.getName());
         stockEntityFromDb.setPrice(updateRequest.getPrice());
     }
-
 }
