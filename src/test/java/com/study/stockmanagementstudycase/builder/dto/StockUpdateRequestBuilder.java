@@ -8,8 +8,6 @@ import com.study.stockmanagementstudycase.model.dto.request.stock.StockUpdateReq
 import java.math.BigDecimal;
 
 public class StockUpdateRequestBuilder extends BaseBuilder<StockUpdateRequest> {
-
-
     public StockUpdateRequestBuilder(
     ) {
         super(StockUpdateRequest.class);
@@ -39,7 +37,6 @@ public class StockUpdateRequestBuilder extends BaseBuilder<StockUpdateRequest> {
 
     @Override
     public StockUpdateRequest build(
-
     ) {
         return super.build();
     }
