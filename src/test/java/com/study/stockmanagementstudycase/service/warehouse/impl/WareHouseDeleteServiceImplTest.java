@@ -2,6 +2,7 @@ package com.study.stockmanagementstudycase.service.warehouse.impl;
 
 import com.study.stockmanagementstudycase.base.BaseServiceTest;
 import com.study.stockmanagementstudycase.common.exception.WareHouseNotFoundException;
+import com.study.stockmanagementstudycase.common.exception.wareHouse.UnableToDeleteWareHouseException;
 import com.study.stockmanagementstudycase.model.WareHouse;
 import com.study.stockmanagementstudycase.model.entities.WareHouseEntity;
 import com.study.stockmanagementstudycase.repository.WareHouseRepository;
@@ -13,6 +14,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.util.Optional;
+import java.util.UUID;
 
 public class WareHouseDeleteServiceImplTest extends BaseServiceTest {
 
@@ -23,56 +25,95 @@ public class WareHouseDeleteServiceImplTest extends BaseServiceTest {
     private WareHouseRepository wareHouseRepository;
 
     @Test
-    void givenValidWareHouseId_whenDeleteWareHouse_thenDeleteWareHouseDomainModel() {
+    void givenValidWareHouseEntity_whenDeleteWareHouse_thenDeleteWareHouseDomainModel() {
         // Given
-        WareHouse wareHouse = new WareHouse();
-        String wareHouseId = wareHouse.getId();
+        final String mockWareHouseId = UUID.randomUUID().toString();
+        final WareHouseEntity mockWareHouseEntity = WareHouseEntity.builder()
+                .id(mockWareHouseId)
+                .status(true)
+                .build();
 
         // When
         Mockito.when(wareHouseRepository.findById(
-                wareHouseId)
-        ).thenReturn(Optional.of(new WareHouseEntity()));
+                mockWareHouseId)
+        ).thenReturn(Optional.of(mockWareHouseEntity));
 
         // Then
         Assertions.assertDoesNotThrow(
-                () -> wareHouseDeleteService.deleteWareHouse(wareHouseId)
+                () -> wareHouseDeleteService.deleteWareHouse(mockWareHouseId)
+        );
+
+        Assertions.assertEquals(
+                Boolean.FALSE, mockWareHouseEntity.getStatus()
         );
 
         // Verify
         Mockito.verify(
-                        wareHouseRepository
-                        , Mockito.times(1))
-                .deleteById(wareHouseId);
+                wareHouseRepository,
+                Mockito.times(1)
+        ).findById(mockWareHouseId);
+
+        Mockito.verify(
+                wareHouseRepository,
+                Mockito.times(1)
+        ).save(mockWareHouseEntity);
     }
 
     @Test
-    void givenNotValidWareHouseId_whenDeleteWareHouse_thenTrowsException() {
+    void givenNotValidWareHouseEntity_whenDeleteWareHouse_thenTrowsException() {
         // Given
-        WareHouse wareHouse = new WareHouse();
-        String wareHouseId = wareHouse.getId();
+        final String mockWareHouseId = UUID.randomUUID().toString();
+        final WareHouseEntity mockWareHouseEntity = WareHouseEntity.builder()
+                .id(mockWareHouseId)
+                .status(false)
+                .build();
 
         // When
         Mockito.when(wareHouseRepository.findById(
-                wareHouseId)
-        ).thenReturn(Optional.empty());
+                mockWareHouseId)
+        ).thenReturn(Optional.of(mockWareHouseEntity));
 
         // Then
-        Assertions.assertThrows(
-                WareHouseNotFoundException.class,
-                () -> wareHouseDeleteService.deleteWareHouse(wareHouseId)
+        Assertions.assertThrowsExactly(
+                UnableToDeleteWareHouseException.class,
+                () -> wareHouseDeleteService.deleteWareHouse(mockWareHouseId)
         );
 
         // Verify
+        Mockito.verify(
+                wareHouseRepository,
+                Mockito.times(1)
+        ).findById(mockWareHouseId);
 
         Mockito.verify(
-                        wareHouseRepository
-                        , Mockito.times(1))
-                .findById(wareHouseId);
+                wareHouseRepository,
+                Mockito.times(0)
+        ).save(mockWareHouseEntity);
+    }
+
+    @Test
+    void givenNotFoundWareHouseEntity_whenDeleteWareHouse_thenTrowsException() {
+        // When
+        Mockito.when(wareHouseRepository.findById(
+                Mockito.anyString())
+        ).thenReturn(Optional.empty());
+
+        // Then
+        Assertions.assertThrowsExactly(
+                WareHouseNotFoundException.class,
+                () -> wareHouseDeleteService.deleteWareHouse(Mockito.anyString())
+        );
+
+        // Verify
+        Mockito.verify(
+                wareHouseRepository,
+                Mockito.times(1)
+        ).findById(Mockito.anyString());
 
         Mockito.verify(
-                        wareHouseRepository
-                        , Mockito.times(0))
-                .deleteById(wareHouseId);
+                wareHouseRepository,
+                Mockito.times(0)
+        ).save(Mockito.any(WareHouseEntity.class));
     }
 
 }

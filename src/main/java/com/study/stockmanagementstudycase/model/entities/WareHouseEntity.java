@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -41,6 +42,14 @@ public class WareHouseEntity extends BaseEntity {
 
     @Column(name = "ADDRESS")
     private String address;
+
+    /**
+     * if status is {@code true}, that means is active. <br>
+     * else status is {@code false}, that means this {@link WareHouseEntity} is deleted.
+     */
+    @Column(name = "STATUS")
+    @Builder.Default
+    private Boolean status = true;
 
     @OneToMany(
             fetch = FetchType.LAZY,

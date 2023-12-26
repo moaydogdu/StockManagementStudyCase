@@ -29,14 +29,11 @@ public class WareHouseMapper {
     public static WareHouse toDomainModel(
             final WareHouseEntity wareHouseEntity
     ) {
-        if (Objects.isNull(wareHouseEntity)) {
-            return null;
-        }
-
         return WareHouse.builder()
                 .id(wareHouseEntity.getId())
                 .name(wareHouseEntity.getName())
                 .address(wareHouseEntity.getAddress())
+                .status(wareHouseEntity.getStatus())
                 .build();
     }
 
@@ -47,6 +44,7 @@ public class WareHouseMapper {
                 .id(wareHouseDomainModel.getId())
                 .name(wareHouseDomainModel.getName())
                 .address(wareHouseDomainModel.getAddress())
+                .status(wareHouseDomainModel.getStatus())
                 .createdAt(wareHouseDomainModel.getCreatedAt())
                 .updatedAt(wareHouseDomainModel.getUpdatedAt())
                 .build();

@@ -15,11 +15,8 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class WareHouse extends BaseDomainModel {
-
     private String id;
-
     private String name;
-
+    private Boolean status;
     private String address;
-
 }
