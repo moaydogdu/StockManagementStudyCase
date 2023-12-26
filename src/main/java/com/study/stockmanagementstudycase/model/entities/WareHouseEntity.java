@@ -42,6 +42,13 @@ public class WareHouseEntity extends BaseEntity {
     @Column(name = "ADDRESS")
     private String address;
 
+    /**
+     * if status is {@code true}, that means is active. <br>
+     * else status is {@code false}, that means this {@link WareHouseEntity} is deleted.
+     */
+    @Column(name = "STATUS")
+    private Boolean status;
+
     @OneToMany(
             fetch = FetchType.LAZY,
             mappedBy = "wareHouseEntity"
