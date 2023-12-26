@@ -20,7 +20,6 @@ public class StockUpdateServiceImpl implements StockUpdateService {
             final StockUpdateRequest updateRequest,
             final String stockId) {
 
-
         final StockEntity stockEntityFromDb = stockRepository
                 .findById(stockId)
                 .orElseThrow(StockNotFoundException::new);
@@ -30,5 +29,4 @@ public class StockUpdateServiceImpl implements StockUpdateService {
         stockRepository.save(stockEntityFromDb);
 
     }
-
 }
