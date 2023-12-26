@@ -2,6 +2,7 @@ package com.study.stockmanagementstudycase.model.mappers.stock;
 
 import com.study.stockmanagementstudycase.model.Stock;
 import com.study.stockmanagementstudycase.model.dto.request.stock.StockCreateRequest;
+import com.study.stockmanagementstudycase.model.dto.request.stock.StockUpdateRequest;
 import com.study.stockmanagementstudycase.model.entities.StockEntity;
 
 import java.math.BigDecimal;
@@ -54,4 +55,12 @@ public class StockMapper {
                 .updatedAt(stockDomainModel.getUpdatedAt())
                 .build();
     }
+
+    public static void mapForUpdating
+            (final StockUpdateRequest updateRequest,
+             final StockEntity stockEntityFromDb) {
+        stockEntityFromDb.setName(updateRequest.getName());
+        stockEntityFromDb.setPrice(updateRequest.getPrice());
+    }
+
 }
