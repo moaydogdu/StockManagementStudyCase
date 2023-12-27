@@ -47,12 +47,13 @@ public class StockController {
     private final WareHouseStockService wareHouseStockService;
 
     @PostMapping
-    public ResponseEntity<Void> createStock(
+    public ResponseEntity<String> createStock(
             @RequestBody @Valid final StockCreateRequest stockCreateRequest
     ) {
-        stockCreateService.createStock(stockCreateRequest);
+        StockResponse stockResponse=StockDTOMapper
+                .toStockResponse(stockCreateService.createStock(stockCreateRequest));
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(stockResponse.getId());
     }
 
     @PostMapping("/{stockId}")

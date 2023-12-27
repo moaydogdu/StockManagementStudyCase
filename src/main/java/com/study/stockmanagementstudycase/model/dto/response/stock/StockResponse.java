@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class StockResponse {
+    private String id;
     private String name;
     private BigDecimal price;
     private BigDecimal amount;

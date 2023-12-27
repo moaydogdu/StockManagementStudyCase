@@ -10,6 +10,7 @@ public class StockDTOMapper {
             final Stock stock
     ) {
         return StockResponse.builder()
+                .id(stock.getId())
                 .amount(stock.getAmount())
                 .price(stock.getPrice())
                 .name(stock.getName())
