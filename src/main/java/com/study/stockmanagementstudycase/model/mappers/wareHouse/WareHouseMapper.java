@@ -39,6 +39,14 @@ public class WareHouseMapper {
                 .build();
     }
 
+    public static List<WareHouse> toDomainModel(
+            final List<WareHouseEntity> wareHouseEntityList
+    ) {
+        return wareHouseEntityList.stream()
+                .map(WareHouseMapper::toDomainModel)
+                .toList();
+    }
+
     public static WareHouseEntity toEntity(
             final WareHouse wareHouseDomainModel
     ) {
