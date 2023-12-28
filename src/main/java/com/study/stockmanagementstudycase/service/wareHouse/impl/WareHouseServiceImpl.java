@@ -36,9 +36,10 @@ public class WareHouseServiceImpl implements WareHouseService {
         List<WareHouse> wareHouseDomainModels = WareHouseMapper
                 .toDomainModel(wareHouseEntityListPage.getContent());
 
-        return wareHouseEntityList.stream()
-                .map(WareHouseMapper::toDomainModel)
-                .toList();
+        return CustomPage.of(
+                wareHouseDomainModels,
+                wareHouseEntityListPage
+        );
     }
 
     @Override
