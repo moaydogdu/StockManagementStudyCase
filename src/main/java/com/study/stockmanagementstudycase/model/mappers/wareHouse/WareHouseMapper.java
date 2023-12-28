@@ -1,10 +1,12 @@
 package com.study.stockmanagementstudycase.model.mappers.wareHouse;
 
+import com.study.stockmanagementstudycase.common.model.dto.CustomPage;
 import com.study.stockmanagementstudycase.model.WareHouse;
 import com.study.stockmanagementstudycase.model.dto.request.wareHouse.WareHouseCreateRequest;
 import com.study.stockmanagementstudycase.model.dto.request.wareHouse.WareHouseUpdateRequest;
 import com.study.stockmanagementstudycase.model.entities.WareHouseEntity;
 
+import java.util.List;
 import java.util.Objects;
 
 public class WareHouseMapper {
