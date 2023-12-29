@@ -43,7 +43,8 @@ public class WareHouseServiceImplTest extends BaseServiceTest {
                 .thenReturn(mockWareHouseEntities);
 
         // Then
-        final List<WareHouse> response = wareHouseService.getWareHouses(pageNumber);
+        // TODO Bu kısım değiştirildi, düzeltilmesi gerekiyor.
+        final List<WareHouse> response = null;//wareHouseService.getWareHouses(pageNumber);
 
         Assertions.assertNotNull(response);
 
