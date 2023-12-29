@@ -8,7 +8,6 @@ import com.study.stockmanagementstudycase.model.dto.response.wareHouse.WareHouse
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class WareHouseDTOMapper {
 
@@ -42,13 +41,12 @@ public class WareHouseDTOMapper {
     public static CustomPagingResponse<WareHouseResponse> toPagingResponse(
             final CustomPage<WareHouse> customPage
     ) {
-        List<WareHouseResponse> resp = customPage.getContent().stream()
-                .map(WareHouseDTOMapper::toWareHouseResponse)
-                .toList();
-
         return CustomPagingResponse.<WareHouseResponse>builder()
-                .content(resp)
                 .of(customPage)
+                .content(
+                        customPage.getContent() == null ? null :
+                                customPage.getContent().stream().map(WareHouseDTOMapper::toWareHouseResponse).toList()
+                )
                 .build();
     }
 }
