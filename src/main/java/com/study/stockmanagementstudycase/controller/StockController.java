@@ -70,7 +70,7 @@ public class StockController {
 
     @GetMapping
     public ResponseEntity<CustomPagingResponse<StockResponse>> getStocks(
-            @RequestBody final StockPagingRequest stockPagingRequest
+            @RequestBody @Valid final StockPagingRequest stockPagingRequest
     ) {
         final CustomPage<Stock> stocks = stockService.
                 getStocks(stockPagingRequest);
