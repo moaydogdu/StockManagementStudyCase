@@ -1,5 +1,6 @@
 package com.study.stockmanagementstudycase.service.warehouse.impl;
 
+import com.github.javafaker.Faker;
 import com.study.stockmanagementstudycase.base.BaseServiceTest;
 import com.study.stockmanagementstudycase.common.exception.WareHouseNotFoundException;
 import com.study.stockmanagementstudycase.model.WareHouse;
@@ -26,6 +27,11 @@ public class WareHouseServiceImplTest extends BaseServiceTest {
     @Test
     void givenWareHouseEntities_whenGetWareHouses_thenReturnWareHouseDomainModels() {
         // Given
+
+        final int pageNumber = Faker.instance().number().randomDigitNotZero();
+        final int pageSize = Faker.instance().number().randomDigitNotZero();
+
+
         final List<WareHouseEntity> mockWareHouseEntities = List.of(
                 WareHouseEntity.builder().id(UUID.randomUUID().toString()).build(),
                 WareHouseEntity.builder().id(UUID.randomUUID().toString()).build(),
@@ -37,7 +43,8 @@ public class WareHouseServiceImplTest extends BaseServiceTest {
                 .thenReturn(mockWareHouseEntities);
 
         // Then
-        final List<WareHouse> response = wareHouseService.getWareHouses();
+        // TODO Bu kısım değiştirildi, düzeltilmesi gerekiyor.
+        final List<WareHouse> response = null;//wareHouseService.getWareHouses(pageNumber);
 
         Assertions.assertNotNull(response);
 
@@ -63,7 +70,7 @@ public class WareHouseServiceImplTest extends BaseServiceTest {
         // Then
         Assertions.assertThrowsExactly(
                 WareHouseNotFoundException.class,
-                () -> wareHouseService.getWareHouses()
+                () -> wareHouseService.getWareHouses(Mockito.any())
         );
 
         // Verify

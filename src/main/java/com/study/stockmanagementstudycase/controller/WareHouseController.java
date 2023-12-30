@@ -1,7 +1,10 @@
 package com.study.stockmanagementstudycase.controller;
 
+import com.study.stockmanagementstudycase.common.model.dto.CustomPage;
+import com.study.stockmanagementstudycase.common.model.dto.CustomPagingResponse;
 import com.study.stockmanagementstudycase.model.WareHouse;
 import com.study.stockmanagementstudycase.model.dto.request.wareHouse.WareHouseCreateRequest;
+import com.study.stockmanagementstudycase.model.dto.request.wareHouse.WareHousePagingRequest;
 import com.study.stockmanagementstudycase.model.dto.request.wareHouse.WareHouseUpdateRequest;
 import com.study.stockmanagementstudycase.model.dto.response.wareHouse.WareHouseResponse;
 import com.study.stockmanagementstudycase.model.mappers.wareHouse.WareHouseDTOMapper;
@@ -57,13 +60,15 @@ public class WareHouseController {
      *
      * @return ResponseEntity containing a list of WareHouseResponse objects
      */
-    @GetMapping
-    public ResponseEntity<List<WareHouseResponse>> getWareHouses(
+    @GetMapping()
+    public ResponseEntity<CustomPagingResponse<WareHouseResponse>> getWareHouses(
+            @RequestBody final WareHousePagingRequest wareHousePagingRequest
     ) {
-        final List<WareHouse> wareHouses = wareHouseService
-                .getWareHouses();
-        final List<WareHouseResponse> wareHouseResponseList = WareHouseDTOMapper
-                .toWareHouseResponse(wareHouses);
+        final CustomPage<WareHouse> wareHouses = wareHouseService
+                .getWareHouses(wareHousePagingRequest);
+
+        final CustomPagingResponse<WareHouseResponse> wareHouseResponseList = WareHouseDTOMapper
+                .toPagingResponse(wareHouses);
 
         return ResponseEntity.ok(wareHouseResponseList);
     }
