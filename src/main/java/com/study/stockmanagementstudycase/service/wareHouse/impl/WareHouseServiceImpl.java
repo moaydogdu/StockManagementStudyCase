@@ -23,7 +23,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 
     @Override
     public CustomPage<WareHouse> getWareHouses(
-            CustomPagingRequest customPagingRequest
+            final CustomPagingRequest customPagingRequest
     ) {
 
         final Page<WareHouseEntity> wareHouseEntityListPage = wareHouseRepository
