@@ -62,7 +62,7 @@ public class WareHouseController {
      */
     @GetMapping()
     public ResponseEntity<CustomPagingResponse<WareHouseResponse>> getWareHouses(
-            @RequestBody final WareHousePagingRequest wareHousePagingRequest
+            @RequestBody @Valid final WareHousePagingRequest wareHousePagingRequest
     ) {
         final CustomPage<WareHouse> wareHouses = wareHouseService
                 .getWareHouses(wareHousePagingRequest);
