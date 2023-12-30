@@ -1,9 +1,12 @@
 package com.study.stockmanagementstudycase.controller;
 
+import com.study.stockmanagementstudycase.common.model.dto.CustomPage;
+import com.study.stockmanagementstudycase.common.model.dto.CustomPagingResponse;
 import com.study.stockmanagementstudycase.model.Stock;
 import com.study.stockmanagementstudycase.model.aggregate.wareHouseStock.WareHouseStockAggregateWithWareHouse;
 import com.study.stockmanagementstudycase.model.dto.request.stock.StockCreateRequest;
 import com.study.stockmanagementstudycase.model.dto.request.stock.StockEntryRequest;
+import com.study.stockmanagementstudycase.model.dto.request.stock.StockPagingRequest;
 import com.study.stockmanagementstudycase.model.dto.request.stock.StockSaleRequest;
 import com.study.stockmanagementstudycase.model.dto.request.stock.StockUpdateRequest;
 import com.study.stockmanagementstudycase.model.dto.response.stock.StockResponse;
@@ -66,11 +69,14 @@ public class StockController {
     }
 
     @GetMapping
-    public ResponseEntity<List<StockResponse>> getStocks() {
-        final List<Stock> stocks = stockService.getStocks();
+    public ResponseEntity<CustomPagingResponse<StockResponse>> getStocks(
+            @RequestBody @Valid final StockPagingRequest stockPagingRequest
+    ) {
+        final CustomPage<Stock> stocks = stockService.
+                getStocks(stockPagingRequest);
 
-        final List<StockResponse> stockResponseList = StockDTOMapper
-                .stockResponses(stocks);
+        final CustomPagingResponse<StockResponse> stockResponseList = StockDTOMapper
+                .toPagingResponse(stocks);
 
         return ResponseEntity.ok(stockResponseList);
     }
