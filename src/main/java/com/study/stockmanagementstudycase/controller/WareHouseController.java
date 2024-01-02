@@ -47,12 +47,13 @@ public class WareHouseController {
      * @return A ResponseEntity with no content.
      */
     @PostMapping
-    public ResponseEntity<Void> createWareHouse(
+    public ResponseEntity<String> createWareHouse(
             @RequestBody final WareHouseCreateRequest request
     ) {
-        wareHouseCreateService.createWareHouse(request);
+        final WareHouse wareHouse = wareHouseCreateService
+                .createWareHouse(request);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok("WareHouse Id : " + wareHouse.getId());
     }
 
     /**
