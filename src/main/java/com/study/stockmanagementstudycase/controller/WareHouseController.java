@@ -26,8 +26,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("api/v1/warehouses")
 @RequiredArgsConstructor
@@ -47,12 +45,13 @@ public class WareHouseController {
      * @return A ResponseEntity with no content.
      */
     @PostMapping
-    public ResponseEntity<Void> createWareHouse(
+    public ResponseEntity<String> createWareHouse(
             @RequestBody final WareHouseCreateRequest request
     ) {
-        wareHouseCreateService.createWareHouse(request);
+        final WareHouse wareHouse = wareHouseCreateService
+                .createWareHouse(request);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(wareHouse.getId());
     }
 
     /**
