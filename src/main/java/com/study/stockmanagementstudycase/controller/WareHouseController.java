@@ -51,7 +51,7 @@ public class WareHouseController {
         final WareHouse wareHouse = wareHouseCreateService
                 .createWareHouse(request);
 
-        return ResponseEntity.ok("id : " + wareHouse.getId());
+        return ResponseEntity.ok(wareHouse.getId());
     }
 
     /**
