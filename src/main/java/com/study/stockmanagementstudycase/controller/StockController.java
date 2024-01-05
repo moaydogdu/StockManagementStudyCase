@@ -14,6 +14,7 @@ import com.study.stockmanagementstudycase.model.dto.response.wareHouseStock.Ware
 import com.study.stockmanagementstudycase.model.mappers.stock.StockDTOMapper;
 import com.study.stockmanagementstudycase.model.mappers.wareHouseStock.WareHouseStockMapper;
 import com.study.stockmanagementstudycase.service.stock.StockCreateService;
+import com.study.stockmanagementstudycase.service.stock.StockDeleteService;
 import com.study.stockmanagementstudycase.service.stock.StockService;
 import com.study.stockmanagementstudycase.service.stock.StockEntryService;
 import com.study.stockmanagementstudycase.service.stock.StockSaleService;
@@ -24,6 +25,7 @@ import lombok.RequiredArgsConstructor;
 import org.hibernate.validator.constraints.UUID;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -46,6 +48,7 @@ public class StockController {
     private final StockEntryService stockEntryService;
     private final StockSaleService stockSaleService;
     private final StockUpdateService stockUpdateService;
+    private final StockDeleteService stockDeleteService;
 
     private final WareHouseStockService wareHouseStockService;
 
@@ -131,6 +134,15 @@ public class StockController {
                 updateRequest,
                 stockId
         );
+
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{stockId}")
+    public ResponseEntity<Void> deleteStock(
+            @PathVariable("stockId") @UUID final String stockId
+    ) {
+        stockDeleteService.deleteStock(stockId);
 
         return ResponseEntity.ok().build();
     }
