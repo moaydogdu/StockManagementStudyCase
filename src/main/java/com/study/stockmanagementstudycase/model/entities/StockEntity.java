@@ -13,6 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -52,6 +53,14 @@ public class StockEntity extends BaseEntity {
     @Column(name = "UNIT_TYPE")
     @Enumerated(EnumType.STRING)
     private UnitType unitType;
+
+    /**
+     * if status is {@code true}, that means is active. <br>
+     * else status is {@code false}, that means this {@link StockEntity} is deleted.
+     */
+    @Column(name = "STATUS")
+    @Builder.Default
+    private Boolean status = true;
 
     @OneToMany(
             fetch = FetchType.LAZY,
