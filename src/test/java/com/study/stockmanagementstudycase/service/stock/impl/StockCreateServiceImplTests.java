@@ -1,7 +1,7 @@
 package com.study.stockmanagementstudycase.service.stock.impl;
 
 import com.study.stockmanagementstudycase.base.BaseServiceTest;
-import com.study.stockmanagementstudycase.builder.dto.StockCreateRequestBuilder;
+import com.study.stockmanagementstudycase.builder.dto.stock.StockCreateRequestBuilder;
 import com.study.stockmanagementstudycase.model.Stock;
 import com.study.stockmanagementstudycase.model.dto.request.stock.StockCreateRequest;
 import com.study.stockmanagementstudycase.model.entities.StockEntity;
