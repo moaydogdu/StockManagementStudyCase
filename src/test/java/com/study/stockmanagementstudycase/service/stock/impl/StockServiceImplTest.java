@@ -147,4 +147,43 @@ class StockServiceImplTest extends BaseServiceTest {
         ).findById(Mockito.anyString());
 
     }
+
+    @Test
+    public void givenStockEntitiesWithStatusIsFalse_whenGetDeletedStocks_thenReturnCustomPage() {
+        // Given
+        final StockPagingRequest mockStockPagingRequest = new StockPagingRequestBuilder()
+                .withValidFields()
+                .build();
+
+        final List<StockEntity> mockStockEntitiesWithStatusIsFalse = List.of(
+                StockEntity.builder().id(UUID.randomUUID().toString()).build(),
+                StockEntity.builder().id(UUID.randomUUID().toString()).build(),
+                StockEntity.builder().id(UUID.randomUUID().toString()).build()
+        );
+
+        final Page<StockEntity> mockStockEntityPage = new PageImpl<>(
+                mockStockEntitiesWithStatusIsFalse,
+                mockStockPagingRequest.toPageable(),
+                mockStockEntitiesWithStatusIsFalse.size()
+        );
+
+        // When
+        Mockito.when(stockRepository.
+                        findStockEntitiesByStatusIsFalse(mockStockPagingRequest.toPageable()))
+                .thenReturn(mockStockEntityPage);
+
+        // Then
+        final CustomPage<Stock> response = stockService
+                .getDeletedStocks(mockStockPagingRequest);
+
+        Assertions.assertEquals(
+                mockStockEntitiesWithStatusIsFalse.size(),
+                response.getTotalElementCount()
+        );
+
+        // Verify
+        Mockito.verify(stockRepository, Mockito.times(1))
+                .findStockEntitiesByStatusIsFalse(mockStockPagingRequest.toPageable());
+
+    }
 }
