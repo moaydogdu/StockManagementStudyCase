@@ -13,4 +13,8 @@ public interface StockRepository extends JpaRepository<StockEntity, String> {
             final Pageable pageable
     );
 
+    Page<StockEntity> findStockEntitiesByStatusIsTrue(
+            final Pageable pageable
+    );
+
 }
