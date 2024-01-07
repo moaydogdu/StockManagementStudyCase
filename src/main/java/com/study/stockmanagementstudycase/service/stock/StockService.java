@@ -6,6 +6,7 @@ import com.study.stockmanagementstudycase.model.Stock;
 import com.study.stockmanagementstudycase.model.dto.request.stock.StockPagingRequest;
 
 public interface StockService {
+
     CustomPage<Stock> getStocks(
             final CustomPagingRequest customPagingRequest
     );
