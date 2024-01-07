@@ -28,8 +28,8 @@ public class StockServiceImpl implements StockService {
         final Page<StockEntity> stockEntityListPage = stockRepository
                 .findAll(customPagingRequest.toPageable());
 
-        if (Boolean.FALSE.equals(stockEntityListPage.isEmpty())) {
-            throw new StockNotFoundException();
+        if (Boolean.FALSE.equals(stockEntityListPage.hasContent())) {
+            throw new StockNotFoundException("Hiç kayıtlı stock yok!");
         }
 
         List<Stock> stockDomainModels = StockMapper.
@@ -54,21 +54,22 @@ public class StockServiceImpl implements StockService {
 
     @Override
     public CustomPage<Stock> getDeletedStocks(
-            final StockPagingRequest stockPagingRequest) {
+            final StockPagingRequest stockPagingRequest
+    ) {
 
-        final Page<StockEntity> deleteStockEntityPage = stockRepository
+        final Page<StockEntity> deletedStockEntityPage = stockRepository
                 .findStockEntitiesByStatusIsFalse(stockPagingRequest.toPageable());
 
-        if (Boolean.FALSE.equals(deleteStockEntityPage.hasContent())) {
+        if (Boolean.FALSE.equals(deletedStockEntityPage.hasContent())) {
             throw new StockNotFoundException("Silinmiş bir depo kaydınız yok!");
         }
 
-        List<Stock> stocksDomainModels = StockMapper
-                .toDomainModel(deleteStockEntityPage.getContent());
+        final List<Stock> stocksDomainModels = StockMapper
+                .toDomainModel(deletedStockEntityPage.getContent());
 
         return CustomPage.of(
                 stocksDomainModels,
-                deleteStockEntityPage
+                deletedStockEntityPage
         );
     }
 }
