@@ -14,6 +14,10 @@ public interface WareHouseRepository extends JpaRepository<WareHouseEntity, Stri
             String address
     );
 
+    Page<WareHouseEntity> findWareHouseEntitiesByStatusIsTrue(
+            final Pageable pageable
+    );
+
     Page<WareHouseEntity> findWareHouseEntitiesByStatusIsFalse(
             final Pageable pageable
     );
