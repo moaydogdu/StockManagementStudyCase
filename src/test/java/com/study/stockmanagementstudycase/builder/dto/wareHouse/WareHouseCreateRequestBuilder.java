@@ -1,4 +1,4 @@
-package com.study.stockmanagementstudycase.builder.dto;
+package com.study.stockmanagementstudycase.builder.dto.wareHouse;
 
 import com.github.javafaker.Faker;
 import com.study.stockmanagementstudycase.builder.BaseBuilder;
