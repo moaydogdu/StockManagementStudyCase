@@ -27,13 +27,13 @@ public class WareHouseServiceImpl implements WareHouseService {
     ) {
 
         final Page<WareHouseEntity> wareHouseEntityListPage = wareHouseRepository
-                .findAll(customPagingRequest.toPageable());
+                .findWareHouseEntitiesByStatusIsTrue(customPagingRequest.toPageable());
 
-        if (Boolean.TRUE.equals(wareHouseEntityListPage.isEmpty())) {
+        if (Boolean.FALSE.equals(wareHouseEntityListPage.hasContent())) {
             throw new WareHouseNotFoundException("Hiç kayıtlı depo yok!");
         }
 
-        List<WareHouse> wareHouseDomainModels = WareHouseMapper
+        final List<WareHouse> wareHouseDomainModels = WareHouseMapper
                 .toDomainModel(wareHouseEntityListPage.getContent());
 
         return CustomPage.of(
