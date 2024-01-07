@@ -84,6 +84,19 @@ public class WareHouseController {
         return ResponseEntity.ok(wareHouseResponse);
     }
 
+    @GetMapping("/deleted")
+    public ResponseEntity<CustomPagingResponse<WareHouseResponse>> getDeletedWareHouses(
+            @RequestBody @Valid final WareHousePagingRequest wareHousePagingRequest
+    ) {
+        final CustomPage<WareHouse> deletedWareHouses = wareHouseService
+                .getDeletedWareHouses(wareHousePagingRequest);
+
+        final CustomPagingResponse<WareHouseResponse> response = WareHouseDTOMapper
+                .toPagingResponse(deletedWareHouses);
+
+        return ResponseEntity.ok(response);
+    }
+
     /**
      * Update a warehouse by its ID.
      *

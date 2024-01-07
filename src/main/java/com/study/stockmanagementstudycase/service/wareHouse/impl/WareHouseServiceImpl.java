@@ -54,4 +54,25 @@ public class WareHouseServiceImpl implements WareHouseService {
                 .toDomainModel(wareHouseEntityFromDb);
     }
 
+    @Override
+    public CustomPage<WareHouse> getDeletedWareHouses(
+            final CustomPagingRequest customPagingRequest
+    ) {
+        final Page<WareHouseEntity> deletedWareHouseEntityPage = wareHouseRepository
+                .findWareHouseEntitiesByStatusIsFalse(
+                        customPagingRequest.toPageable()
+                );
+
+        if (Boolean.FALSE.equals(deletedWareHouseEntityPage.hasContent())) {
+            throw new WareHouseNotFoundException("Silinmiş bir depo kaydınız yok!");
+        }
+
+        final List<WareHouse> wareHouseDomainModels = WareHouseMapper
+                .toDomainModel(deletedWareHouseEntityPage);
+
+        return CustomPage.of(
+                wareHouseDomainModels,
+                deletedWareHouseEntityPage
+        );
+    }
 }
