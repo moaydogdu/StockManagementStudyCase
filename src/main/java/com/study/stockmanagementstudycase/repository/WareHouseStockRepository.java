@@ -3,10 +3,11 @@ package com.study.stockmanagementstudycase.repository;
 import com.study.stockmanagementstudycase.model.entities.StockEntity;
 import com.study.stockmanagementstudycase.model.entities.WareHouseEntity;
 import com.study.stockmanagementstudycase.model.entities.WareHouseStockEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -22,8 +23,9 @@ public interface WareHouseStockRepository extends JpaRepository<WareHouseStockEn
             final WareHouseEntity wareHouseEntity
     );
 
-    List<WareHouseStockEntity> findWareHouseStockEntitiesByStockEntity(
-            final StockEntity stockEntity
+    Page<WareHouseStockEntity> findWareHouseStockEntitiesByStockEntity(
+            final StockEntity stockEntity,
+            final Pageable pageable
     );
 
 }

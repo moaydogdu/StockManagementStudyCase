@@ -166,6 +166,20 @@
             <column name="STOCK_ID" value="f12fae0e-01f6-4177-9f0e-6d0e7525ce48"/>
         </insert>
     </changeSet>
+
+    <changeSet id="insertStockTransactionExampleData13" author="moaydogdu">
+        <insert tableName="STOCK_TRANSACTION">
+            <column name="ID" value="17a3b3ee-3674-4a08-9994-2a28f03bef1f"/>
+            <column name="STOCK_TRANSACTION_TYPE" value="STOCK_ENTRY"/>
+            <column name="AMOUNT" value="25.0000"/>
+            <column name="BEFORE_AMOUNT" value="15.0000"/>
+            <column name="AFTER_AMOUNT" value="40.0000"/>
+            <column name="DATE" value="2024-01-08 20:02:30"/>
+            <column name="CREATED_AT" value="2024-01-08 02:36:41"/>
+            <column name="STOCK_ID" value="3b308439-c142-451d-8843-b1e774ff0a00"/>
+            <column name="WAREHOUSE_ID" value="3e269ce8-482f-4576-8a21-e8b76562c06d"/>
+        </insert>
+    </changeSet>
     <!-- ================================== -->
     <!-- DML of example STOCK_TRANSACTION data      -->
     <!-- ================================== -->
