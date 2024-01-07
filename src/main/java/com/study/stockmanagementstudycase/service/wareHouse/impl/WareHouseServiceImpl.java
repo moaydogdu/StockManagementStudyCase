@@ -75,4 +75,24 @@ public class WareHouseServiceImpl implements WareHouseService {
                 deletedWareHouseEntityPage
         );
     }
+
+    @Override
+    public CustomPage<WareHouse> getAllWareHouses(
+            final CustomPagingRequest customPagingRequest
+    ) {
+        final Page<WareHouseEntity> allWareHousesAsPageFromDB = wareHouseRepository
+                .findAll(customPagingRequest.toPageable());
+
+        if (Boolean.FALSE.equals(allWareHousesAsPageFromDB.hasContent())) {
+            throw new WareHouseNotFoundException("Hiç kayıtlı deponuz yok!");
+        }
+
+        final List<WareHouse> wareHouseDomainModels = WareHouseMapper
+                .toDomainModel(allWareHousesAsPageFromDB);
+
+        return CustomPage.of(
+                wareHouseDomainModels,
+                allWareHousesAsPageFromDB
+        );
+    }
 }
