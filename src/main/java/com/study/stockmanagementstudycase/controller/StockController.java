@@ -9,15 +9,16 @@ import com.study.stockmanagementstudycase.model.dto.request.stock.StockEntryRequ
 import com.study.stockmanagementstudycase.model.dto.request.stock.StockPagingRequest;
 import com.study.stockmanagementstudycase.model.dto.request.stock.StockSaleRequest;
 import com.study.stockmanagementstudycase.model.dto.request.stock.StockUpdateRequest;
+import com.study.stockmanagementstudycase.model.dto.request.wareHouseStock.WareHouseStockPagingRequest;
 import com.study.stockmanagementstudycase.model.dto.response.stock.StockResponse;
 import com.study.stockmanagementstudycase.model.dto.response.wareHouseStock.WareHouseStockResponse;
 import com.study.stockmanagementstudycase.model.mappers.stock.StockDTOMapper;
 import com.study.stockmanagementstudycase.model.mappers.wareHouseStock.WareHouseStockMapper;
 import com.study.stockmanagementstudycase.service.stock.StockCreateService;
 import com.study.stockmanagementstudycase.service.stock.StockDeleteService;
-import com.study.stockmanagementstudycase.service.stock.StockService;
 import com.study.stockmanagementstudycase.service.stock.StockEntryService;
 import com.study.stockmanagementstudycase.service.stock.StockSaleService;
+import com.study.stockmanagementstudycase.service.stock.StockService;
 import com.study.stockmanagementstudycase.service.stock.StockUpdateService;
 import com.study.stockmanagementstudycase.service.wareHouseStock.WareHouseStockService;
 import jakarta.validation.Valid;
@@ -26,14 +27,13 @@ import org.hibernate.validator.constraints.UUID;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-
 
 import java.util.List;
 
@@ -76,8 +76,8 @@ public class StockController {
     public ResponseEntity<CustomPagingResponse<StockResponse>> getStocks(
             @RequestBody @Valid final StockPagingRequest stockPagingRequest
     ) {
-        final CustomPage<Stock> stocks = stockService.
-                getStocks(stockPagingRequest);
+        final CustomPage<Stock> stocks = stockService
+                .getStocks(stockPagingRequest);
 
         final CustomPagingResponse<StockResponse> stockResponseList = StockDTOMapper
                 .toPagingResponse(stocks);
@@ -124,16 +124,20 @@ public class StockController {
     }
 
     @GetMapping("/{stockId}/wareHouseStocks")
-    public ResponseEntity<List<WareHouseStockResponse>> getWareHouseStocks(
-            @PathVariable("stockId") @UUID final String stockId
+    public ResponseEntity<CustomPagingResponse<WareHouseStockResponse>> getWareHouseStocks(
+            @PathVariable("stockId") @UUID final String stockId,
+            @RequestBody @Valid final WareHouseStockPagingRequest wareHouseStockPagingRequest
     ) {
         final Stock stock = stockService.getStockById(stockId);
 
-        final List<WareHouseStockAggregateWithWareHouse> wareHouseStocksByStock = wareHouseStockService
-                .getWareHouseStocksByStock(stock);
+        final CustomPage<WareHouseStockAggregateWithWareHouse> wareHouseStocksByStock = wareHouseStockService
+                .getWareHouseStocksByStock(
+                        stock,
+                        wareHouseStockPagingRequest
+                );
 
-        final List<WareHouseStockResponse> wareHouseStockResponses = WareHouseStockMapper
-                .toWareHouseStockResponse(wareHouseStocksByStock);
+        final CustomPagingResponse<WareHouseStockResponse> wareHouseStockResponses = WareHouseStockMapper
+                .toPagingResponse(wareHouseStocksByStock);
 
         return ResponseEntity.ok(wareHouseStockResponses);
     }
