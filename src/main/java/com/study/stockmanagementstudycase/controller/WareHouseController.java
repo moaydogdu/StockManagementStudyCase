@@ -57,10 +57,11 @@ public class WareHouseController {
 
     @GetMapping("/{wareHouseId}")
     public ResponseEntity<WareHouseResponse> getWareHouseById(
-            @PathVariable("wareHouseId") @UUID String wareHouseId
+            @PathVariable("wareHouseId") @UUID final String wareHouseId
     ) {
         final WareHouse wareHouse = wareHouseService
                 .getWareHouseById(wareHouseId);
+
         final WareHouseResponse wareHouseResponse = WareHouseDTOMapper
                 .toWareHouseResponse(wareHouse);
 
