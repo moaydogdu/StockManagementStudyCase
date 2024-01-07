@@ -13,4 +13,8 @@ public interface WareHouseService {
     WareHouse getWareHouseById(
             final String wareHouseId
     );
+
+    CustomPage<WareHouse> getDeletedWareHouses(
+            final CustomPagingRequest customPagingRequest
+    );
 }
