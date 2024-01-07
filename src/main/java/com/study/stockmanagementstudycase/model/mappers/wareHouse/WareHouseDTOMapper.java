@@ -4,6 +4,7 @@ import com.study.stockmanagementstudycase.common.model.dto.CustomPage;
 import com.study.stockmanagementstudycase.common.model.dto.CustomPagingResponse;
 import com.study.stockmanagementstudycase.model.WareHouse;
 import com.study.stockmanagementstudycase.model.dto.response.wareHouse.WareHouseResponse;
+import com.study.stockmanagementstudycase.model.dto.response.wareHouse.WareHouseResponseWithStatus;
 
 import java.util.Collections;
 import java.util.List;
@@ -37,8 +38,27 @@ public class WareHouseDTOMapper {
                 .toList();
     }
 
+    public static WareHouseResponseWithStatus toWareHouseResponseWithStatus(
+            final WareHouse wareHouse
+    ) {
+        return WareHouseResponseWithStatus.builder()
+                .id(wareHouse.getId())
+                .name(wareHouse.getName())
+                .address(wareHouse.getAddress())
+                .status(wareHouse.getStatus())
+                .build();
+    }
 
-    public static CustomPagingResponse<WareHouseResponse> toPagingResponse(
+    public static List<WareHouseResponseWithStatus> toWareHouseResponseWithStatus(
+            final List<WareHouse> wareHouses
+    ) {
+        return wareHouses.stream()
+                .map(WareHouseDTOMapper::toWareHouseResponseWithStatus)
+                .toList();
+    }
+
+
+    public static CustomPagingResponse<WareHouseResponse> toPagingResponseWithWareHouseResponse(
             final CustomPage<WareHouse> customPage
     ) {
         return CustomPagingResponse.<WareHouseResponse>builder()
@@ -46,6 +66,20 @@ public class WareHouseDTOMapper {
                 .content(
                         customPage.getContent() == null ? null :
                                 customPage.getContent().stream().map(WareHouseDTOMapper::toWareHouseResponse).toList()
+                )
+                .build();
+    }
+
+    public static CustomPagingResponse<WareHouseResponseWithStatus> toPagingResponseWithWareHouseResponseWithStatus(
+            final CustomPage<WareHouse> wareHouseCustomPage
+    ) {
+        return CustomPagingResponse.<WareHouseResponseWithStatus>builder()
+                .of(wareHouseCustomPage)
+                .content(
+                        wareHouseCustomPage.getContent() == null ? null :
+                                wareHouseCustomPage.getContent().stream()
+                                        .map(WareHouseDTOMapper::toWareHouseResponseWithStatus)
+                                        .toList()
                 )
                 .build();
     }
