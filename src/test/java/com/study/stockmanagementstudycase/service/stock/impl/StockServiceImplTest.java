@@ -31,7 +31,7 @@ class StockServiceImplTest extends BaseServiceTest {
     private StockRepository stockRepository;
 
     @Test
-    public void givenStockEntities_whenGetStocks_thenReturnStockDomainModels() {
+    public void givenStockEntitiesWithStatusIsTrue_whenGetStocks_thenReturnStockDomainModels() {
         // Given
         final StockPagingRequest mockStockPagingRequest = new StockPagingRequestBuilder()
                 .withValidFields()
@@ -50,7 +50,8 @@ class StockServiceImplTest extends BaseServiceTest {
         );
 
         // When
-        Mockito.when(stockRepository.findAll(mockStockPagingRequest.toPageable()))
+        Mockito.when(stockRepository
+                        .findStockEntitiesByStatusIsTrue(mockStockPagingRequest.toPageable()))
                 .thenReturn(mockStockEntityPage);
 
         // Then
@@ -65,7 +66,7 @@ class StockServiceImplTest extends BaseServiceTest {
         // Verify
         Mockito.verify(
                 stockRepository, Mockito.times(1)
-        ).findAll(mockStockPagingRequest.toPageable());
+        ).findStockEntitiesByStatusIsTrue(mockStockPagingRequest.toPageable());
 
     }
 
@@ -85,7 +86,8 @@ class StockServiceImplTest extends BaseServiceTest {
         );
 
         // When
-        Mockito.when(stockRepository.findAll(mockStockPagingRequest.toPageable()))
+        Mockito.when(stockRepository
+                        .findStockEntitiesByStatusIsTrue(mockStockPagingRequest.toPageable()))
                 .thenReturn(mockStockEntityPage);
 
         // Then
@@ -97,7 +99,7 @@ class StockServiceImplTest extends BaseServiceTest {
         // Verify
         Mockito.verify(
                 stockRepository, Mockito.times(1)
-        ).findAll(mockStockPagingRequest.toPageable());
+        ).findStockEntitiesByStatusIsTrue(mockStockPagingRequest.toPageable());
 
     }
 

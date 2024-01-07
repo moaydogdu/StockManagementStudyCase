@@ -26,7 +26,7 @@ public class StockServiceImpl implements StockService {
             final CustomPagingRequest customPagingRequest
     ) {
         final Page<StockEntity> stockEntityListPage = stockRepository
-                .findAll(customPagingRequest.toPageable());
+                .findStockEntitiesByStatusIsTrue(customPagingRequest.toPageable());
 
         if (Boolean.FALSE.equals(stockEntityListPage.hasContent())) {
             throw new StockNotFoundException("Hiç kayıtlı stock yok!");
