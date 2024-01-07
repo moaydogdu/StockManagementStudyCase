@@ -97,6 +97,19 @@ public class StockController {
         return ResponseEntity.ok(stockResponse);
     }
 
+    @GetMapping("/deleted")
+    public ResponseEntity<CustomPagingResponse<StockResponse>> getDeletedStocks(
+            @RequestBody @Valid final StockPagingRequest stockPagingRequest
+    ) {
+        final CustomPage<Stock> deletedStocks = stockService
+                .getDeletedStocks(stockPagingRequest);
+
+        final CustomPagingResponse<StockResponse> response = StockDTOMapper
+                .toPagingResponse(deletedStocks);
+
+        return ResponseEntity.ok(response);
+    }
+
     @PostMapping("/{stockId}/sale")
     public ResponseEntity<Void> sellStock(
             @PathVariable("stockId") @UUID final String stockId,

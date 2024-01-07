@@ -4,6 +4,7 @@ import com.study.stockmanagementstudycase.common.exception.StockNotFoundExceptio
 import com.study.stockmanagementstudycase.common.model.dto.CustomPage;
 import com.study.stockmanagementstudycase.common.model.dto.CustomPagingRequest;
 import com.study.stockmanagementstudycase.model.Stock;
+import com.study.stockmanagementstudycase.model.dto.request.stock.StockPagingRequest;
 import com.study.stockmanagementstudycase.model.entities.StockEntity;
 import com.study.stockmanagementstudycase.model.mappers.stock.StockMapper;
 import com.study.stockmanagementstudycase.repository.StockRepository;
@@ -27,8 +28,8 @@ public class StockServiceImpl implements StockService {
         final Page<StockEntity> stockEntityListPage = stockRepository
                 .findAll(customPagingRequest.toPageable());
 
-        if (stockEntityListPage.isEmpty()) {
-            throw new StockNotFoundException();
+        if (Boolean.FALSE.equals(stockEntityListPage.hasContent())) {
+            throw new StockNotFoundException("Hiç kayıtlı stock yok!");
         }
 
         List<Stock> stockDomainModels = StockMapper.
@@ -49,5 +50,26 @@ public class StockServiceImpl implements StockService {
                 .orElseThrow(StockNotFoundException::new);
 
         return StockMapper.toDomainModel(stockFromDB);
+    }
+
+    @Override
+    public CustomPage<Stock> getDeletedStocks(
+            final StockPagingRequest stockPagingRequest
+    ) {
+
+        final Page<StockEntity> deletedStockEntityPage = stockRepository
+                .findStockEntitiesByStatusIsFalse(stockPagingRequest.toPageable());
+
+        if (Boolean.FALSE.equals(deletedStockEntityPage.hasContent())) {
+            throw new StockNotFoundException("Silinmiş bir depo kaydınız yok!");
+        }
+
+        final List<Stock> stocksDomainModels = StockMapper
+                .toDomainModel(deletedStockEntityPage.getContent());
+
+        return CustomPage.of(
+                stocksDomainModels,
+                deletedStockEntityPage
+        );
     }
 }
