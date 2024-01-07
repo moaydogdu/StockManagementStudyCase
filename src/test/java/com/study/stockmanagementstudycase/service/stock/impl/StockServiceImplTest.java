@@ -186,4 +186,35 @@ class StockServiceImplTest extends BaseServiceTest {
                 .findStockEntitiesByStatusIsFalse(mockStockPagingRequest.toPageable());
 
     }
+
+    @Test
+    public void givenEmptyStockEntities_whenGetDeletedStocks_thenThrowsStockNotFoundException() {
+        // Given
+        final StockPagingRequest mockStockPagingRequest = new StockPagingRequestBuilder()
+                .withValidFields()
+                .build();
+
+        final List<StockEntity> mockStockEntitiesWithStatusIsFalse = List.of();
+
+        final Page<StockEntity> mockStockEntityPage = new PageImpl<>(
+                mockStockEntitiesWithStatusIsFalse,
+                mockStockPagingRequest.toPageable(),
+                mockStockEntitiesWithStatusIsFalse.size()
+        );
+
+        // When
+        Mockito.when(stockRepository.
+                        findStockEntitiesByStatusIsFalse(mockStockPagingRequest.toPageable()))
+                .thenReturn(mockStockEntityPage);
+
+        // Then
+        Assertions.assertThrowsExactly(
+                StockNotFoundException.class,
+                () -> stockService.getDeletedStocks(mockStockPagingRequest)
+        );
+
+        // Verify
+        Mockito.verify(stockRepository, Mockito.times(1))
+                .findStockEntitiesByStatusIsFalse(mockStockPagingRequest.toPageable());
+    }
 }
