@@ -100,4 +100,32 @@ class StockServiceImplTest extends BaseServiceTest {
         ).findAll(mockStockPagingRequest.toPageable());
 
     }
+
+    @Test
+    public void givenStockEntity_whenGetStockById_thenReturnStockDomainModel() {
+        // Given
+        final String mockStockId = UUID.randomUUID().toString();
+
+        final StockEntity mockStockEntity = StockEntity.builder()
+                .id(mockStockId)
+                .build();
+
+        // When
+        Mockito.when(stockRepository.findById(Mockito.anyString()))
+                .thenReturn(Optional.of(mockStockEntity));
+
+        // Then
+        final Stock response = stockService.getStockById(mockStockId);
+
+        Assertions.assertEquals(
+                response.getId(),
+                mockStockId
+        );
+
+        // Verify
+        Mockito.verify(
+                stockRepository, Mockito.times(1)
+        ).findById(mockStockId);
+
+    }
 }
