@@ -33,7 +33,7 @@ class StockServiceImplTest extends BaseServiceTest {
     @Test
     public void givenStockEntities_whenGetStocks_thenReturnStockDomainModels() {
         // Given
-        final CustomPagingRequest mockStockPagingRequest = new StockPagingRequestBuilder()
+        final StockPagingRequest mockStockPagingRequest = new StockPagingRequestBuilder()
                 .withValidFields()
                 .build();
 
@@ -72,7 +72,7 @@ class StockServiceImplTest extends BaseServiceTest {
     @Test
     public void givenEmptyStockEntities_whenGetStocks_thenThrowsException() {
         // Given
-        final CustomPagingRequest mockStockPagingRequest = new StockPagingRequestBuilder()
+        final StockPagingRequest mockStockPagingRequest = new StockPagingRequestBuilder()
                 .withValidFields()
                 .build();
 
@@ -156,9 +156,9 @@ class StockServiceImplTest extends BaseServiceTest {
                 .build();
 
         final List<StockEntity> mockStockEntitiesWithStatusIsFalse = List.of(
-                StockEntity.builder().id(UUID.randomUUID().toString()).build(),
-                StockEntity.builder().id(UUID.randomUUID().toString()).build(),
-                StockEntity.builder().id(UUID.randomUUID().toString()).build()
+                StockEntity.builder().id(UUID.randomUUID().toString()).status(false).build(),
+                StockEntity.builder().id(UUID.randomUUID().toString()).status(false).build(),
+                StockEntity.builder().id(UUID.randomUUID().toString()).status(false).build()
         );
 
         final Page<StockEntity> mockStockEntityPage = new PageImpl<>(
