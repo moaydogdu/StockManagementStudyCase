@@ -1,7 +1,7 @@
 package com.study.stockmanagementstudycase.service.warehouse.impl;
 
 import com.study.stockmanagementstudycase.base.BaseServiceTest;
-import com.study.stockmanagementstudycase.builder.dto.WareHouseCreateRequestBuilder;
+import com.study.stockmanagementstudycase.builder.dto.wareHouse.WareHouseCreateRequestBuilder;
 import com.study.stockmanagementstudycase.common.exception.WareHouseAlreadyExistException;
 import com.study.stockmanagementstudycase.model.WareHouse;
 import com.study.stockmanagementstudycase.model.dto.request.wareHouse.WareHouseCreateRequest;
