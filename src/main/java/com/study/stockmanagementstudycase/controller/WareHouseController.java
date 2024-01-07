@@ -7,6 +7,7 @@ import com.study.stockmanagementstudycase.model.dto.request.wareHouse.WareHouseC
 import com.study.stockmanagementstudycase.model.dto.request.wareHouse.WareHousePagingRequest;
 import com.study.stockmanagementstudycase.model.dto.request.wareHouse.WareHouseUpdateRequest;
 import com.study.stockmanagementstudycase.model.dto.response.wareHouse.WareHouseResponse;
+import com.study.stockmanagementstudycase.model.dto.response.wareHouse.WareHouseResponseWithStatus;
 import com.study.stockmanagementstudycase.model.mappers.wareHouse.WareHouseDTOMapper;
 import com.study.stockmanagementstudycase.service.wareHouse.WareHouseCreateService;
 import com.study.stockmanagementstudycase.service.wareHouse.WareHouseDeleteService;
@@ -54,6 +55,19 @@ public class WareHouseController {
         return ResponseEntity.ok(wareHouse.getId());
     }
 
+    @GetMapping("/{wareHouseId}")
+    public ResponseEntity<WareHouseResponse> getWareHouseById(
+            @PathVariable("wareHouseId") @UUID final String wareHouseId
+    ) {
+        final WareHouse wareHouse = wareHouseService
+                .getWareHouseById(wareHouseId);
+
+        final WareHouseResponse wareHouseResponse = WareHouseDTOMapper
+                .toWareHouseResponse(wareHouse);
+
+        return ResponseEntity.ok(wareHouseResponse);
+    }
+
     /**
      * Retrieves a list of warehouses.
      *
@@ -67,21 +81,9 @@ public class WareHouseController {
                 .getWareHouses(wareHousePagingRequest);
 
         final CustomPagingResponse<WareHouseResponse> wareHouseResponseList = WareHouseDTOMapper
-                .toPagingResponse(wareHouses);
+                .toPagingResponseWithWareHouseResponse(wareHouses);
 
         return ResponseEntity.ok(wareHouseResponseList);
-    }
-
-    @GetMapping("/{wareHouseId}")
-    public ResponseEntity<WareHouseResponse> getWareHouseById(
-            @PathVariable("wareHouseId") @UUID String wareHouseId
-    ) {
-        final WareHouse wareHouse = wareHouseService
-                .getWareHouseById(wareHouseId);
-        final WareHouseResponse wareHouseResponse = WareHouseDTOMapper
-                .toWareHouseResponse(wareHouse);
-
-        return ResponseEntity.ok(wareHouseResponse);
     }
 
     @GetMapping("/deleted")
@@ -92,7 +94,20 @@ public class WareHouseController {
                 .getDeletedWareHouses(wareHousePagingRequest);
 
         final CustomPagingResponse<WareHouseResponse> response = WareHouseDTOMapper
-                .toPagingResponse(deletedWareHouses);
+                .toPagingResponseWithWareHouseResponse(deletedWareHouses);
+
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/getAll")
+    public ResponseEntity<CustomPagingResponse<WareHouseResponseWithStatus>> getAllWareHouses(
+            @RequestBody @Valid final WareHousePagingRequest wareHousePagingRequest
+    ) {
+        final CustomPage<WareHouse> allWarehouses = wareHouseService
+                .getAllWareHouses(wareHousePagingRequest);
+
+        final CustomPagingResponse<WareHouseResponseWithStatus> response =
+                WareHouseDTOMapper.toPagingResponseWithWareHouseResponseWithStatus(allWarehouses);
 
         return ResponseEntity.ok(response);
     }

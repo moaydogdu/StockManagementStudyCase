@@ -219,4 +219,88 @@ public class WareHouseServiceImplTest extends BaseServiceTest {
 
     }
 
+    @Test
+    void givenValidWareHousePagingRequestAndWareHouseEntities_whenGetAllWareHouses_thenReturnWareHousesWithAllStatuses() {
+        // Given
+        final WareHousePagingRequest mockWareHousePagingRequest = new WareHousePagingRequestBuilder()
+                .withValidFields()
+                .build();
+
+        final List<WareHouseEntity> mockWareHouseEntities = List.of(
+                WareHouseEntity.builder().id(UUID.randomUUID().toString()).status(false).build(),
+                WareHouseEntity.builder().id(UUID.randomUUID().toString()).status(false).build(),
+                WareHouseEntity.builder().id(UUID.randomUUID().toString()).build(),
+                WareHouseEntity.builder().id(UUID.randomUUID().toString()).build(),
+                WareHouseEntity.builder().id(UUID.randomUUID().toString()).build()
+        );
+
+        final Page<WareHouseEntity> mockWareHouseEntityPage = new PageImpl<>(
+                mockWareHouseEntities,
+                mockWareHousePagingRequest.toPageable(),
+                mockWareHouseEntities.size()
+        );
+
+        // When
+        Mockito.when(wareHouseRepository.findAll(mockWareHousePagingRequest.toPageable()))
+                .thenReturn(mockWareHouseEntityPage);
+
+        // Then
+        final CustomPage<WareHouse> response = wareHouseService
+                .getAllWareHouses(mockWareHousePagingRequest);
+
+        Assertions.assertEquals(
+                mockWareHouseEntities.size(),
+                response.getContent().size()
+        );
+
+        Assertions.assertEquals(
+                mockWareHousePagingRequest.getPagination().getPageNumber() + 1,
+                response.getPageNumber()
+        );
+
+        Assertions.assertEquals(
+                mockWareHousePagingRequest.getPagination().getPageSize(),
+                response.getPageSize()
+        );
+
+        // Verify
+        Mockito.verify(
+                wareHouseRepository,
+                Mockito.times(1)
+        ).findAll(mockWareHousePagingRequest.toPageable());
+    }
+
+    @Test
+    void givenValidWareHousePagingRequestButEmptyWareHouseEntities_whenGetAllWareHouses_thenThrowsWareHouseNotFoundException() {
+        // Given
+        final WareHousePagingRequest mockWareHousePagingRequest = new WareHousePagingRequestBuilder()
+                .withValidFields()
+                .build();
+
+        final List<WareHouseEntity> mockWareHouseEntities = List.of();
+
+        final Page<WareHouseEntity> mockWareHouseEntityPage = new PageImpl<>(
+                mockWareHouseEntities,
+                mockWareHousePagingRequest.toPageable(),
+                mockWareHouseEntities.size()
+        );
+
+        // When
+        Mockito.when(wareHouseRepository.findAll(mockWareHousePagingRequest.toPageable()))
+                .thenReturn(mockWareHouseEntityPage);
+
+        // Then
+        Assertions.assertThrowsExactly(
+                WareHouseNotFoundException.class,
+                () -> wareHouseService.getAllWareHouses(mockWareHousePagingRequest)
+        );
+
+        // Verify
+        Mockito.verify(
+                wareHouseRepository,
+                Mockito.times(1)
+        ).findAll(mockWareHousePagingRequest.toPageable());
+    }
+
+
 }

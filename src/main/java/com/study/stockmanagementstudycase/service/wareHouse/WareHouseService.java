@@ -17,4 +17,8 @@ public interface WareHouseService {
     CustomPage<WareHouse> getDeletedWareHouses(
             final CustomPagingRequest customPagingRequest
     );
+
+    CustomPage<WareHouse> getAllWareHouses(
+            final CustomPagingRequest customPagingRequest
+    );
 }
