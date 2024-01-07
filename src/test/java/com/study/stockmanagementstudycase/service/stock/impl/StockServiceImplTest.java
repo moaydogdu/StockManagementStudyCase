@@ -68,4 +68,36 @@ class StockServiceImplTest extends BaseServiceTest {
         ).findAll(mockStockPagingRequest.toPageable());
 
     }
+
+    @Test
+    public void givenEmptyStockEntities_whenGetStocks_thenThrowsException() {
+        // Given
+        final CustomPagingRequest mockStockPagingRequest = new StockPagingRequestBuilder()
+                .withValidFields()
+                .build();
+
+        final List<StockEntity> mockStockEntities = List.of();
+
+        final Page<StockEntity> mockStockEntityPage = new PageImpl<>(
+                mockStockEntities,
+                mockStockPagingRequest.toPageable(),
+                mockStockEntities.size()
+        );
+
+        // When
+        Mockito.when(stockRepository.findAll(mockStockPagingRequest.toPageable()))
+                .thenReturn(mockStockEntityPage);
+
+        // Then
+        Assertions.assertThrows(
+                StockNotFoundException.class,
+                () -> stockService.getStocks(mockStockPagingRequest)
+        );
+
+        // Verify
+        Mockito.verify(
+                stockRepository, Mockito.times(1)
+        ).findAll(mockStockPagingRequest.toPageable());
+
+    }
 }
