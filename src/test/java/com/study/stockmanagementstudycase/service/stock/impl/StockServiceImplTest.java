@@ -128,4 +128,23 @@ class StockServiceImplTest extends BaseServiceTest {
         ).findById(mockStockId);
 
     }
+
+    @Test
+    public void givenEmptyStockEntity_whenGetStockById_thenThrowsException() {
+        // When
+        Mockito.when(stockRepository.findById(Mockito.anyString()))
+                .thenReturn(Optional.empty());
+
+        // Then
+        Assertions.assertThrows(
+                StockNotFoundException.class,
+                () -> stockService.getStockById(Mockito.anyString())
+        );
+
+        // Verify
+        Mockito.verify(
+                stockRepository, Mockito.times(1)
+        ).findById(Mockito.anyString());
+
+    }
 }
