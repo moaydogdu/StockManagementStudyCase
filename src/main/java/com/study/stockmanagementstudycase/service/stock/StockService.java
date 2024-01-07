@@ -13,5 +13,6 @@ public interface StockService {
     Stock getStockById(String stockId);
 
     CustomPage<Stock> getDeletedStocks(
-            final StockPagingRequest stockPagingRequest);
+            final StockPagingRequest stockPagingRequest
+    );
 }
