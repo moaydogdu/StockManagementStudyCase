@@ -1,5 +1,7 @@
 package com.study.stockmanagementstudycase.model.mappers.wareHouseStock;
 
+import com.study.stockmanagementstudycase.common.model.dto.CustomPage;
+import com.study.stockmanagementstudycase.common.model.dto.CustomPagingResponse;
 import com.study.stockmanagementstudycase.model.Stock;
 import com.study.stockmanagementstudycase.model.WareHouse;
 import com.study.stockmanagementstudycase.model.WareHouseStock;
@@ -8,6 +10,7 @@ import com.study.stockmanagementstudycase.model.dto.response.wareHouseStock.Ware
 import com.study.stockmanagementstudycase.model.entities.WareHouseStockEntity;
 import com.study.stockmanagementstudycase.model.mappers.stock.StockMapper;
 import com.study.stockmanagementstudycase.model.mappers.wareHouse.WareHouseMapper;
+import org.springframework.data.domain.Page;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -86,5 +89,27 @@ public class WareHouseStockMapper {
         return wareHouseStockEntities.stream()
                 .map(WareHouseStockMapper::toAggregateWithWareHouse)
                 .toList();
+    }
+
+    public static List<WareHouseStockAggregateWithWareHouse> toAggregateWithWareHouse(
+            final Page<WareHouseStockEntity> wareHouseStockEntityPage
+    ) {
+        return wareHouseStockEntityPage.getContent().stream()
+                .map(WareHouseStockMapper::toAggregateWithWareHouse)
+                .toList();
+    }
+
+    public static CustomPagingResponse<WareHouseStockResponse> toPagingResponse(
+            final CustomPage<WareHouseStockAggregateWithWareHouse> wareHouseStocksByStockCustomPage
+    ) {
+        return CustomPagingResponse.<WareHouseStockResponse>builder()
+                .of(wareHouseStocksByStockCustomPage)
+                .content(
+                        wareHouseStocksByStockCustomPage.getContent() == null ? null :
+                                wareHouseStocksByStockCustomPage.getContent().stream()
+                                        .map(WareHouseStockMapper::toWareHouseStockResponse)
+                                        .toList()
+                )
+                .build();
     }
 }
