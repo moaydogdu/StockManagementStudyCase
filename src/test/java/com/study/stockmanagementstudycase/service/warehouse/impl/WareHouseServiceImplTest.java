@@ -29,7 +29,7 @@ public class WareHouseServiceImplTest extends BaseServiceTest {
     private WareHouseRepository wareHouseRepository;
 
     @Test
-    void givenWareHouseEntities_whenGetWareHouses_thenReturnWareHouseDomainModels() {
+    void givenWareHouseEntitiesWithStatusTrue_whenGetWareHouses_thenReturnWareHouseDomainModels() {
         // Given
         final WareHousePagingRequest mockWareHousePagingRequest = new WareHousePagingRequestBuilder()
                 .withValidFields()
@@ -48,7 +48,9 @@ public class WareHouseServiceImplTest extends BaseServiceTest {
         );
 
         // When
-        Mockito.when(wareHouseRepository.findAll(mockWareHousePagingRequest.toPageable()))
+        Mockito.when(wareHouseRepository
+                        .findWareHouseEntitiesByStatusIsTrue(mockWareHousePagingRequest.toPageable())
+                )
                 .thenReturn(mockWareHouseEntityPage);
 
         // Then
@@ -64,7 +66,7 @@ public class WareHouseServiceImplTest extends BaseServiceTest {
         Mockito.verify(
                 wareHouseRepository,
                 Mockito.times(1)
-        ).findAll(mockWareHousePagingRequest.toPageable());
+        ).findWareHouseEntitiesByStatusIsTrue(mockWareHousePagingRequest.toPageable());
     }
 
     @Test
@@ -83,7 +85,9 @@ public class WareHouseServiceImplTest extends BaseServiceTest {
         );
 
         // When
-        Mockito.when(wareHouseRepository.findAll(mockWareHousePagingRequest.toPageable()))
+        Mockito.when(wareHouseRepository
+                        .findWareHouseEntitiesByStatusIsTrue(mockWareHousePagingRequest.toPageable())
+                )
                 .thenReturn(mockWareHouseEntityPage);
 
         // Then
@@ -96,7 +100,7 @@ public class WareHouseServiceImplTest extends BaseServiceTest {
         Mockito.verify(
                 wareHouseRepository,
                 Mockito.times(1)
-        ).findAll(mockWareHousePagingRequest.toPageable());
+        ).findWareHouseEntitiesByStatusIsTrue(mockWareHousePagingRequest.toPageable());
 
     }
 
