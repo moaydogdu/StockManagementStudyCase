@@ -10,8 +10,10 @@ import com.study.stockmanagementstudycase.model.dto.request.stock.StockPagingReq
 import com.study.stockmanagementstudycase.model.dto.request.stock.StockSaleRequest;
 import com.study.stockmanagementstudycase.model.dto.request.stock.StockUpdateRequest;
 import com.study.stockmanagementstudycase.model.dto.response.stock.StockResponse;
+import com.study.stockmanagementstudycase.model.dto.response.stock.StockResponseWithStatus;
 import com.study.stockmanagementstudycase.model.dto.response.wareHouseStock.WareHouseStockResponse;
 import com.study.stockmanagementstudycase.model.mappers.stock.StockDTOMapper;
+import com.study.stockmanagementstudycase.model.mappers.wareHouse.WareHouseDTOMapper;
 import com.study.stockmanagementstudycase.model.mappers.wareHouseStock.WareHouseStockMapper;
 import com.study.stockmanagementstudycase.service.stock.StockCreateService;
 import com.study.stockmanagementstudycase.service.stock.StockDeleteService;
@@ -80,7 +82,7 @@ public class StockController {
                 getStocks(stockPagingRequest);
 
         final CustomPagingResponse<StockResponse> stockResponseList = StockDTOMapper
-                .toPagingResponse(stocks);
+                .toPagingResponseWithStockResponse(stocks);
 
         return ResponseEntity.ok(stockResponseList);
     }
@@ -105,7 +107,20 @@ public class StockController {
                 .getDeletedStocks(stockPagingRequest);
 
         final CustomPagingResponse<StockResponse> response = StockDTOMapper
-                .toPagingResponse(deletedStocks);
+                .toPagingResponseWithStockResponse(deletedStocks);
+
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/getAll")
+    public ResponseEntity<CustomPagingResponse<StockResponseWithStatus>> getAllStocks(
+            @RequestBody @Valid final StockPagingRequest stockPagingRequest
+    ) {
+        final CustomPage<Stock> allStocks = stockService
+                .getAllStocks(stockPagingRequest);
+
+        final CustomPagingResponse<StockResponseWithStatus> response = StockDTOMapper
+                .toPagingResponseWithStockResponseWithStatus(allStocks);
 
         return ResponseEntity.ok(response);
     }
