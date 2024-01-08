@@ -4,6 +4,7 @@ import com.study.stockmanagementstudycase.common.model.dto.CustomPage;
 import com.study.stockmanagementstudycase.common.model.dto.CustomPagingResponse;
 import com.study.stockmanagementstudycase.model.Stock;
 import com.study.stockmanagementstudycase.model.dto.response.stock.StockResponse;
+import com.study.stockmanagementstudycase.model.dto.response.stock.StockResponseWithStatus;
 import com.study.stockmanagementstudycase.model.dto.response.wareHouse.WareHouseResponse;
 import com.study.stockmanagementstudycase.model.mappers.wareHouse.WareHouseDTOMapper;
 
@@ -30,7 +31,28 @@ public class StockDTOMapper {
                 .toList();
     }
 
-    public static CustomPagingResponse<StockResponse> toPagingResponse(
+    public static StockResponseWithStatus toStockResponseWithStatus(
+            final Stock stock
+    ) {
+        return StockResponseWithStatus.builder()
+                .name(stock.getName())
+                .amount(stock.getAmount())
+                .price(stock.getPrice())
+                .name(stock.getName())
+                .unitType(stock.getUnitType())
+                .status(stock.getStatus())
+                .build();
+    }
+
+    public static List<StockResponseWithStatus> toStockResponseWithStatus(
+            final List<Stock> stocks
+    ) {
+        return stocks.stream()
+                .map(StockDTOMapper::toStockResponseWithStatus)
+                .toList();
+    }
+
+    public static CustomPagingResponse<StockResponse> toPagingResponseWithStockResponse(
             final CustomPage<Stock> customPage
     ) {
         return CustomPagingResponse.<StockResponse>builder()
@@ -38,6 +60,19 @@ public class StockDTOMapper {
                 .content(
                         customPage.getContent() == null ? null :
                                 customPage.getContent().stream().map(StockDTOMapper::toStockResponse).toList()
+                )
+                .build();
+    }
+
+    public static CustomPagingResponse<StockResponseWithStatus> toPagingResponseWithStockResponseWithStatus(
+            final CustomPage<Stock> stockCustomPage
+    ) {
+        return CustomPagingResponse.<StockResponseWithStatus>builder()
+                .of(stockCustomPage)
+                .content(
+                        stockCustomPage.getContent() == null ? null :
+                                stockCustomPage.getContent().stream()
+                                        .map(StockDTOMapper::toStockResponseWithStatus).toList()
                 )
                 .build();
     }
