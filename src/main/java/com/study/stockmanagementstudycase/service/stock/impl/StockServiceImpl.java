@@ -33,7 +33,7 @@ public class StockServiceImpl implements StockService {
         }
 
         List<Stock> stockDomainModels = StockMapper.
-                toDomainModel(stockEntityListPage.getContent());
+                toDomainModel(stockEntityListPage);
 
         return CustomPage.of(
                 stockDomainModels,
@@ -65,11 +65,31 @@ public class StockServiceImpl implements StockService {
         }
 
         final List<Stock> stocksDomainModels = StockMapper
-                .toDomainModel(deletedStockEntityPage.getContent());
+                .toDomainModel(deletedStockEntityPage);
 
         return CustomPage.of(
                 stocksDomainModels,
                 deletedStockEntityPage
+        );
+    }
+
+    @Override
+    public CustomPage<Stock> getAllStocks(
+            final StockPagingRequest stockPagingRequest
+    ) {
+        final Page<StockEntity> allStocksAsPageFromDB = stockRepository
+                .findAll(stockPagingRequest.toPageable());
+
+        if (Boolean.FALSE.equals(allStocksAsPageFromDB.hasContent())) {
+            throw new StockNotFoundException("Silinmiş bir depo kaydınız yok!");
+        }
+
+        final List<Stock> stocksDomainModels = StockMapper
+                .toDomainModel(allStocksAsPageFromDB);
+
+        return CustomPage.of(
+                stocksDomainModels,
+                allStocksAsPageFromDB
         );
     }
 }
