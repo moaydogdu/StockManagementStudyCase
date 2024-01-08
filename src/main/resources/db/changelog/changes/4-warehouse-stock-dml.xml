@@ -54,6 +54,16 @@
             <column name="CREATED_AT" value="2023-12-04 21:00:00"/>
         </insert>
     </changeSet>
+
+    <changeSet id="insertWareHouseStockExampleData6" author="moaydogdu">
+        <insert tableName="WAREHOUSE_STOCK">
+            <column name="ID" value="cf9430d6-9278-495f-a769-b6d8c86d990b"/>
+            <column name="STOCK_ID" value="3b308439-c142-451d-8843-b1e774ff0a00"/>
+            <column name="WAREHOUSE_ID" value="3e269ce8-482f-4576-8a21-e8b76562c06d"/>
+            <column name="AMOUNT" value="25.0000"/>
+            <column name="CREATED_AT" value="2024-01-08 02:36:41"/>
+        </insert>
+    </changeSet>
     <!-- ================================== -->
     <!-- DML of example WAREHOUSE_STOCK data      -->
     <!-- ================================== -->

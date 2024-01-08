@@ -1,5 +1,7 @@
 package com.study.stockmanagementstudycase.service.wareHouseStock;
 
+import com.study.stockmanagementstudycase.common.model.dto.CustomPage;
+import com.study.stockmanagementstudycase.common.model.dto.CustomPagingRequest;
 import com.study.stockmanagementstudycase.model.Stock;
 import com.study.stockmanagementstudycase.model.WareHouseStock;
 import com.study.stockmanagementstudycase.model.aggregate.wareHouseStock.WareHouseStockAggregateWithWareHouse;
@@ -19,7 +21,8 @@ public interface WareHouseStockService {
             final String wareHouseId
     );
 
-    List<WareHouseStockAggregateWithWareHouse> getWareHouseStocksByStock(
-            final Stock stock
+    CustomPage<WareHouseStockAggregateWithWareHouse> getWareHouseStocksByStock(
+            final Stock stock,
+            final CustomPagingRequest customPagingRequest
     );
 }

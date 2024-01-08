@@ -15,6 +15,7 @@ public class StockDTOMapper {
             final Stock stock
     ) {
         return StockResponse.builder()
+                .id(stock.getId())
                 .amount(stock.getAmount())
                 .price(stock.getPrice())
                 .name(stock.getName())
@@ -23,10 +24,9 @@ public class StockDTOMapper {
     }
 
     public static List<StockResponse> toStockResponse(
-            final List<Stock> stockList
+            final List<Stock> stockDomainModels
     ) {
-        return stockList
-                .stream()
+        return stockDomainModels.stream()
                 .map(StockDTOMapper::toStockResponse)
                 .toList();
     }
@@ -45,9 +45,9 @@ public class StockDTOMapper {
     }
 
     public static List<StockResponseWithStatus> toStockResponseWithStatus(
-            final List<Stock> stocks
+            final List<Stock> stockDomainModels
     ) {
-        return stocks.stream()
+        return stockDomainModels.stream()
                 .map(StockDTOMapper::toStockResponseWithStatus)
                 .toList();
     }
@@ -59,7 +59,9 @@ public class StockDTOMapper {
                 .of(customPage)
                 .content(
                         customPage.getContent() == null ? null :
-                                customPage.getContent().stream().map(StockDTOMapper::toStockResponse).toList()
+                                customPage.getContent().stream()
+                                  .map(StockDTOMapper::toStockResponse)
+                                  .toList()
                 )
                 .build();
     }
@@ -72,7 +74,8 @@ public class StockDTOMapper {
                 .content(
                         stockCustomPage.getContent() == null ? null :
                                 stockCustomPage.getContent().stream()
-                                        .map(StockDTOMapper::toStockResponseWithStatus).toList()
+                                        .map(StockDTOMapper::toStockResponseWithStatus)
+                                        .toList()
                 )
                 .build();
     }
