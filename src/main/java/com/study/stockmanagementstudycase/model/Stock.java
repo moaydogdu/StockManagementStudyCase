@@ -27,5 +27,6 @@ public class Stock extends BaseDomainModel {
     private BigDecimal price;
     private BigDecimal amount;
     private UnitType unitType;
+    private Boolean status;
 }
 
