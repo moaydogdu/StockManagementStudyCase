@@ -4,6 +4,7 @@ import com.study.stockmanagementstudycase.model.Stock;
 import com.study.stockmanagementstudycase.model.dto.request.stock.StockCreateRequest;
 import com.study.stockmanagementstudycase.model.dto.request.stock.StockUpdateRequest;
 import com.study.stockmanagementstudycase.model.entities.StockEntity;
+import org.springframework.data.domain.Page;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -32,10 +33,11 @@ public class StockMapper {
                 .unitType(stockEntity.getUnitType())
                 .createdAt(stockEntity.getCreatedAt())
                 .updatedAt(stockEntity.getUpdatedAt())
+                .status(stockEntity.getStatus())
                 .build();
     }
     public static List<Stock>  toDomainModel(
-            final List<StockEntity> stockEntity
+            final Page<StockEntity> stockEntity
     ) {
         return stockEntity.stream()
                 .map(StockMapper::toDomainModel)

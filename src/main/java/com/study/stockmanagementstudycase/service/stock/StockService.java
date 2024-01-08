@@ -16,4 +16,8 @@ public interface StockService {
     CustomPage<Stock> getDeletedStocks(
             final StockPagingRequest stockPagingRequest
     );
+
+    CustomPage<Stock> getAllStocks(
+            final StockPagingRequest stockPagingRequest
+    );
 }
