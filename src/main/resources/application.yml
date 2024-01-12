@@ -1,6 +1,14 @@
 server:
   port: 8080
 
+application:
+  security:
+    jwt:
+      secret-key: 405X235266556A586E3272355512782F413F4428472B4B6250645367566B5970
+      expiration: 6000000
+      refresh-token:
+        expiration: 60000000
+
 spring:
   liquibase:
     enabled: true
@@ -19,6 +27,7 @@ spring:
         dialect: org.hibernate.dialect.MySQLDialect
         format_sql: true
     hibernate:
+      ddl-auto: update
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
 
