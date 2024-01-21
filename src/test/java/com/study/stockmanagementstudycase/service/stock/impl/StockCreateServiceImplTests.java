@@ -42,7 +42,7 @@ public class StockCreateServiceImplTests extends BaseServiceTest {
                 .build();
 
 
-        final StockEntity mockStockEntity = StockMapper.mapForCreating(
+        final StockEntity mockStockEntity = StockMapper.mapForSaving(
                 mockValidCreateRequest
         );
 
@@ -88,7 +88,7 @@ public class StockCreateServiceImplTests extends BaseServiceTest {
                 .withValidFields()
                 .build();
 
-        final StockEntity mockStockEntity = StockMapper.mapForCreating(
+        final StockEntity mockStockEntity = StockMapper.mapForSaving(
                 mockValidCreateRequest
         );
 
@@ -136,7 +136,7 @@ public class StockCreateServiceImplTests extends BaseServiceTest {
                 .withValidFields()
                 .build();
 
-        final StockEntity mockStockEntity = StockMapper.mapForCreating(
+        final StockEntity mockStockEntity = StockMapper.mapForSaving(
                 mockValidCreateRequest
         );
 
