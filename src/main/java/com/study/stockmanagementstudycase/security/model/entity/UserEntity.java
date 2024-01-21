@@ -1,5 +1,7 @@
 package com.study.stockmanagementstudycase.security.model.entity;
 
+import com.study.stockmanagementstudycase.common.model.entity.BaseEntity;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -26,7 +28,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "USER")
-public class UserEntity implements UserDetails {
+public class UserEntity extends BaseEntity implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -44,7 +46,10 @@ public class UserEntity implements UserDetails {
     @Column(name = "PASSWORD")
     private String password;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL
+    )
     private List<TokenEntity> tokenEntities;
 
     @Override
