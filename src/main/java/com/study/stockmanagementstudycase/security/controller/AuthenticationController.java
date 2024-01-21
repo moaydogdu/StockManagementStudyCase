@@ -4,6 +4,8 @@ import com.study.stockmanagementstudycase.security.model.dto.request.Authenticat
 import com.study.stockmanagementstudycase.security.model.dto.request.RegisterRequest;
 import com.study.stockmanagementstudycase.security.model.dto.response.AuthenticationResponse;
 import com.study.stockmanagementstudycase.security.service.AuthenticationService;
+import com.study.stockmanagementstudycase.security.service.RegisterService;
+import com.study.stockmanagementstudycase.security.service.TokenService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -19,12 +21,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
+    private final RegisterService registerService;
+    private final TokenService tokenService;
 
     @PostMapping("/register")
     public ResponseEntity<Void> register(
-            @RequestBody @Valid final RegisterRequest request
+            @RequestBody @Valid final RegisterRequest registerRequest
     ) {
-        authenticationService.register(request);
+        registerService.register(registerRequest);
         return ResponseEntity.ok().build();
     }
 
@@ -40,15 +44,12 @@ public class AuthenticationController {
 
     @PostMapping("/token/refresh")
     public ResponseEntity<String> refreshToken(
-            final HttpServletRequest request
+            final HttpServletRequest refreshTokenRequest
     ) {
-        final String accessToken = authenticationService
-                .refreshToken(request);
+        final String accessToken = tokenService
+                .refreshToken(refreshTokenRequest);
 
         return ResponseEntity.ok(accessToken);
     }
-
-    // TODO : LOGOUT
-    // TODO : OPTIMIZASYON.
 
 }
