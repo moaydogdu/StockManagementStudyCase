@@ -45,32 +45,36 @@ public class JWTService {
                 .getBody();
     }
 
-    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
+    public <T> T extractClaim(
+            final String token,
+            final Function<Claims, T> claimsResolver) {
         final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
     }
 
-    public String extractUsername(String token) {
+    public String extractUsername(
+            final String token
+    ) {
         return extractClaim(token, Claims::getSubject);
     }
 
     public String generateToken(
-            UserDetails userDetails
+            final UserDetails userDetails
     ) {
         return generateToken(new HashMap<>(), userDetails);
     }
 
     public String generateToken(
-            Map<String, Object> extraClaims,
-            UserDetails userDetails
+            final Map<String, Object> extraClaims,
+            final UserDetails userDetails
     ) {
         return buildToken(extraClaims, userDetails, jwtExpiration);
     }
 
     private String buildToken(
-            Map<String, Object> extraClaims,
-            UserDetails userDetails,
-            long expiration
+            final Map<String, Object> extraClaims,
+            final UserDetails userDetails,
+            final long expiration
     ) {
         return Jwts
                 .builder()
@@ -83,14 +87,14 @@ public class JWTService {
     }
 
     public String generateRefreshToken(
-            UserDetails userDetails
+            final UserDetails userDetails
     ) {
         return buildToken(new HashMap<>(), userDetails, refreshExpiration);
     }
 
     public boolean isTokenValid(
-            String token,
-            UserDetails userDetails
+            final String token,
+            final UserDetails userDetails
     ) {
         final String username = extractUsername(token);
         return (
@@ -100,25 +104,25 @@ public class JWTService {
         );
     }
 
-    public boolean isTokenExpired(String token) {
+    public boolean isTokenExpired(
+            final String token
+    ) {
         return extractExpiration(token).before(new Date());
     }
 
     private Date extractExpiration(
-            String token
+            final String token
     ) {
         return extractClaim(token, Claims::getExpiration);
     }
 
     public String getJwtFromHeader(
-            HttpServletRequest request
-    )  {
+            final HttpServletRequest request
+    ) {
         final String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (authHeader == null || !authHeader.startsWith(TokenType.BEARER.getValue())) {
             throw new RuntimeException();
         }
         return authHeader.substring(7);
     }
-
-
 }
