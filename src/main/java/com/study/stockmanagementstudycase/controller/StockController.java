@@ -14,7 +14,6 @@ import com.study.stockmanagementstudycase.model.dto.response.stock.StockResponse
 import com.study.stockmanagementstudycase.model.dto.response.stock.StockResponseWithStatus;
 import com.study.stockmanagementstudycase.model.dto.response.wareHouseStock.WareHouseStockResponse;
 import com.study.stockmanagementstudycase.model.mappers.stock.StockDTOMapper;
-import com.study.stockmanagementstudycase.model.mappers.wareHouse.WareHouseDTOMapper;
 import com.study.stockmanagementstudycase.model.mappers.wareHouseStock.WareHouseStockMapper;
 import com.study.stockmanagementstudycase.service.stock.StockCreateService;
 import com.study.stockmanagementstudycase.service.stock.StockDeleteService;
@@ -36,8 +35,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/stocks")
