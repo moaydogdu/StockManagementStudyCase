@@ -1,8 +1,8 @@
 package com.study.stockmanagementstudycase.service.stockTransaction;
 
+import com.study.stockmanagementstudycase.model.Stock;
 import com.study.stockmanagementstudycase.model.StockTransaction;
 import com.study.stockmanagementstudycase.model.WareHouse;
-import com.study.stockmanagementstudycase.model.Stock;
 import com.study.stockmanagementstudycase.model.dto.request.stock.StockCreateRequest;
 
 import java.math.BigDecimal;
