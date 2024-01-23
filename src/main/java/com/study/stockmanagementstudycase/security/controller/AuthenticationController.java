@@ -29,6 +29,7 @@ public class AuthenticationController {
             @RequestBody @Valid final RegisterRequest registerRequest
     ) {
         registerService.register(registerRequest);
+
         return ResponseEntity.ok().build();
     }
 
@@ -47,7 +48,7 @@ public class AuthenticationController {
             final HttpServletRequest refreshTokenRequest
     ) {
         final String accessToken = tokenService
-                .refreshToken(refreshTokenRequest);
+                .generateAccessTokenUsingByRefreshToken(refreshTokenRequest);
 
         return ResponseEntity.ok(accessToken);
     }
