@@ -32,7 +32,7 @@ public class RegisterService {
             final String email
     ) {
         if (Boolean.TRUE.equals(userRepository
-                .existsUserEntitiesByEmail(email))) {
+                .existsUserEntityByEmail(email))) {
             throw new EmailAlreadyExistException();
         }
     }
