@@ -8,7 +8,6 @@ import com.study.stockmanagementstudycase.security.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,15 +17,19 @@ public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(
+            final String email
+    ) {
         return userRepository
                 .findUserEntityByEmail(email)
                 .orElseThrow(UserNotFoundException::new);
     }
 
 
-    public User getUserByUsername(String email) throws UsernameNotFoundException {
-        UserEntity userEntityFromDb = userRepository
+    public User getUserByEmail(
+            final String email
+    ) {
+        final UserEntity userEntityFromDb = userRepository
                 .findUserEntityByEmail(email)
                 .orElseThrow(UserNotFoundException::new);
 
