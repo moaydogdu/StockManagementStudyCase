@@ -1,8 +1,7 @@
 package com.study.stockmanagementstudycase.security.service;
 
 import com.study.stockmanagementstudycase.security.exception.token.TokenInterferedException;
-import com.study.stockmanagementstudycase.security.model.dto.response.AuthenticationResponse;
-import com.study.stockmanagementstudycase.security.model.dto.response.GenerateTokenResponse;
+import com.study.stockmanagementstudycase.security.model.AccessAndRefreshToken;
 import com.study.stockmanagementstudycase.security.model.entity.TokenEntity;
 import com.study.stockmanagementstudycase.security.model.entity.UserEntity;
 import com.study.stockmanagementstudycase.security.model.mappers.TokenMapper;
@@ -21,7 +20,7 @@ public class TokenService {
     private final UserService userService;
     private final JWTService jwtService;
 
-    public GenerateTokenResponse generateToken(
+    public AccessAndRefreshToken generateToken(
             final UserEntity userEntity
     ) {
         this.revokeAllUserTokens(userEntity);
@@ -36,13 +35,13 @@ public class TokenService {
 
         saveUserToken(userEntity, refreshToken);
 
-        return GenerateTokenResponse.builder()
+        return AccessAndRefreshToken.builder()
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
                 .build();
     }
 
-    public String refreshToken(
+    public String generateAccessTokenUsingByRefreshToken(
             final HttpServletRequest request
     ) {
 
