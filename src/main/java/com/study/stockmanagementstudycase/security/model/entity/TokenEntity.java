@@ -2,7 +2,6 @@ package com.study.stockmanagementstudycase.security.model.entity;
 
 import com.study.stockmanagementstudycase.common.model.entity.BaseEntity;
 import com.study.stockmanagementstudycase.security.model.enums.TokenType;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
