@@ -3,7 +3,6 @@ package com.study.stockmanagementstudycase.security.model;
 import com.study.stockmanagementstudycase.common.model.BaseDomainModel;
 import com.study.stockmanagementstudycase.security.model.entity.UserEntity;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
