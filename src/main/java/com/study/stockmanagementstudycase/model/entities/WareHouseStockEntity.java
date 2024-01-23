@@ -37,7 +37,7 @@ public class WareHouseStockEntity extends BaseEntity {
     @Column(name = "ID")
     private String id;
 
-    @Column(name = "AMOUNT", scale = 24, precision = 4)
+    @Column(name = "AMOUNT", precision = 24, scale = 4)
     private BigDecimal amount;
 
     @ManyToOne(fetch = FetchType.LAZY)
