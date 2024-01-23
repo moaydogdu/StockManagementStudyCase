@@ -1,4 +1,4 @@
-package com.study.stockmanagementstudycase.security.model.dto.response;
+package com.study.stockmanagementstudycase.security.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,7 +11,7 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class GenerateTokenResponse {
+public class AccessAndRefreshToken {
     private String accessToken;
     private String refreshToken;
 }
