@@ -41,13 +41,13 @@ public class StockTransactionEntity extends BaseEntity {
     @Column(name = "ID")
     private String id;
 
-    @Column(name = "AMOUNT", scale = 24, precision = 4)
+    @Column(name = "AMOUNT", precision = 24, scale = 4)
     private BigDecimal amount;
 
-    @Column(name = "BEFORE_AMOUNT", scale = 24, precision = 4)
+    @Column(name = "BEFORE_AMOUNT", precision = 24, scale = 4)
     private BigDecimal beforeAmount;
 
-    @Column(name = "AFTER_AMOUNT", scale = 24, precision = 4)
+    @Column(name = "AFTER_AMOUNT", precision = 24, scale = 4)
     private BigDecimal afterAmount;
 
     @Column(name = "DATE")

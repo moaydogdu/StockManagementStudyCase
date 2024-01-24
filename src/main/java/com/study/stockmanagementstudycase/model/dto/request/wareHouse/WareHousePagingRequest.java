@@ -1,7 +1,6 @@
 package com.study.stockmanagementstudycase.model.dto.request.wareHouse;
 
 import com.study.stockmanagementstudycase.common.model.dto.CustomPagingRequest;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

@@ -1,6 +1,5 @@
 package com.study.stockmanagementstudycase.common.model.dto;
 
-import com.study.stockmanagementstudycase.model.WareHouse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

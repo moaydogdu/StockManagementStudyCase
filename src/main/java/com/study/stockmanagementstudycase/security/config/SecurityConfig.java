@@ -32,7 +32,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(
-            HttpSecurity httpSecurity
+            final HttpSecurity httpSecurity
     ) throws Exception {
 
         httpSecurity
@@ -53,7 +53,7 @@ public class SecurityConfig {
                                         .addLogoutHandler(logoutHandler)
                                         .logoutUrl("/api/v1/auth/logout")
                                         .logoutSuccessHandler(
-                                                (request, response, authentication)-> SecurityContextHolder.clearContext()
+                                                (request, response, authentication) -> SecurityContextHolder.clearContext()
                                         )
 
                 );
@@ -63,7 +63,7 @@ public class SecurityConfig {
 
 
     private CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
+        final CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(List.of("*"));
         configuration.setAllowedMethods(List.of("*"));
         configuration.setAllowedHeaders(List.of("*"));

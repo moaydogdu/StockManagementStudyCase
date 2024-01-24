@@ -11,7 +11,7 @@ import java.util.List;
 
 public class StockMapper {
 
-    public static StockEntity mapForCreating(
+    public static StockEntity mapForSaving(
             final StockCreateRequest stockCreateRequest
     ) {
         return StockEntity.builder()

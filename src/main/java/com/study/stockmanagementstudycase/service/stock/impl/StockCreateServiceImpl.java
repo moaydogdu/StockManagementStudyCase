@@ -28,7 +28,7 @@ public class StockCreateServiceImpl implements StockCreateService {
     public Stock createStock(
             final StockCreateRequest stockCreateRequest
     ) {
-        StockEntity stockEntityToBeCreate = StockMapper.mapForCreating(
+        StockEntity stockEntityToBeCreate = StockMapper.mapForSaving(
                 stockCreateRequest
         );
 

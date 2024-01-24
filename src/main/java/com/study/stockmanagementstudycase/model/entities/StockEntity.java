@@ -44,10 +44,10 @@ public class StockEntity extends BaseEntity {
     @Column(name = "NAME")
     private String name;
 
-    @Column(name = "PRICE", scale = 24, precision = 4)
+    @Column(name = "PRICE", precision = 24, scale = 4)
     private BigDecimal price;
 
-    @Column(name = "AMOUNT", scale = 24, precision = 4)
+    @Column(name = "AMOUNT", precision = 24, scale = 4)
     private BigDecimal amount;
 
     @Column(name = "UNIT_TYPE")
