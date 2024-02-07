@@ -41,11 +41,14 @@ public class LoggerAspect {
      * @param result Result of the endpoint.
      */
     @AfterReturning(pointcut = "restControllerPointcut()", returning = "result")
-    public void afterReturning(JoinPoint joinPoint, Object result) {
+    public void afterReturning(
+            final JoinPoint joinPoint,
+            final Object result
+    ) {
 
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
 
-        if (!Objects.isNull(requestAttributes)) {
+        if (Objects.nonNull(requestAttributes)) {
 
             HttpServletRequest request = requestAttributes.getRequest();
 
