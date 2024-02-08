@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 
 public abstract class InvalidException extends RuntimeException {
 
-    public static final HttpStatus HTTP_STATUS = HttpStatus.BAD_REQUEST;
+    public static final HttpStatus STATUS = HttpStatus.BAD_REQUEST;
 
     protected InvalidException(
             final String message
