@@ -1,6 +1,6 @@
 package com.study.stockmanagementstudycase.service.stock.impl;
 
-import com.study.stockmanagementstudycase.common.exception.StockNotFoundException;
+import com.study.stockmanagementstudycase.common.exception.stock.StockNotFoundException;
 import com.study.stockmanagementstudycase.model.dto.request.stock.StockUpdateRequest;
 import com.study.stockmanagementstudycase.model.entities.StockEntity;
 import com.study.stockmanagementstudycase.model.mappers.stock.StockMapper;

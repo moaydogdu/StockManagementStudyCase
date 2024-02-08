@@ -2,13 +2,12 @@ package com.study.stockmanagementstudycase.service.warehouse.impl;
 
 import com.study.stockmanagementstudycase.base.BaseServiceTest;
 import com.study.stockmanagementstudycase.builder.dto.wareHouse.WareHousePagingRequestBuilder;
-import com.study.stockmanagementstudycase.common.exception.WareHouseNotFoundException;
+import com.study.stockmanagementstudycase.common.exception.warehouse.WareHouseNotFoundException;
 import com.study.stockmanagementstudycase.common.model.dto.CustomPage;
 import com.study.stockmanagementstudycase.model.WareHouse;
 import com.study.stockmanagementstudycase.model.dto.request.wareHouse.WareHousePagingRequest;
 import com.study.stockmanagementstudycase.model.entities.WareHouseEntity;
 import com.study.stockmanagementstudycase.repository.WareHouseRepository;
-import com.study.stockmanagementstudycase.service.wareHouse.impl.WareHouseServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

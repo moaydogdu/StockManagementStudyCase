@@ -7,7 +7,7 @@ import com.study.stockmanagementstudycase.model.mappers.stock.StockMapper;
 import com.study.stockmanagementstudycase.repository.StockRepository;
 import com.study.stockmanagementstudycase.service.stock.StockCreateService;
 import com.study.stockmanagementstudycase.service.stock.StockEntryService;
-import com.study.stockmanagementstudycase.service.stockTransaction.StockTransactionCreateService;
+import com.study.stockmanagementstudycase.service.stock_transaction.StockTransactionCreateService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

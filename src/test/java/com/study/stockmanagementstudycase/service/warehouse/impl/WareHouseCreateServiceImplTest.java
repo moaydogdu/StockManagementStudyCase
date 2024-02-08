@@ -2,12 +2,11 @@ package com.study.stockmanagementstudycase.service.warehouse.impl;
 
 import com.study.stockmanagementstudycase.base.BaseServiceTest;
 import com.study.stockmanagementstudycase.builder.dto.wareHouse.WareHouseCreateRequestBuilder;
-import com.study.stockmanagementstudycase.common.exception.WareHouseAlreadyExistException;
+import com.study.stockmanagementstudycase.common.exception.warehouse.WareHouseAlreadyExistException;
 import com.study.stockmanagementstudycase.model.WareHouse;
 import com.study.stockmanagementstudycase.model.dto.request.wareHouse.WareHouseCreateRequest;
 import com.study.stockmanagementstudycase.model.entities.WareHouseEntity;
 import com.study.stockmanagementstudycase.repository.WareHouseRepository;
-import com.study.stockmanagementstudycase.service.wareHouse.impl.WareHouseCreateServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

@@ -1,6 +1,6 @@
 package com.study.stockmanagementstudycase.service.stock.impl;
 
-import com.study.stockmanagementstudycase.common.exception.StockNotFoundException;
+import com.study.stockmanagementstudycase.common.exception.stock.StockNotFoundException;
 import com.study.stockmanagementstudycase.model.Stock;
 import com.study.stockmanagementstudycase.model.WareHouse;
 import com.study.stockmanagementstudycase.model.dto.request.stock.StockEntryRequest;
@@ -8,9 +8,9 @@ import com.study.stockmanagementstudycase.model.entities.StockEntity;
 import com.study.stockmanagementstudycase.model.mappers.stock.StockMapper;
 import com.study.stockmanagementstudycase.repository.StockRepository;
 import com.study.stockmanagementstudycase.service.stock.StockEntryService;
-import com.study.stockmanagementstudycase.service.stockTransaction.StockTransactionCreateService;
-import com.study.stockmanagementstudycase.service.wareHouse.WareHouseService;
-import com.study.stockmanagementstudycase.service.wareHouseStock.WareHouseStockUpdateService;
+import com.study.stockmanagementstudycase.service.stock_transaction.StockTransactionCreateService;
+import com.study.stockmanagementstudycase.service.warehouse.WareHouseService;
+import com.study.stockmanagementstudycase.service.warehouse_stock.WareHouseStockUpdateService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -1,12 +1,10 @@
 package com.study.stockmanagementstudycase.service.warehouse.impl;
 
 import com.study.stockmanagementstudycase.base.BaseServiceTest;
-import com.study.stockmanagementstudycase.common.exception.WareHouseNotFoundException;
-import com.study.stockmanagementstudycase.common.exception.wareHouse.UnableToDeleteWareHouseException;
-import com.study.stockmanagementstudycase.model.WareHouse;
+import com.study.stockmanagementstudycase.common.exception.warehouse.WareHouseNotFoundException;
+import com.study.stockmanagementstudycase.common.exception.warehouse.UnableToDeleteWareHouseException;
 import com.study.stockmanagementstudycase.model.entities.WareHouseEntity;
 import com.study.stockmanagementstudycase.repository.WareHouseRepository;
-import com.study.stockmanagementstudycase.service.wareHouse.impl.WareHouseDeleteServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

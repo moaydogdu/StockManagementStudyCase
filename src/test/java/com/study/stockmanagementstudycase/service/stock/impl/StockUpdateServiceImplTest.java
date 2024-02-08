@@ -2,7 +2,7 @@ package com.study.stockmanagementstudycase.service.stock.impl;
 
 import com.study.stockmanagementstudycase.base.BaseServiceTest;
 import com.study.stockmanagementstudycase.builder.dto.stock.StockUpdateRequestBuilder;
-import com.study.stockmanagementstudycase.common.exception.StockNotFoundException;
+import com.study.stockmanagementstudycase.common.exception.stock.StockNotFoundException;
 import com.study.stockmanagementstudycase.model.Stock;
 import com.study.stockmanagementstudycase.model.dto.request.stock.StockUpdateRequest;
 import com.study.stockmanagementstudycase.model.entities.StockEntity;

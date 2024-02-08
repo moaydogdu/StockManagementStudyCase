@@ -2,10 +2,8 @@ package com.study.stockmanagementstudycase.service.stock.impl;
 
 import com.study.stockmanagementstudycase.base.BaseServiceTest;
 import com.study.stockmanagementstudycase.builder.dto.stock.StockPagingRequestBuilder;
-import com.study.stockmanagementstudycase.common.exception.StockNotFoundException;
-import com.study.stockmanagementstudycase.common.exception.WareHouseNotFoundException;
+import com.study.stockmanagementstudycase.common.exception.stock.StockNotFoundException;
 import com.study.stockmanagementstudycase.common.model.dto.CustomPage;
-import com.study.stockmanagementstudycase.common.model.dto.CustomPagingRequest;
 import com.study.stockmanagementstudycase.model.Stock;
 import com.study.stockmanagementstudycase.model.dto.request.stock.StockPagingRequest;
 import com.study.stockmanagementstudycase.model.entities.StockEntity;
