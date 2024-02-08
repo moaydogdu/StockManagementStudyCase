@@ -1,6 +1,6 @@
 package com.study.stockmanagementstudycase.service.stock.impl;
 
-import com.study.stockmanagementstudycase.common.exception.StockNotFoundException;
+import com.study.stockmanagementstudycase.common.exception.stock.StockNotFoundException;
 import com.study.stockmanagementstudycase.common.exception.stock.UnableToDeleteStockException;
 import com.study.stockmanagementstudycase.model.entities.StockEntity;
 import com.study.stockmanagementstudycase.repository.StockRepository;

@@ -8,7 +8,7 @@ import com.study.stockmanagementstudycase.model.entities.StockEntity;
 import com.study.stockmanagementstudycase.model.mappers.stock.StockMapper;
 import com.study.stockmanagementstudycase.repository.StockRepository;
 import com.study.stockmanagementstudycase.service.stock.StockEntryService;
-import com.study.stockmanagementstudycase.service.stockTransaction.StockTransactionCreateService;
+import com.study.stockmanagementstudycase.service.stock_transaction.StockTransactionCreateService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

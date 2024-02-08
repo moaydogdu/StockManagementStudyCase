@@ -9,10 +9,10 @@ import com.study.stockmanagementstudycase.model.dto.request.wareHouse.WareHouseU
 import com.study.stockmanagementstudycase.model.dto.response.wareHouse.WareHouseResponse;
 import com.study.stockmanagementstudycase.model.dto.response.wareHouse.WareHouseResponseWithStatus;
 import com.study.stockmanagementstudycase.model.mappers.wareHouse.WareHouseDTOMapper;
-import com.study.stockmanagementstudycase.service.wareHouse.WareHouseCreateService;
-import com.study.stockmanagementstudycase.service.wareHouse.WareHouseDeleteService;
-import com.study.stockmanagementstudycase.service.wareHouse.WareHouseService;
-import com.study.stockmanagementstudycase.service.wareHouse.WareHouseUpdateService;
+import com.study.stockmanagementstudycase.service.warehouse.WareHouseCreateService;
+import com.study.stockmanagementstudycase.service.warehouse.WareHouseDeleteService;
+import com.study.stockmanagementstudycase.service.warehouse.WareHouseService;
+import com.study.stockmanagementstudycase.service.warehouse.WareHouseUpdateService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.validator.constraints.UUID;

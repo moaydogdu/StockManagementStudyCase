@@ -21,7 +21,7 @@ import com.study.stockmanagementstudycase.service.stock.StockEntryService;
 import com.study.stockmanagementstudycase.service.stock.StockSaleService;
 import com.study.stockmanagementstudycase.service.stock.StockService;
 import com.study.stockmanagementstudycase.service.stock.StockUpdateService;
-import com.study.stockmanagementstudycase.service.wareHouseStock.WareHouseStockService;
+import com.study.stockmanagementstudycase.service.warehouse_stock.WareHouseStockService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.validator.constraints.UUID;
