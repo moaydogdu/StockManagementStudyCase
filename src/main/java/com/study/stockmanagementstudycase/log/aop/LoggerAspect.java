@@ -37,8 +37,9 @@ public class LoggerAspect {
 
     /**
      * A method that will work after each successful controller method.
+     *
      * @param joinPoint JoinPoint.
-     * @param result Result of the endpoint.
+     * @param result    Result of the endpoint.
      */
     @AfterReturning(pointcut = "restControllerPointcut()", returning = "result")
     public void afterReturning(
