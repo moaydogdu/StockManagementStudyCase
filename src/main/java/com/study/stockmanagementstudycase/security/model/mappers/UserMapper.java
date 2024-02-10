@@ -6,6 +6,8 @@ import com.study.stockmanagementstudycase.security.model.entity.UserEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.Objects;
+
 
 public class UserMapper {
 
@@ -39,6 +41,9 @@ public class UserMapper {
     public static UserEntity toEntity(
             final User user
     ) {
+        if (Objects.isNull(user)) {
+            return null;
+        }
         return UserEntity.builder()
                 .id(user.getId())
                 .firstName(user.getFirstName())
