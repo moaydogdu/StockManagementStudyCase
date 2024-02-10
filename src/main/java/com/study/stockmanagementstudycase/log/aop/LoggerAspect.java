@@ -37,8 +37,9 @@ public class LoggerAspect {
 
     /**
      * A method that will work after each successful controller method.
+     *
      * @param joinPoint JoinPoint.
-     * @param result Result of the endpoint.
+     * @param result    Result of the endpoint.
      */
     @AfterReturning(pointcut = "restControllerPointcut()", returning = "result")
     public void afterReturning(
@@ -54,15 +55,20 @@ public class LoggerAspect {
 
             ResponseEntity<?> response = (ResponseEntity<?>) result;
 
-            identity.getEmail();
             LogEntity logEntity = LogEntity.builder()
                     .path(request.getRequestURI())
                     .httpMethod(request.getMethod())
                     .status(response.getStatusCode().value())
-                    .user(UserMapper.toEntity(userService.getUserByEmail(identity.getEmail())))
                     .ip(request.getRemoteAddr())
                     .build();
 
+            if (identity.isAuthenticated()) {
+                logEntity.setUser(
+                        UserMapper.toEntity(
+                                userService.getUserByEmail(identity.getEmail())
+                        )
+                );
+            }
             logService.saveLogToDatabase(logEntity);
         }
 

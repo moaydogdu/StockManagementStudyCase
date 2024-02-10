@@ -47,7 +47,7 @@ public class WareHouseController {
      */
     @PostMapping
     public ResponseEntity<String> createWareHouse(
-            @RequestBody final WareHouseCreateRequest request
+            @Valid @RequestBody final WareHouseCreateRequest request
     ) {
         final WareHouse wareHouse = wareHouseCreateService
                 .createWareHouse(request);

@@ -1,7 +1,10 @@
 package com.study.stockmanagementstudycase.common.exception;
 
 import com.study.stockmanagementstudycase.common.model.CustomSubError;
+import com.study.stockmanagementstudycase.common.model.dto.ErrorResponse;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolationException;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,12 +19,16 @@ import java.util.List;
 import java.util.Map;
 
 @RestControllerAdvice
+@Slf4j
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
             final MethodArgumentNotValidException ex
     ) {
+
+        log.error(ex.getMessage(), ex);
+
         Map<String, String> errors = new HashMap<>();
 
         ex.getBindingResult().getAllErrors().forEach(
@@ -36,10 +43,13 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(ConstraintViolationException.class)
     protected ResponseEntity<Object> handlePathVariableErrors(
-            final ConstraintViolationException constraintViolationException
+            final ConstraintViolationException ex
     ) {
+
+        log.error(ex.getMessage(), ex);
+
         final List<CustomSubError> subErrors = new ArrayList<>();
-        constraintViolationException.getConstraintViolations()
+        ex.getConstraintViolations()
                 .forEach(constraintViolation ->
                         subErrors.add(
                                 CustomSubError.builder()
@@ -56,11 +66,80 @@ public class GlobalExceptionHandler {
                 HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(RuntimeException.class)
-    protected ResponseEntity<?> handleRuntimeException(
-            final RuntimeException runtimeException
+    @ExceptionHandler(AlreadyExistsException.class)
+    protected ResponseEntity<ErrorResponse> handleAlreadyExistsException(
+            final AlreadyExistsException ex,
+            final HttpServletRequest request
     ) {
-        return new ResponseEntity<>(runtimeException, HttpStatus.NOT_FOUND);
+
+        log.error(ex.getMessage(), ex);
+
+        List<String> details = new ArrayList<>();
+
+        details.add(ex.getMessage());
+
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .errorName(ErrorResponse.Header.ALREADY_EXISTS.value())
+                .message(ex.getMessage())
+                .status(AlreadyExistsException.STATUS.value())
+                .path(request.getRequestURI())
+                .build();
+
+        return new ResponseEntity<ErrorResponse>(errorResponse, AlreadyExistsException.STATUS);
+    }
+
+    @ExceptionHandler(InvalidException.class)
+    protected ResponseEntity<ErrorResponse> handleInvalidException(
+            final InvalidException ex,
+            final HttpServletRequest request
+    ) {
+
+        log.error(ex.getMessage(), ex);
+
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .errorName(ErrorResponse.Header.INVALID.value())
+                .message(ex.getMessage())
+                .status(InvalidException.STATUS.value())
+                .path(request.getRequestURI())
+                .build();
+
+        return new ResponseEntity<ErrorResponse>(errorResponse, InvalidException.STATUS);
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    protected ResponseEntity<ErrorResponse> handleNotFoundException(
+            final NotFoundException ex,
+            final HttpServletRequest request
+    ) {
+
+        log.error(ex.getMessage(), ex);
+
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .errorName(ErrorResponse.Header.NOT_FOUND.value())
+                .message(ex.getMessage())
+                .status(NotFoundException.STATUS.value())
+                .path(request.getRequestURI())
+                .build();
+
+        return new ResponseEntity<ErrorResponse>(errorResponse, NotFoundException.STATUS);
+    }
+
+    @ExceptionHandler(UnableException.class)
+    protected ResponseEntity<ErrorResponse> handleUnableException(
+            final UnableException ex,
+            final HttpServletRequest request
+    ) {
+
+        log.error(ex.getMessage(), ex);
+
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .errorName(ErrorResponse.Header.UNABLE.value())
+                .message(ex.getMessage())
+                .status(UnableException.STATUS.value())
+                .path(request.getRequestURI())
+                .build();
+
+        return new ResponseEntity<ErrorResponse>(errorResponse, UnableException.STATUS);
     }
 
 }
