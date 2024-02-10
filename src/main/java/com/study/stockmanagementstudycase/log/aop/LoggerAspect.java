@@ -59,10 +59,16 @@ public class LoggerAspect {
                     .path(request.getRequestURI())
                     .httpMethod(request.getMethod())
                     .status(response.getStatusCode().value())
-                    .user(UserMapper.toEntity(userService.getUserByEmail(identity.getEmail())))
                     .ip(request.getRemoteAddr())
                     .build();
 
+            if (identity.isAuthenticated()) {
+                logEntity.setUser(
+                        UserMapper.toEntity(
+                                userService.getUserByEmail(identity.getEmail())
+                        )
+                );
+            }
             logService.saveLogToDatabase(logEntity);
         }
 
