@@ -11,6 +11,13 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class Identity {
 
+    private static final String UNAUTHENTICATED = "anonymousUser";
+
+    public boolean isAuthenticated() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication.isAuthenticated() && !authentication.getName().equals(UNAUTHENTICATED);
+    }
+
     public String getEmail() {
         return SecurityContextHolder.getContext().getAuthentication().getName();
     }
