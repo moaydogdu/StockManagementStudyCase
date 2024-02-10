@@ -54,7 +54,6 @@ public class LoggerAspect {
 
             ResponseEntity<?> response = (ResponseEntity<?>) result;
 
-            identity.getEmail();
             LogEntity logEntity = LogEntity.builder()
                     .path(request.getRequestURI())
                     .httpMethod(request.getMethod())
