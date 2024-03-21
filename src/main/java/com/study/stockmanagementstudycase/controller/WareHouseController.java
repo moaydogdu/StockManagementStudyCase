@@ -2,6 +2,7 @@ package com.study.stockmanagementstudycase.controller;
 
 import com.study.stockmanagementstudycase.common.model.dto.CustomPage;
 import com.study.stockmanagementstudycase.common.model.dto.CustomPagingResponse;
+import com.study.stockmanagementstudycase.common.model.dto.CustomResponse;
 import com.study.stockmanagementstudycase.model.WareHouse;
 import com.study.stockmanagementstudycase.model.dto.request.wareHouse.WareHouseCreateRequest;
 import com.study.stockmanagementstudycase.model.dto.request.wareHouse.WareHousePagingRequest;
@@ -46,17 +47,17 @@ public class WareHouseController {
      * @return A ResponseEntity with no content.
      */
     @PostMapping
-    public ResponseEntity<String> createWareHouse(
+    public CustomResponse<String> createWareHouse(
             @Valid @RequestBody final WareHouseCreateRequest request
     ) {
         final WareHouse wareHouse = wareHouseCreateService
                 .createWareHouse(request);
 
-        return ResponseEntity.ok(wareHouse.getId());
+        return CustomResponse.created(wareHouse.getId());
     }
 
     @GetMapping("/{wareHouseId}")
-    public ResponseEntity<WareHouseResponse> getWareHouseById(
+    public CustomResponse<WareHouseResponse> getWareHouseById(
             @PathVariable("wareHouseId") @UUID final String wareHouseId
     ) {
         final WareHouse wareHouse = wareHouseService
@@ -65,7 +66,7 @@ public class WareHouseController {
         final WareHouseResponse wareHouseResponse = WareHouseDTOMapper
                 .toWareHouseResponse(wareHouse);
 
-        return ResponseEntity.ok(wareHouseResponse);
+        return CustomResponse.ok(wareHouseResponse);
     }
 
     /**
@@ -74,7 +75,7 @@ public class WareHouseController {
      * @return ResponseEntity containing a list of WareHouseResponse objects
      */
     @GetMapping()
-    public ResponseEntity<CustomPagingResponse<WareHouseResponse>> getWareHouses(
+    public CustomResponse<CustomPagingResponse<WareHouseResponse>> getWareHouses(
             @RequestBody @Valid final WareHousePagingRequest wareHousePagingRequest
     ) {
         final CustomPage<WareHouse> wareHouses = wareHouseService
@@ -83,11 +84,11 @@ public class WareHouseController {
         final CustomPagingResponse<WareHouseResponse> wareHouseResponseList = WareHouseDTOMapper
                 .toPagingResponseWithWareHouseResponse(wareHouses);
 
-        return ResponseEntity.ok(wareHouseResponseList);
+        return CustomResponse.ok(wareHouseResponseList);
     }
 
     @GetMapping("/deleted")
-    public ResponseEntity<CustomPagingResponse<WareHouseResponse>> getDeletedWareHouses(
+    public CustomResponse<CustomPagingResponse<WareHouseResponse>> getDeletedWareHouses(
             @RequestBody @Valid final WareHousePagingRequest wareHousePagingRequest
     ) {
         final CustomPage<WareHouse> deletedWareHouses = wareHouseService
@@ -96,11 +97,11 @@ public class WareHouseController {
         final CustomPagingResponse<WareHouseResponse> response = WareHouseDTOMapper
                 .toPagingResponseWithWareHouseResponse(deletedWareHouses);
 
-        return ResponseEntity.ok(response);
+        return CustomResponse.ok(response);
     }
 
     @GetMapping("/getAll")
-    public ResponseEntity<CustomPagingResponse<WareHouseResponseWithStatus>> getAllWareHouses(
+    public CustomResponse<CustomPagingResponse<WareHouseResponseWithStatus>> getAllWareHouses(
             @RequestBody @Valid final WareHousePagingRequest wareHousePagingRequest
     ) {
         final CustomPage<WareHouse> allWarehouses = wareHouseService
@@ -109,7 +110,7 @@ public class WareHouseController {
         final CustomPagingResponse<WareHouseResponseWithStatus> response =
                 WareHouseDTOMapper.toPagingResponseWithWareHouseResponseWithStatus(allWarehouses);
 
-        return ResponseEntity.ok(response);
+        return CustomResponse.ok(response);
     }
 
     /**
@@ -120,7 +121,7 @@ public class WareHouseController {
      * @return A ResponseEntity with no content.
      */
     @PutMapping("/{wareHouseId}")
-    public ResponseEntity<Void> updateWareHouse(
+    public CustomResponse<Void> updateWareHouse(
             @RequestBody @Valid final WareHouseUpdateRequest updateRequest,
             @PathVariable("wareHouseId") @UUID final String wareHouseId
     ) {
@@ -129,16 +130,16 @@ public class WareHouseController {
                 wareHouseId
         );
 
-        return ResponseEntity.ok().build();
+        return CustomResponse.SUCCESS;
     }
 
     @DeleteMapping("/{wareHouseId}")
-    public ResponseEntity<Void> deleteWareHouse(
+    public CustomResponse<Void> deleteWareHouse(
             @PathVariable("wareHouseId") @UUID final String wareHouseId
     ) {
         wareHouseDeleteService.deleteWareHouse(wareHouseId);
 
-        return ResponseEntity.ok().build();
+        return CustomResponse.SUCCESS;
     }
 
 }
