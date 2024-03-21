@@ -2,6 +2,7 @@ package com.study.stockmanagementstudycase.controller;
 
 import com.study.stockmanagementstudycase.common.model.dto.CustomPage;
 import com.study.stockmanagementstudycase.common.model.dto.CustomPagingResponse;
+import com.study.stockmanagementstudycase.common.model.dto.CustomResponse;
 import com.study.stockmanagementstudycase.model.Stock;
 import com.study.stockmanagementstudycase.model.aggregate.wareHouseStock.WareHouseStockAggregateWithWareHouse;
 import com.study.stockmanagementstudycase.model.dto.request.stock.StockCreateRequest;
@@ -25,7 +26,6 @@ import com.study.stockmanagementstudycase.service.warehouse_stock.WareHouseStock
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.validator.constraints.UUID;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -52,27 +52,27 @@ public class StockController {
     private final WareHouseStockService wareHouseStockService;
 
     @PostMapping
-    public ResponseEntity<String> createStock(
+    public CustomResponse<String> createStock(
             @RequestBody @Valid final StockCreateRequest stockCreateRequest
     ) {
         final Stock stock = stockCreateService
                 .createStock(stockCreateRequest);
 
-        return ResponseEntity.ok(stock.getId());
+        return CustomResponse.created(stock.getId());
     }
 
     @PostMapping("/{stockId}")
-    public ResponseEntity<Void> entryStock(
+    public CustomResponse<Void> entryStock(
             @PathVariable("stockId") @UUID final String stockId,
             @RequestBody @Valid final StockEntryRequest stockEntryRequest
     ) {
         stockEntryService.entryStock(stockId, stockEntryRequest);
 
-        return ResponseEntity.ok().build();
+        return CustomResponse.SUCCESS;
     }
 
     @GetMapping
-    public ResponseEntity<CustomPagingResponse<StockResponse>> getStocks(
+    public CustomResponse<CustomPagingResponse<StockResponse>> getStocks(
             @RequestBody @Valid final StockPagingRequest stockPagingRequest
     ) {
         final CustomPage<Stock> stocks = stockService
@@ -81,11 +81,11 @@ public class StockController {
         final CustomPagingResponse<StockResponse> stockResponseList = StockDTOMapper
                 .toPagingResponseWithStockResponse(stocks);
 
-        return ResponseEntity.ok(stockResponseList);
+        return CustomResponse.ok(stockResponseList);
     }
 
     @GetMapping("/{stockId}")
-    public ResponseEntity<StockResponse> getStockById(
+    public CustomResponse<StockResponse> getStockById(
             @PathVariable("stockId") @UUID final String stockId
     ) {
         final Stock stock = stockService.getStockById(stockId);
@@ -93,11 +93,11 @@ public class StockController {
         final StockResponse stockResponse = StockDTOMapper
                 .toStockResponse(stock);
 
-        return ResponseEntity.ok(stockResponse);
+        return CustomResponse.ok(stockResponse);
     }
 
     @GetMapping("/deleted")
-    public ResponseEntity<CustomPagingResponse<StockResponse>> getDeletedStocks(
+    public CustomResponse<CustomPagingResponse<StockResponse>> getDeletedStocks(
             @RequestBody @Valid final StockPagingRequest stockPagingRequest
     ) {
         final CustomPage<Stock> deletedStocks = stockService
@@ -106,11 +106,11 @@ public class StockController {
         final CustomPagingResponse<StockResponse> response = StockDTOMapper
                 .toPagingResponseWithStockResponse(deletedStocks);
 
-        return ResponseEntity.ok(response);
+        return CustomResponse.ok(response);
     }
 
     @GetMapping("/getAll")
-    public ResponseEntity<CustomPagingResponse<StockResponseWithStatus>> getAllStocks(
+    public CustomResponse<CustomPagingResponse<StockResponseWithStatus>> getAllStocks(
             @RequestBody @Valid final StockPagingRequest stockPagingRequest
     ) {
         final CustomPage<Stock> allStocks = stockService
@@ -119,11 +119,11 @@ public class StockController {
         final CustomPagingResponse<StockResponseWithStatus> response = StockDTOMapper
                 .toPagingResponseWithStockResponseWithStatus(allStocks);
 
-        return ResponseEntity.ok(response);
+        return CustomResponse.ok(response);
     }
 
     @PostMapping("/{stockId}/sale")
-    public ResponseEntity<Void> sellStock(
+    public CustomResponse<Void> sellStock(
             @PathVariable("stockId") @UUID final String stockId,
             @RequestBody @Valid final StockSaleRequest stockSaleRequest
     ) {
@@ -132,11 +132,11 @@ public class StockController {
                 stockSaleRequest
         );
 
-        return ResponseEntity.ok().build();
+        return CustomResponse.SUCCESS;
     }
 
     @GetMapping("/{stockId}/wareHouseStocks")
-    public ResponseEntity<CustomPagingResponse<WareHouseStockResponse>> getWareHouseStocks(
+    public CustomResponse<CustomPagingResponse<WareHouseStockResponse>> getWareHouseStocks(
             @PathVariable("stockId") @UUID final String stockId,
             @RequestBody @Valid final WareHouseStockPagingRequest wareHouseStockPagingRequest
     ) {
@@ -151,11 +151,11 @@ public class StockController {
         final CustomPagingResponse<WareHouseStockResponse> wareHouseStockResponses = WareHouseStockMapper
                 .toPagingResponse(wareHouseStocksByStock);
 
-        return ResponseEntity.ok(wareHouseStockResponses);
+        return CustomResponse.ok(wareHouseStockResponses);
     }
 
     @PutMapping("/{stockId}")
-    public ResponseEntity<Void> updateStock(
+    public CustomResponse<Void> updateStock(
             @RequestBody @Valid final StockUpdateRequest updateRequest,
             @PathVariable("stockId") @UUID final String stockId
     ) {
@@ -164,16 +164,16 @@ public class StockController {
                 stockId
         );
 
-        return ResponseEntity.ok().build();
+        return CustomResponse.SUCCESS;
     }
 
     @DeleteMapping("/{stockId}")
-    public ResponseEntity<Void> deleteStock(
+    public CustomResponse<Void> deleteStock(
             @PathVariable("stockId") @UUID final String stockId
     ) {
         stockDeleteService.deleteStock(stockId);
 
-        return ResponseEntity.ok().build();
+        return CustomResponse.SUCCESS;
     }
 
 }
