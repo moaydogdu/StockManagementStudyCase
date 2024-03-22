@@ -1,19 +1,14 @@
 server:
   port: 8080
 
-application:
-  security:
-    jwt:
-      secret-key: 405X235266556A586E3272355512782F413F4428472B4B6250645367566B5970
-      expiration: 6000000
-      refresh-token:
-        expiration: 60000000
-
 spring:
   liquibase:
     enabled: true
     changeLog: "classpath:db/changelog/db.changelog-master.yaml"
     drop-first: ${STOCK_MANAGEMENT_LIQUIBASE_ENABLE_DROP_FIRST:false}
+
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
 
   datasource:
     url: jdbc:mysql://${STOCK_MANAGEMENT_DB_IP:localhost}:${STOCK_MANAGEMENT_DB_PORT:3306}/stock_management
@@ -22,12 +17,12 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
+    open-in-view: true
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQLDialect
         format_sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
 
