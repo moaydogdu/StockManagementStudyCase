@@ -1,0 +1,26 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+    <!-- ================================== -->
+    <!-- DML of example USER data      -->
+    <!-- ================================== -->
+    <changeSet id="insertUserData1_Admin" author="moaydogdu">
+        <insert tableName="USER">
+            <column name="ID" value="88df67ff-d0b0-4af7-b24f-8a5b8ac7950a"/>
+            <column name="FIRST_NAME" value="ADMIN"/>
+            <column name="LAST_NAME" value="ADMIN"/>
+            <column name="EMAIL" value="admin@stockmanagementsystem.com"/>
+            <column name="PHONE_NUMBER" value="05005005050"/>
+            <column name="PASSWORD" value="$2a$10$YbDBkTBmPB8G5otQ6danO.c/BxBQi8xdaRtBIFg5U9FTGKc7BKs7O"/>
+            <!-- RAW PASSWORD: "h645_hw56;wh6:*,098.80,*.97/()=)=(//?," -->
+            <column name="USER_TYPE" value="ADMIN"/>
+            <column name="USER_STATUS" value="ACTIVE"/>
+            <column name="CREATED_AT" value="2024-03-22 08:00:00"/>
+            <column name="CREATED_BY" value="SYSTEM"/>
+        </insert>
+    </changeSet>
+    <!-- ================================== -->
+    <!-- DML of example USER data      -->
+    <!-- ================================== -->
+</databaseChangeLog>
