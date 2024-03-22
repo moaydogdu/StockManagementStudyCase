@@ -15,7 +15,11 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-public class BaseDomainModel {
+public abstract class BaseDomainModel {
+
     public LocalDateTime createdAt;
+    public String createdBy;
     public LocalDateTime updatedAt;
+    public String updatedBy;
+
 }

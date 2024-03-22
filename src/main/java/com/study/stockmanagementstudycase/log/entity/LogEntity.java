@@ -1,9 +1,10 @@
 package com.study.stockmanagementstudycase.log.entity;
 
 import com.study.stockmanagementstudycase.common.model.entity.BaseEntity;
-import com.study.stockmanagementstudycase.security.model.entity.UserEntity;
+import com.study.stockmanagementstudycase.user.model.entity.UserEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -44,8 +45,11 @@ public class LogEntity extends BaseEntity {
     @Column(name = "IP")
     private String ip;
 
-    @ManyToOne
-    @JoinColumn(name = "USER_ID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(
+            name = "USER_ID",
+            referencedColumnName = "ID"
+    )
     private UserEntity user;
 }
 
