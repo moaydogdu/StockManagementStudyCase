@@ -33,7 +33,7 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
         httpServletResponse.setContentType(MediaType.APPLICATION_JSON_VALUE);
         httpServletResponse.setStatus(HttpStatus.UNAUTHORIZED.value());
 
-        final CustomError enbError = CustomError.builder()
+        final CustomError error = CustomError.builder()
                 .header(CustomError.Header.AUTH_ERROR.getName())
                 .httpStatus(HttpStatus.UNAUTHORIZED)
                 .isSuccess(false)
@@ -41,7 +41,7 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
 
         final String responseBody = OBJECT_MAPPER
                 .writer(DateFormat.getDateInstance())
-                .writeValueAsString(enbError);
+                .writeValueAsString(error);
 
         httpServletResponse.getOutputStream()
                 .write(responseBody.getBytes());
