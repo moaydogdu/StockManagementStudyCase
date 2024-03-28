@@ -117,7 +117,7 @@ public class StockTransactionCreateServiceImplTest extends BaseServiceTest {
                 .build();
 
         final BigDecimal mockEntryAmount = BigDecimal.TEN;
-        final LocalDateTime mockEntryTime = LocalDateTime.now();
+        final LocalDateTime mockEntryTime = LocalDateTime.now().plusHours(1);
 
         // Then
         final StockTransaction response = stockTransactionCreateService
